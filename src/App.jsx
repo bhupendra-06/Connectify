@@ -1,14 +1,16 @@
-import './App.css'
+import "./App.css";
+import Home from "./components/home/Home.jsx";
+import LoginPage from "./components/LoginPage.jsx";
+import SignUpPage from "./components/SignUpPage.jsx";
 
 function App() {
-
   return (
     <>
-      <h1 className="read-the-docs">
-        Connectify
-      </h1>
+      {/* <Home /> */}
+      <LoginPage/>
+      {/* <SignUpPage/> */}
     </>
-  )
+  );
 }
 
-export default App
+export default App;

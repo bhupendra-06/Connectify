@@ -1,0 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+.login-header {
+  min-height: 100vh;
+  background-image: linear-gradient(
+      rgba(150, 150, 150, 0.4),
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url("https://img.freepik.com/free-vector/background-with-cute-social-media-icons-blue_53876-120591.jpg?size=626&ext=jpg&ga=GA1.1.1786478827.1722595130&semt=ais_hybrid");
+  background-size: cover;
+  /* position: relative; */
+  box-sizing: content-box;
+}
+.login-header .login-container {
+  padding: 2rem 3rem;
+  padding-bottom: 2rem;
+  width: 400px;
+  max-width: 500px;
+  background-color: rgb(209, 209, 209);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login-header .login-container h2 {
+    text-align: left;
+}
+
+.login-container .input-field input {
+  padding: 2rem 1rem;
+  background: transparent;
+  color: #000;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  font-size: 1em;
+  /* border-radius: 0.1em; */
+  position: absolute;
+  left: 0;
+  z-index: 2;
+}
+.login-container .input-field label {
+  position: absolute;
+  left: 0;
+  padding: 1rem;
+  color: #737373;
+  z-index: 1;
+}
+.login-container .input-field input:focus ~ label,
+.login-container .input-field input:valid ~ label {
+  transform: translateY(-10px);
+  font-size: 0.8em;
+  color: #737373;
+}
+
+.login-container input[type="submit"] {
+  margin-top: 2.5em;
+  width: 100%;
+  height: 3em;
+  background-color: rgb(0, 122, 255);
+  border-radius: 1rem;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* ==== Remember Chechbox ==== */
+.login-container .remember {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.7em;
+  font-size: 14px;
+}
+.remember .chechbox {
+  color: #878787;
+  display: flex;
+  align-items: center;
+}
+.remember .chechbox input {
+  margin-right: 3px;
+}
+.remember span {
+  color: #878787;
+}
+
+/* ==== New To Netflix ==== */
+.login-container p {
+  margin-top: 4rem;
+  color: #878787;
+}
+input[type="checkbox"] {
+  background-color: rgb(0, 122, 255);
+  color: rgb(0, 122, 255);
+}
+.login-container p a {
+  color: rgb(0, 122, 255);
+  font-weight: 600;
+}
+
+/* ==== RESPONSIVE DESIGN ==== */
+
+@media (max-width: 650px) {
+  /* ====CONTAINER==== */
+  .login-header .login-container {
+    padding: 5rem 3rem;
+    width: 100%;
+    max-width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
