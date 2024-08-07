@@ -6,8 +6,8 @@ import SignUpPage from "./components/SignUpPage.jsx";
 function App() {
   return (
     <>
-      {/* <Home /> */}
-      <LoginPage/>
+      <Home/>
+      {/* <LoginPage/> */}
       {/* <SignUpPage/> */}
     </>
   );
