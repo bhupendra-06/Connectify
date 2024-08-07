@@ -7,6 +7,10 @@
   padding: 0;
   max-width: 100%;
 }
+
+body {
+  background-color: #ffffff !important;
+}
 /* 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;

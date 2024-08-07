@@ -10,6 +10,7 @@ function App() {
   return (
     <>
 
+
       {/* <Home /> */}
       {/* <LoginPage/> */}
       {/* <Sidebar/> */}
@@ -17,8 +18,12 @@ function App() {
       <Home/>
       {/* <LoginPage/> */}
 
+
+      <Home/>
+      {/* <LoginPage/> */}
+
       {/* <SignUpPage/> */}
-      <AccountInformation/>
+      {/* <AccountInformation/> */}
 
     </>
   );

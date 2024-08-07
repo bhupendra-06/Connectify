@@ -18,7 +18,7 @@ function Sidebar() {
     const slider = () => setposition(position === 0 ? -280 : 0);
 
     return (
-        <div className='relative'>
+        <div className=''>
             <div>
                 <button className ='bg-red-400 p-4' 
                 onClick={slider} >X</button>
