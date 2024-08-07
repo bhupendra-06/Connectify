@@ -9,11 +9,10 @@ import AccountInformation from "./components/settings/AccountInformation.jsx";
 function App() {
   return (
     <>
-      {/* <Home /> */}
+      <Home/>
       {/* <LoginPage/> */}
-      {/* <Sidebar/> */}
       {/* <SignUpPage/> */}
-      <AccountInformation/>
+      {/* <AccountInformation/> */}
 
     </>
   );

@@ -1,0 +1,40 @@
+/* GOOGLE FONT Calistoga */
+@import url('https://fonts.googleapis.com/css2?family=Calistoga&family=Open+Sans&display=swap');
+.icon-gola {
+  margin: 0.5rem;
+  /* width: 3rem; */
+  /* height: 3rem; */
+  background: #eee;
+  border-radius: 50%;
+}
+.icon {
+    margin: 0.7rem;
+    font-size: 1.6rem;
+    color: #a4a4a4;
+}
+.icon:hover{
+    color: rgb(66, 66, 255);
+    font-weight: 900;
+}
+.logo {
+    font-family: Calistoga,serif;
+    letter-spacing: 0.1rem;
+}
+.icon-gola, .icon, .logo {
+    cursor: pointer;
+}
+.search-box {
+  margin-inline: 1.5rem;
+  padding: 0.2rem;
+  display: flex;
+  align-items: center;
+  background: #eee;
+  border-radius: 3rem;
+}
+.search-box input {
+  width: 300px;
+  outline: none;
+  background-color: transparent;
+  color: #888;
+  font-size: 0.9rem;
+}
