@@ -12,6 +12,9 @@ function App() {
       {/* <Home /> */}
       {/* <LoginPage/> */}
       {/* <Sidebar/> */}
+
+      <Home/>
+      {/* <LoginPage/> */}
       {/* <SignUpPage/> */}
       <AccountInformation/>
 
