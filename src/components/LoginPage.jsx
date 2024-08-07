@@ -1,7 +1,44 @@
 import React from "react";
+import { useState } from "react";
 import "./LoginPage.css";
 
 const LoginPage = () => {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value
+    }));
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const requestBody = {
+      email: formData.email,
+      password: formData.password
+    };
+
+    console.log(requestBody);
+
+    fetch('https://vivacious-stillness-production.up.railway.app/v1/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestBody)
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+
+  }
+
   return (
     <>
       <main className="login-header w-full">
@@ -14,20 +51,20 @@ const LoginPage = () => {
             <img src="https://connectify.me/wp-content/uploads/HOTSPOT-2021-01.png" alt="logo" className="logo" />
           </nav>
           <h2 className="my-6 text-3xl font-semibold text-gray-300 sm:text-black">Sign In</h2>
-          <form action="">
+          <form onSubmit={handleSubmit}>
             <div className="input-field mt-4 w-full h-14 bg-white rounded-sm relative overflow-hidden">
-              <input type="text" required />
-              <label for="email">Email or phone number</label>
+              <input type="email" id="email" value={formData.email} onChange={handleChange} required />
+              <label htmlFor="email">Email </label>
             </div>
             <div className="input-field mt-4 w-full h-14 bg-white rounded-sm relative">
-              <input type="password" required />
-              <label for="password">Password</label>
+              <input type="password" id="password" value={formData.password} onChange={handleChange} required />
+              <label htmlFor="password">Password</label>
             </div>
-            <input type="submit" value="Sign In" />
+            <input type="submit" value="Sign In" className="hover:cursor-pointer" />
             <div className="remember">
-              <div className="chechbox">
-                <input type="checkbox" checked />
-                <label for="chechbox">Remember me</label>
+              <div className="checkbox">
+                <input type="checkbox" defaultChecked  className="cursor-pointer" />
+                <label htmlFor="checkbox"> Remember me</label>
               </div>
               <span>Need help?</span>
             </div>
