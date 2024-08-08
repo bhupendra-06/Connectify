@@ -78,15 +78,15 @@ function Sidebar() {
                     <div className='text-[#ADB5BD] w-28 text-[13px] p-3 font-bold '>Accounts</div>
                     <div className='ml-4 flex flex-col gap-3' >
                         <div className='flex '>
-                            <div className='inline-block p-[10px]  rounded-full  text-[#0055ff] font-bold'><IoSettingsOutline className='font-bold' size={30}/></div>
+                            <div className='inline-block p-[10px]  rounded-full  text-[#888] font-bold'><IoSettingsOutline className='font-bold' size={25}/></div>
                             <div className='p-3 text-[#888] font-bold hover:text-[#0055ff]'>Setting</div>
                         </div>
                         <div className='flex '>
-                            <div className='inline-block p-[10px]  rounded-full  text-[#0055ff] font-bold'><MdOutlineWatchLater className='font-bold' size={30}/></div>
+                            <div className='inline-block p-[10px]  rounded-full  text-[#888] font-bold'><MdOutlineWatchLater className='font-bold' size={25}/></div>
                             <div className='p-3 text-[#888] font-bold hover:text-[#0055ff]'>Analysis</div>
                         </div>
                         <div className='flex mb-3'>
-                            <div className='inline-block p-[10px]  rounded-full  text-[#0055ff] font-bold'><MdOutlineChatBubbleOutline className='font-bold' size={30}/></div>
+                            <div className='inline-block p-[10px]  rounded-full  text-[#888] font-bold'><MdOutlineChatBubbleOutline className='font-bold' size={25}/></div>
                             <div className='p-3 text-[#888] font-bold hover:text-[#0055ff]'>Chat</div>
                         </div>
                     </div>
