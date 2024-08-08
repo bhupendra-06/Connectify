@@ -17,15 +17,18 @@ function Sidebar() {
     
     const slider = () => setposition(position === 0 ? -280 : 0);
 
+    console.log(position);
+    
+
     return (
-        <div className='relative'>
+        <div className=''>
             <div>
                 <button className ='bg-red-400 p-4' 
                 onClick={slider} >X</button>
         
             </div>
 
-            <div className={`bg-lime-400 w-[280px] h-[890px] absolute left-[${position}px] transition-all duration-500`}>
+            <div className={`bg-lime-400 w-[280px] h-[890px] absolute transition-all duration-500`} style={{ left: `${position}px` }}>
                 <div className='bg-slate-100 w-[250px] m-auto mb-3 rounded-xl'>
                     <div className='text-[#ADB5BD] w-28 text-[13px] p-3 font-bold '>New Feeds</div>
                     <div className='ml-4 flex flex-col gap-3' >
