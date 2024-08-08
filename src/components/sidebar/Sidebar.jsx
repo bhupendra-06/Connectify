@@ -28,7 +28,7 @@ function Sidebar() {
         
             </div>
 
-            <div className={`bg-lime-400 w-[280px] h-[890px] absolute left-[${position}px] transition-all duration-500`}>
+            <div className={`bg-lime-400 w-[280px] h-[890px] absolute transition-all duration-500`} style={{ left: `${position}px` }}>
                 <div className='bg-slate-100 w-[250px] m-auto mb-3 rounded-xl'>
                     <div className='text-[#ADB5BD] w-28 text-[13px] p-3 font-bold '>New Feeds</div>
                     <div className='ml-4 flex flex-col gap-3' >
