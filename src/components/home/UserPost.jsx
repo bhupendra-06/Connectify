@@ -16,9 +16,11 @@ const UserPost = ({ post, index }) => {
   // }, []);
 
   const [seeMore, setSeeMore] = useState(false);
+  const [see, setSee] = useState("See More");
   const sm = document.getElementById("see-more");
   const seeMoreFunction = () => {
     setSeeMore(!seeMore);
+    see == "See More" ? setSee("See Less") : setSee("See More");
   };
 
   return (
@@ -54,7 +56,8 @@ const UserPost = ({ post, index }) => {
                 id="see-more"
                 className="text-blue-600 font-semibold cursor-pointer"
               >
-                See more.
+                {/* See more. */}
+                {see}
               </span>
             </p>
           ) : (
