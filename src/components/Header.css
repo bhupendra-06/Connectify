@@ -1,5 +1,9 @@
 /* GOOGLE FONT Calistoga */
 @import url('https://fonts.googleapis.com/css2?family=Calistoga&family=Open+Sans&display=swap');
+body {
+    background: #ffffff;
+}
+
 .icon-gola {
   margin: 0.5rem;
   /* width: 3rem; */
