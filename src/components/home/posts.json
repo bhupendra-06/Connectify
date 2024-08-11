@@ -12,6 +12,32 @@
       "https://uitheme.net/sociala/images/t-10.jpg"
     ]
   },
+  {
+    "profileImage": "https://media.istockphoto.com/id/864516870/photo/young-woman-photographing-the-autumn-season.jpg?s=612x612&w=0&k=20&c=M3G2SwKJ15zolsSaFABsneLitdWXCrrJ3LkTEKnIOys=",
+    "name": "Surfiya",
+    "lastSeen": "1 hour ago",
+    "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor, ornare at commodo non, feugiat non nisi. Phasellus faucibus mollis pharetra. Proin blandit ac massa sed rhoncus.",
+    "likes": "1.2k",
+    "comments": "124",
+    "pictures": [
+      "https://images.pexels.com/photos/21033370/pexels-photo-21033370/free-photo-of-woman-sitting-with-fisherman-on-boat-on-lake.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.pexels.com/photos/16368423/pexels-photo-16368423/free-photo-of-man-holding-a-net-on-a-boat.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+      ""
+    ]
+  },
+  {
+    "profileImage": "https://media.istockphoto.com/id/864516870/photo/young-woman-photographing-the-autumn-season.jpg?s=612x612&w=0&k=20&c=M3G2SwKJ15zolsSaFABsneLitdWXCrrJ3LkTEKnIOys=",
+    "name": "Surfiya",
+    "lastSeen": "1 hour ago",
+    "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor, ornare at commodo non, feugiat non nisi. Phasellus faucibus mollis pharetra. Proin blandit ac massa sed rhoncus.",
+    "likes": "1.2k",
+    "comments": "124",
+    "pictures": [
+      "https://images.pexels.com/photos/19956394/pexels-photo-19956394/free-photo-of-buildings-on-paved-street-in-old-town.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+      "https://images.pexels.com/photos/3711354/pexels-photo-3711354.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+      "https://images.pexels.com/photos/27354543/pexels-photo-27354543/free-photo-of-two-buildings-with-balconies-and-windows-in-the-city.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    ]
+  },
 
   {
     "profileImage": "https://plus.unsplash.com/premium_photo-1689539137236-b68e436248de?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cHJvZmlsZSUyMHBpY3R1cmV8ZW58MHx8MHx8fDA%3D",
@@ -25,7 +51,7 @@
     "profileImage": "https://randomuser.me/api/portraits/women/68.jpg",
     "name": "Olivia",
     "lastSeen": "4 hours ago",
-    "caption": "Exploring the beauty of India. It is so beautiful! ",
+    "caption": "Exploring the beauty of India. It is so beautiful. Every corner of the world holds a new adventure. With each step, we uncover hidden stories and create unforgettable memories. Traveling isn’t just about the places we go, but the people we meet and the moments we cherish. Embrace the journey, for it shapes who we are ",
     "likes": "620",
     "comments": "40",
     "pictures": [
@@ -42,9 +68,10 @@
     "likes": "980",
     "comments": "120",
     "pictures": [
-      "https://images.unsplash.com/photo-1593642532973-d31b6557fa68",
-      "https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a"
-        ]
+      "https://images.pexels.com/photos/2265488/pexels-photo-2265488.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.pexels.com/photos/2312369/pexels-photo-2312369.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/2102416/pexels-photo-2102416.jpeg?auto=compress&cs=tinysrgb&w=600"
+    ]
   },
   {
     "pictures": [
@@ -53,12 +80,4 @@
       "https://uitheme.net/sociala/images/t-10.jpg"
     ]
   }
-  
-
-
-
-  
-
-
-
 ]

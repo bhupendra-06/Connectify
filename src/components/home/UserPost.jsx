@@ -16,14 +16,16 @@ const UserPost = ({ post, index }) => {
   // }, []);
 
   const [seeMore, setSeeMore] = useState(false);
-  const sm = document.getElementById("see-more");
+  const [see, setSee] = useState("See More.");
+
   const seeMoreFunction = () => {
     setSeeMore(!seeMore);
+    see == "See More." ? setSee("See Less.") : setSee("See More.");
   };
 
   return (
     <div key={index}>
-      <div className="my-2 p-5 rounded-xl bg-yellow-50 border">
+      <div className="m-2 mt-0 p-5 rounded-lg bg-white shadow-xl shadow-gray-200 border">
         <div className="profile mb-5 flex items-center justify-between">
           <div>
             <div className="flex items-center justify-center">
@@ -47,14 +49,13 @@ const UserPost = ({ post, index }) => {
         </div>
         {post.caption &&
           (post.caption.length > 150 ? (
-            <p className="mb-5 text-lg text-gray-400 text-justify">
+            <p className="mb-5 text-lg text-gray-400 text-justify select-none">
               {seeMore ? post.caption : post.caption.slice(0, 100) + ".."}{" "}
               <span
                 onClick={seeMoreFunction}
-                id="see-more"
                 className="text-blue-600 font-semibold cursor-pointer"
               >
-                See more.
+                {see}
               </span>
             </p>
           ) : (
@@ -70,7 +71,7 @@ const UserPost = ({ post, index }) => {
                 <img
                   key={picIndex}
                   className="h-full object-cover rounded-lg"
-                  src={url || "https://uitheme.net/sociala/images/t-10.jpg"}
+                  src={url}
                 />
               );
             })}
@@ -99,10 +100,3 @@ const UserPost = ({ post, index }) => {
 
 export default UserPost;
 
-// POST COMPONENT
-
-// const PostComponent = ({ post }) => {
-//   return (
-
-//   );
-// };
