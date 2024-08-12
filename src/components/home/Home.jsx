@@ -9,15 +9,8 @@ import FindPeople from "./FindPeople";
 const Home = () => {
   return (
   <>
-      <section className="m-2 sm:mx-auto max-w-[600px] h-screen border shadow-lg">
-        {posts.map((post, index) => {
-          return <UserPost post={post} index={index} />;
-        })}
-      </section>
-    
     <div className="">
       <Header />
-      <Sidebar />
       <div className="lg:pl-[270px] pt-20 h-screen overflow-y-scroll flex justify-center">
           <section className="h-full overflow-x-hidden hide-scrollbar xl:max-w-[650px]">
             <Stories />

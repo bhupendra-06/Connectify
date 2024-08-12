@@ -15,6 +15,8 @@ function Sidebar() {
   const [position, setposition] = useState(0);
 
   const slider = () => setposition(position === 0 ? -280 : 0);
+  console.log(position);
+  
 
   return (
     <div className="my-[97px] fixed top-0 hidden lg:block overflow-hidden hide-scrollbar">
@@ -24,9 +26,10 @@ function Sidebar() {
         </button>
       </div>
 
-      <div
-        className={`pt-4 h-[calc(100vh-100px)] min-w-[280px] w-[280px] left-[${position}px] transition-all overflow-scroll hide-scrollbar duration-500`}
-      >
+        <div
+          className={`pt-4 h-[calc(100vh-100px)] min-w-[280px] w-[280px] transition-all overflow-scroll hide-scrollbar duration-500`}
+          style={{ left: `${position}px` }}
+        >
         <div className="mb-3 w-[250px] bg-white shadow-lg m-auto rounded-xl border-2 border-gray-100">
           <div className="text-[#ADB5BD] w-28 text-[13px] p-3 font-bold ">
             New Feeds
@@ -124,31 +127,31 @@ function Sidebar() {
         </div>
 
         <div className="mb-3 w-[250px] bg-white shadow-lg m-auto rounded-xl border-2 border-gray-100">
-          <div className="text-[#ADB5BD] w-28 text-[13px] p-3 font-bold ">
+          <div className="text-[#ADB5BD] w-28 text-[13px] p-3 font-bold">
             Accounts
           </div>
           <div className="ml-4 flex flex-col gap-3">
-            <div className="flex ">
-              <div className="inline-block p-[10px]  rounded-full  text-[#0055ff] font-bold">
+            <div className="flex group">
+              <div className="inline-block p-[10px] rounded-full text-[#888] font-bold group-hover:text-[#0055ff] transition-colors duration-200">
                 <IoSettingsOutline className="font-bold" size={30} />
               </div>
-              <div className="p-3 text-[#888] font-bold hover:text-[#0055ff]">
+              <div className="p-3 text-[#888] font-bold group-hover:text-[#0055ff] transition-colors duration-200">
                 Setting
               </div>
             </div>
-            <div className="flex ">
-              <div className="inline-block p-[10px]  rounded-full  text-[#0055ff] font-bold">
+            <div className="flex group">
+              <div className="inline-block p-[10px] rounded-full text-[#888] font-bold group-hover:text-[#0055ff] transition-colors duration-200">
                 <MdOutlineWatchLater className="font-bold" size={30} />
               </div>
-              <div className="p-3 text-[#888] font-bold hover:text-[#0055ff]">
+              <div className="p-3 text-[#888] font-bold group-hover:text-[#0055ff] transition-colors duration-200">
                 Analysis
               </div>
             </div>
-            <div className="flex mb-3">
-              <div className="inline-block p-[10px]  rounded-full  text-[#0055ff] font-bold">
+            <div className="flex mb-3 group">
+              <div className="inline-block p-[10px] rounded-full text-[#888] font-bold group-hover:text-[#0055ff] transition-colors duration-200">
                 <MdOutlineChatBubbleOutline className="font-bold" size={30} />
               </div>
-              <div className="p-3 text-[#888] font-bold hover:text-[#0055ff]">
+              <div className="p-3 text-[#888] font-bold group-hover:text-[#0055ff] transition-colors duration-200">
                 Chat
               </div>
             </div>
@@ -157,6 +160,7 @@ function Sidebar() {
 
         <div className="bg-red-300"></div>
         <div className="bg-red-300"></div>
+
       </div>
     </div>
   );
