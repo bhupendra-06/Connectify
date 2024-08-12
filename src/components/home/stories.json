@@ -1,0 +1,36 @@
+[
+  {
+    "name": "John Doe",
+    "picture": "https://images.pexels.com/photos/27622732/pexels-photo-27622732/free-photo-of-a-couple-holding-hands-in-front-of-a-green-building.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "profileImage": "https://randomuser.me/api/portraits/men/1.jpg"
+  },
+  {
+    "name": "Jane Smith",
+    "picture": "https://images.pexels.com/photos/3933906/pexels-photo-3933906.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "profileImage": "https://randomuser.me/api/portraits/women/1.jpg"
+  },
+  {
+    "name": "Alice Johnson",
+    "picture": "https://images.pexels.com/photos/2894151/pexels-photo-2894151.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "profileImage": "https://randomuser.me/api/portraits/women/2.jpg"
+  },
+  {
+    "name": "Bob Brown",
+    "picture": "https://images.pexels.com/photos/6210330/pexels-photo-6210330.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "profileImage": "https://randomuser.me/api/portraits/men/2.jpg"
+  },
+  {
+    "name": "Brown Munde",
+    "picture": "https://images.pexels.com/photos/27352740/pexels-photo-27352740/free-photo-of-a-woman-standing-on-the-stairs-of-the-cubuklu-silolar-beykoz-turkey.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "profileImage": "https://randomuser.me/api/portraits/men/5.jpg"
+  },
+  {
+    "name": "David Wilson",
+    "picture": "https://images.pexels.com/photos/6210330/pexels-photo-6210330.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "profileImage": "https://randomuser.me/api/portraits/men/2.jpg"
+  },
+  {
+    "name": "Charlie Davis",
+    "profileImage": "https://randomuser.me/api/portraits/men/3.jpg"
+  }
+]

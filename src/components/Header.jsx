@@ -30,7 +30,7 @@ const Header = () => {
   }, []);
   return (
     <>
-      <header className="w-full pl-5 py-2 md:py-4 flex items-center bg-white justify-between shadow-xl shadow-gray-100">
+      <header className="fixed w-full pl-5 py-2 md:py-4 flex items-center bg-white justify-between shadow-sm shadow-gray-300">
         <div className="logo text-2xl md:text-3xl font-bold text-blue-600">
           Connectify.
         </div>
@@ -68,11 +68,11 @@ const Header = () => {
               </li>
             </ul>
           </div>
-          <ul className="px-2 flex items-center">
-            <LuBell className="icon mx-3 text-blue-600 lg:text-3xl" />
-            <BiComment className="icon mx-3 text-blue-600 lg:text-3xl" />
-            <SlSettings className="icon gsapRotate mx-3 text-blue-600 lg:text-3xl" />
-            <FaCircleUser className="icon mx-3 text-red-700 lg:text-3xl" />
+          <ul className="px-2 flex items-center *:mx-3 *:lg:text-3xl">
+            <LuBell className="icon text-blue-600" />
+            <BiComment className="icon text-blue-600" />
+            <SlSettings className="icon gsapRotate text-blue-600 hidden sm:inline-block" />
+            <FaCircleUser className="icon text-red-700" />
           </ul>
         </div>
       </header>
