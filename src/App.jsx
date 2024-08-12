@@ -6,24 +6,16 @@ import Sidebar from "./components/sidebar/Sidebar.jsx";
 import AccountInformation from "./components/settings/AccountInformation.jsx";
 import DefaultSettings from "./components/settings/DefaultSettings.jsx";
 
+import { Outlet } from "react-router-dom";
+import Header from "./components/Header.jsx";
+
 
 function App() {
   return (
     <>
-
-
-      <Home /> 
-      {/* <LoginPage/> */}
-      {/* <Sidebar/> */}
-
-      {/* <SignUpPage/> */}
-      {/* <AccountInformation/> */}
-      
-      {/* <div className="bg-slate-600 py-3">
-      <DefaultSettings/>
-      </div> */}
-      
-
+      <Header/>
+      <Sidebar/>
+      <Outlet/>
     </>
   );
 }

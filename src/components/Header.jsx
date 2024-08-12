@@ -13,6 +13,7 @@ import { SlSettings } from "react-icons/sl";
 import { FaCircleUser } from "react-icons/fa6";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { NavLink } from "react-router-dom";
 
 // gsap.registerPlugin(useGSAP);
 
@@ -25,7 +26,7 @@ const Header = () => {
       delay: 0,
       ease: "none",
       repeat: Infinity,
-     });
+      });
   }, []);
   return (
     <>
@@ -40,20 +41,30 @@ const Header = () => {
               <input type="search" placeholder="Start typing to search...." />
             </div>
             <ul className="hidden xl:flex">
-              <li className="icon-gola text-blue-600 bg-[#d2e3ff]">
-                <LuHome className="icon text-blue-600" />
+              <li className="icon-gola text-blue-600 bg-[#d2e3ff] rounded-full">
+                <NavLink to="/" >
+                  <LuHome className="icon text-blue-600" />
+                </NavLink>
               </li>
               <li className="icon-gola">
-                <MdOutlineElectricBolt className="icon" />
+                <NavLink to="/login" >
+                  <MdOutlineElectricBolt className="icon" />
+                </NavLink>
               </li>
               <li className="icon-gola">
-                <LuVideo className="icon" />
+                <NavLink to="/signup" >
+                  <LuVideo className="icon" />
+                </NavLink>
               </li>
               <li className="icon-gola">
-                <HiUserGroup className="icon" />
+                <NavLink>
+                  <HiUserGroup className="icon" />
+                </NavLink>
               </li>
               <li className="icon-gola">
-                <LuShoppingBag className="icon" />
+                <NavLink>
+                  <LuShoppingBag className="icon" />
+                </NavLink>
               </li>
             </ul>
           </div>
