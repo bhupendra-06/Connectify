@@ -24,7 +24,7 @@ const Stories = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Stories;
 
@@ -34,7 +34,6 @@ const SingleStory = ({ story, index }) => {
   };
 
   const [showStory, setShowStory] = useState("hidden");
-  //   const [value, setValue] = useState(true);
   const biggerStory = () => {
     setShowStory("");
     setTimeout(() => {
@@ -70,21 +69,18 @@ const SingleStory = ({ story, index }) => {
               {story.name || "Person"}
             </h4>
           </div>
-          {/* {value ? ( */}
+          {/* FULL SCREEN STROY */}
           <section
             id="story-image"
             className={`${showStory} w-full h-screen absolute top-0 left-0 bg-[#000000f4]`}
           >
-            <span
-              className="absolute top-0 left-0 text-gray-400 text-2xl sm:text-3xl lg:text-4xl"
-            >
+            <span className="absolute top-0 left-0 text-gray-400 text-2xl sm:text-3xl lg:text-4xl">
               <FaArrowLeft className="m-4" />
             </span>
             <figure className="p-10 mx-auto h-screen flex items-center justify-center object-contain">
               <img src={story.picture} className="h-[90vh] object-contain" />
             </figure>
           </section>
-          {/* ) : null} */}
         </div>
       )}
     </>

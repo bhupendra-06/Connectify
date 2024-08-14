@@ -124,7 +124,7 @@ const LoginPage = () => {
     .then(response => response.json())
     .then(data => {
       if (data.user && data.token) { // Assuming the success status is in `data.success`
-        navigate('/');
+        navigate('/home');
       } else {
         setErrMsg('Invalid Username or Password');
       }
