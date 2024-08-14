@@ -13,8 +13,8 @@ const yourStory = {
 // STORIES COMPONENT STARTS HERE
 const Stories = () => {
   return (
-    <div className="pl-1 pr-2 w-full lg:max-w-[650px]">
-      <div className="-mt-1 md:mt-3 lg:mt-5 h-48 w-full lg:max-w-[650px] story-section flex items-center overflow-scroll hide-scrollbar">
+    <div className="pl-1 pr-2 w-full lg:max-w-[] z-0">
+      <div className="-mt-1 md:mt-3 lg:mt-5 h-48 w-full story-section flex items-center overflow-scroll hide-scrollbar">
         <SingleStory story={yourStory} index={"yourStory"} />
         {stories.map((story, index) => {
           {
@@ -55,6 +55,7 @@ const SingleStory = ({ story, index }) => {
           style={storyStyle}
           onClick={biggerStory}
         >
+        {/* SINGLE STORY CODE STARTS HERE */}
           <div className="p-2 bg-gradient-to-b from-transparent from-50% via- to-[#000000ee] to-100% w-full h-full flex flex-col items-center justify-end gap-1">
             <figure className="mx-auto w-10 h-10 object-cover border border-[#959595] rounded-full overflow-hidden">
               <img
@@ -69,16 +70,16 @@ const SingleStory = ({ story, index }) => {
               {story.name || "Person"}
             </h4>
           </div>
-          {/* FULL SCREEN STROY */}
+          {/* FULL SCREEN STROY VIEW*/}
           <section
             id="story-image"
-            className={`${showStory} w-full h-screen absolute top-0 left-0 bg-[#000000f4]`}
+            className={`${showStory} w-full h-screen absolute top-0 left-0 bg-[#000000f4] z-50`}
           >
             <span className="absolute top-0 left-0 text-gray-400 text-2xl sm:text-3xl lg:text-4xl">
               <FaArrowLeft className="m-4" />
             </span>
-            <figure className="p-10 mx-auto h-screen flex items-center justify-center object-contain">
-              <img src={story.picture} className="h-[90vh] object-contain" />
+            <figure className="p-1 mx-auto h-screen flex items-center justify-center object-contain">
+              <img src={story.picture} className="h-[99vh] object-contain" />
             </figure>
           </section>
         </div>

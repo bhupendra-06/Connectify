@@ -19,18 +19,18 @@ function Sidebar() {
   console.log(position);
 
   return (
-    <div className="">
-      <div>
+    <div className="my-[97px] fixed top-0 hidden lg:block overflow-hidden hide-scrollbar">
+      <div className="w-40 hidden">
         <button className="bg-red-400 p-4" onClick={slider}>
           X
         </button>
       </div>
 
       <div
-        className={`bg-lime-400 w-[280px] h-[890px] absolute transition-all duration-500`}
+        className={`pt-4 h-[calc(100vh-100px)] min-w-[280px] w-[280px] transition-all overflow-scroll hide-scrollbar duration-500`}
         style={{ left: `${position}px` }}
       >
-        <div className="bg-slate-100 w-[250px] m-auto mb-3 rounded-xl">
+        <div className="mb-3 w-[250px] bg-white shadow-lg m-auto rounded-xl border-2 border-gray-100">
           <div className="text-[#ADB5BD] w-28 text-[13px] p-3 font-bold ">
             New Feeds
           </div>
@@ -126,7 +126,7 @@ function Sidebar() {
           </div>
         </div>
 
-        <div className="bg-slate-100 w-[250px] m-auto mb-3 rounded-xl">
+        <div className="mb-3 w-[250px] bg-white shadow-lg m-auto rounded-xl border-2 border-gray-100">
           <div className="text-[#ADB5BD] w-28 text-[13px] p-3 font-bold ">
             Accounts
           </div>

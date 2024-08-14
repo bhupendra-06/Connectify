@@ -1,8 +1,6 @@
 import React from "react";
-import Header from "../Header";
 import UserPost from "./UserPost";
 import posts from "./posts.json";
-import Sidebar from "../sidebar/Sidebar";
 import Stories from "./Stories";
 import FindPeople from "./FindPeople";
 
@@ -10,9 +8,8 @@ const Home = () => {
   return (
   <>
     <div className="">
-      <Header />
       <div className="lg:pl-[270px] pt-20 h-screen overflow-y-scroll flex justify-center">
-          <section className="h-full overflow-x-hidden hide-scrollbar xl:max-w-[650px]">
+          <section className="h-full mx-auto overflow-x-hidden hide-scrollbar xl:max-w-[]">
             <Stories />
             {posts.map((post, index) => {
               return <UserPost post={post} index={index} />;

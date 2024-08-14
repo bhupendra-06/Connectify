@@ -30,7 +30,7 @@ const Header = () => {
   }, []);
   return (
     <>
-      <header className="fixed w-full pl-5 py-2 md:py-4 flex items-center bg-white justify-between shadow-sm shadow-gray-300 z-10">
+      <header className="fixed top-0 w-full pl-5 py-2 md:py-4 flex items-center bg-white justify-between shadow-sm shadow-gray-300 z-10">
         <div className="logo text-2xl md:text-3xl font-bold text-blue-600">
           Connectify.
         </div>

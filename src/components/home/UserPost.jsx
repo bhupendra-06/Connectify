@@ -125,7 +125,7 @@ const UserPost = ({ post, index }) => {
       </div>
       {/* WHEN POST HAS MULTIPLE IMAGES */}
       {postImages && (
-        <div className="w-screen h-screen absolute top-0 left-0 select-none">
+        <div className="w-screen h-screen absolute top-0 left-0 select-none z-50">
           <div className="p-2 w-full h-full bg-[#000] flex items-center overflow-hidden">
             {post.pictures && (
               <img

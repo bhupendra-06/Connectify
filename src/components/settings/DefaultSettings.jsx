@@ -12,7 +12,7 @@ import { RiAccountCircleLine } from "react-icons/ri";
 
 function DefaultSettings() {
     return (
-        <div className='max-w-[800px] mx-auto my-4 rounded overflow-hidden bg-white'>
+        <div className='lg:pl-48 pt-20 max-w-[800px] mx-auto my-4 rounded overflow-hidden bg-white'>
             <div className='align-left mt-3'>
                 <div className='flex p-7'>
                     <a href="http://"><GoArrowLeft className='inline-block m-1' size={30}/></a>
