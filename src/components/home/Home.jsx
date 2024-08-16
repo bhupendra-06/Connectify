@@ -3,7 +3,7 @@ import UserPost from "./UserPost";
 import posts from "./posts.json";
 import Stories from "./Stories";
 import FindPeople from "./FindPeople";
-import Header from "../Header";
+import Header from "../Header"
 import Sidebar from "../sidebar/Sidebar"
 import CreatPost from "./CreatPost";
 
