@@ -11,6 +11,7 @@ const Home = () => {
   <>
     <div className="">
       <Header />
+      <Sidebar/>
       <div className="lg:pl-[270px] pt-20 h-screen overflow-y-scroll flex justify-center">
           <section className="h-full overflow-x-hidden hide-scrollbar xl:max-w-[650px]">
             <Stories />
