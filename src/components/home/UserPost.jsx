@@ -1,8 +1,11 @@
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaRegThumbsUp } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
 import { FaRegComment } from "react-icons/fa6";
 import { FiShare2 } from "react-icons/fi";
+import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
+import { RxCrossCircled } from "react-icons/rx";
 
 const NoUser =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA3W3oppN7sdVCsUWwwnPIn9pX6E6G2UW70w&s";
@@ -23,6 +26,31 @@ const UserPost = ({ post, index }) => {
     see == "See More." ? setSee("See Less.") : setSee("See More.");
   };
 
+  // FOR FULL SCREEN POST IMAGES
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [postImages, setPostImages] = useState(null);
+
+  const displayPostImages = (picIndex) => {
+    setPostImages(true);
+    setCurrentIndex(picIndex);
+    console.log(picIndex);
+  };
+  const removePostImages = () => {
+    setPostImages(null);
+  };
+  const goBack = () => {
+    const isFirstImage = currentIndex === 0;
+    const newIndex = isFirstImage ? post.pictures.length - 1 : currentIndex - 1;
+    setCurrentIndex(newIndex);
+  };
+  const goForward = () => {
+    const isLastImage = currentIndex === post.pictures.length - 1;
+    const newIndex = isLastImage ? 0 : currentIndex + 1;
+    setCurrentIndex(newIndex);
+  };
+
+  // RETURN FUNCTION FOR USER POST COMPONENT IS HERE
   return (
     <div key={index}>
       <div className="m-2 mt-0 p-5 rounded-lg bg-white shadow-xl shadow-gray-200 border">
@@ -69,6 +97,7 @@ const UserPost = ({ post, index }) => {
             {post.pictures.map((url, picIndex) => {
               return (
                 <img
+                  onClick={() => displayPostImages(picIndex)}
                   key={picIndex}
                   className="h-full object-cover rounded-lg"
                   src={url}
@@ -94,9 +123,34 @@ const UserPost = ({ post, index }) => {
           </div>
         </div>
       </div>
+      {/* WHEN POST HAS MULTIPLE IMAGES */}
+      {postImages && (
+        <div className="w-screen h-screen absolute top-0 left-0 select-none z-50">
+          <div className="p-2 w-full h-full bg-[#000] flex items-center overflow-hidden">
+            {post.pictures && (
+              <img
+                src={`${post.pictures[currentIndex]}`}
+                className="w-[85vw] h-[90vh] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 object-contain"
+              />
+            )}
+            <RxCrossCircled 
+                onClick={() => removePostImages()}
+              className="text-5xl md:text-5xl text-gray-600 absolute left-2 lg:left-10 top-2 lg:top-5 select-none cursor-pointer"
+            />
+
+            <IoIosArrowBack
+              onClick={goBack}
+              className="text-3xl md:text-5xl text-gray-300 border border-gray-500 absolute left-2 lg:left-10 top-1/2 -translate-y-1/2 select-none cursor-pointer"
+            />
+            <IoIosArrowForward
+              onClick={goForward}
+              className="text-3xl md:text-5xl text-gray-300 border border-gray-500 absolute right-2  lg:right-10 top-1/2 -translate-y-1/2 select-none cursor-pointer"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
 export default UserPost;
-

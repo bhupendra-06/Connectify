@@ -21,8 +21,7 @@
     "comments": "124",
     "pictures": [
       "https://images.pexels.com/photos/21033370/pexels-photo-21033370/free-photo-of-woman-sitting-with-fisherman-on-boat-on-lake.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      "https://images.pexels.com/photos/16368423/pexels-photo-16368423/free-photo-of-man-holding-a-net-on-a-boat.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-      ""
+      "https://images.pexels.com/photos/16368423/pexels-photo-16368423/free-photo-of-man-holding-a-net-on-a-boat.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
     ]
   },
   {
@@ -48,19 +47,6 @@
     "comments": "124"
   },
   {
-    "profileImage": "https://randomuser.me/api/portraits/women/68.jpg",
-    "name": "Olivia",
-    "lastSeen": "4 hours ago",
-    "caption": "Exploring the beauty of India. It is so beautiful. Every corner of the world holds a new adventure. With each step, we uncover hidden stories and create unforgettable memories. Traveling isn’t just about the places we go, but the people we meet and the moments we cherish. Embrace the journey, for it shapes who we are ",
-    "likes": "620",
-    "comments": "40",
-    "pictures": [
-      "https://images.unsplash.com/photo-1511988617509-a57c8a288659",
-      "https://images.unsplash.com/photo-1523292562811-8fa7962a78c8",
-      "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0"
-    ]
-  },
-  {
     "profileImage": "https://randomuser.me/api/portraits/women/12.jpg",
     "name": "Emma",
     "lastSeen": "5 hours ago",
@@ -71,6 +57,19 @@
       "https://images.pexels.com/photos/2265488/pexels-photo-2265488.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       "https://images.pexels.com/photos/2312369/pexels-photo-2312369.jpeg?auto=compress&cs=tinysrgb&w=600",
       "https://images.pexels.com/photos/2102416/pexels-photo-2102416.jpeg?auto=compress&cs=tinysrgb&w=600"
+    ]
+  },
+  {
+    "profileImage": "https://randomuser.me/api/portraits/women/68.jpg",
+    "name": "Olivia",
+    "lastSeen": "4 hours ago",
+    "caption": "Exploring the beauty of India. It is so beautiful. Every corner of the world holds a new adventure. With each step, we uncover hidden stories and create unforgettable memories. Traveling isn’t just about the places we go, but the people we meet and the moments we cherish. Embrace the journey, for it shapes who we are ",
+    "likes": "620",
+    "comments": "40",
+    "pictures": [
+      "https://images.unsplash.com/photo-1511988617509-a57c8a288659",
+      "https://images.unsplash.com/photo-1523292562811-8fa7962a78c8",
+      "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0"
     ]
   },
   {
