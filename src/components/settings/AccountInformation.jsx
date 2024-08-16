@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { GoArrowLeft } from "react-icons/go";
 import img1 from "./AccountInfo1.jpg"
 import Input1 from '../form/Input1';
@@ -7,19 +8,19 @@ import { IoCloudDownloadOutline } from "react-icons/io5";
 function AccountInformation() {
 
     return (
-        <div className=' bg-white max-w-[800px] mx-auto rounded-md my-4'>
+        <div className='mx-2 md:mx-auto mt-10 lg:pl-48 pt-7 md:pt-12 lg:pt-16 max-w-[800px] bg-white  rounded-md my-4'>
             <div className='bg-[#05f] align-left rounded-md'>
                 <div className='flex p-7 text-white '>
-                    <a href="http://"><GoArrowLeft className='inline-block pb-1' size={30}/></a>
+                    <Link to="settings"><GoArrowLeft className='inline-block pb-1' size={30}/></Link>
                     <h4 className='pl-4 text-xl '>Account Details</h4>
                 </div>
             </div>
-            <div className='flex flex-col items-center mt-[50px] '>
+            <div className='flex flex-col items-center mt-2 sm:mt-10'>
                 <img className='w-24 h-24 rounded-md center m-2' src={img1} alt="img" srcset="" />
                 <h2 className='text-2xl m-1 font-bold'>Surfiya Zakir</h2>
                 <h4 className='text-[#ADB5BD]'>Brooklyn</h4>
             </div>
-            <div className='p-7'>
+            <div className='sm:p-7'>
                 <form action="">
                     <div className='grid gap-8 m-4 lg:grid-cols-2'>
                         <Input1 inputLabel="First Name" inputType="text" />

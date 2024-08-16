@@ -39,7 +39,7 @@ const SingleStory = ({ story, index }) => {
     setTimeout(() => {
       setShowStory("hidden");
       console.log(showStory);
-    }, 1500);
+    }, 1800);
   };
   useEffect(() => {
     console.log(showStory);

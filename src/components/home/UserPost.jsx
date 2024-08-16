@@ -62,9 +62,9 @@ const UserPost = ({ post, index }) => {
                 src={post.profileImage || NoUser}
               />
               <div className="text-start ml-3">
-                <h3 className="text-xl font-bold">
+                <h3 className="text-lg font-bold">
                   {post.name || "Anonymous"}
-                  <span className="text-base text-gray-400 block">
+                  <span className="text-sm text-gray-400 block">
                     {post.lastSeen || "Last seen.."}
                   </span>
                 </h3>
@@ -77,8 +77,8 @@ const UserPost = ({ post, index }) => {
         </div>
         {post.caption &&
           (post.caption.length > 150 ? (
-            <p className="mb-5 text-lg text-gray-400 text-justify select-none">
-              {seeMore ? post.caption : post.caption.slice(0, 100) + ".."}{" "}
+            <p className="mb-5 text-base text-gray-400 text-justify select-none">
+              {seeMore ? post.caption : post.caption.slice(0, 150) + ".."}{" "}
               <span
                 onClick={seeMoreFunction}
                 className="text-blue-600 font-semibold cursor-pointer"
@@ -108,14 +108,16 @@ const UserPost = ({ post, index }) => {
         )}
 
         <div className="my-6 mx-1 flex justify-between">
-          <div className="flex items-center text-md">
-            <FaRegThumbsUp className="p-1 mx-1 text-xl text-white bg-blue-500 rounded-full" />
-            <FaRegHeart className="p-1 mx-1 text-xl text-white bg-red-500 rounded-full" />
-            <span>{`${post.likes || ""} Likes`}</span>
-          </div>
-          <div className="flex items-center text-md">
-            <FaRegComment className="mx-1" />
-            <span>{`${post.comments || ""} Comments`}</span>
+          <div className="min-w-1/2 flex gap-4 justify-between">
+            <div className="flex items-center text-md">
+              <FaRegThumbsUp className="p-1 mx-1 text-xl text-white bg-blue-500 rounded-full" />
+              {/* <FaRegHeart className="p-1 mx-1 text-xl text-white bg-red-500 rounded-full" /> */}
+              <span>{`${post.likes || ""} Likes`}</span>
+            </div>
+            <div className="flex items-center text-md">
+              <FaRegComment className="mx-1" />
+              <span>{`${post.comments || ""} Comments`}</span>
+            </div>
           </div>
           <div className="flex items-center text-md">
             <FiShare2 className="mx-1" />
@@ -133,8 +135,8 @@ const UserPost = ({ post, index }) => {
                 className="w-[85vw] h-[90vh] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 object-contain"
               />
             )}
-            <RxCrossCircled 
-                onClick={() => removePostImages()}
+            <RxCrossCircled
+              onClick={() => removePostImages()}
               className="text-5xl md:text-5xl text-gray-600 absolute left-2 lg:left-10 top-2 lg:top-5 select-none cursor-pointer"
             />
 

@@ -4,37 +4,33 @@ const people = [
   {
     profileImage:
       "https://media.istockphoto.com/id/864516870/photo/young-woman-photographing-the-autumn-season.jpg?s=612x612&w=0&k=20&c=M3G2SwKJ15zolsSaFABsneLitdWXCrrJ3LkTEKnIOys=",
-    name: "Bhupendra Nirmalkar",
-    name: "RajKumar Dewangan",
+    name: "Rajdewangan02",
     time: "1 month ago",
   },
   {
-    name: "Bhupendra Nirmalkar",
+    name: "Bhupendra26",
     time: "2 days ago",
   },
   {
     profileImage:
       "https://media.istockphoto.com/id/864516870/photo/young-woman-photographing-the-autumn-season.jpg?s=612x612&w=0&k=20&c=M3G2SwKJ15zolsSaFABsneLitdWXCrrJ3LkTEKnIOys=",
-    name: "Bhupendra Nirmalkar",
-    name: "Deepak Sahu",
+    name: "Deepak1211",
     time: "2 weeks ago",
   },
   {
     profileImage:
       "https://media.istockphoto.com/id/864516870/photo/young-woman-photographing-the-autumn-season.jpg?s=612x612&w=0&k=20&c=M3G2SwKJ15zolsSaFABsneLitdWXCrrJ3LkTEKnIOys=",
-    name: "Bhupendra Nirmalkar",
-    name: "RajKumar Dewangan",
+    name: "Rajdewangan02",
     time: "1 month ago",
   },
   {
-    name: "Bhupendra Nirmalkar",
+    name: "Bhupendra26",
     time: "2 days ago",
   },
   {
     profileImage:
       "https://media.istockphoto.com/id/864516870/photo/young-woman-photographing-the-autumn-season.jpg?s=612x612&w=0&k=20&c=M3G2SwKJ15zolsSaFABsneLitdWXCrrJ3LkTEKnIOys=",
-    name: "Bhupendra Nirmalkar",
-    name: "Deepak Sahu",
+    name: "Bhupendra26",
     time: "2 weeks ago",
   }
 ];
@@ -46,9 +42,9 @@ const noUser =
 const FindPeople = () => {
   return (
     <>
-    <div className="find-people mt-5 pb-2 border rounded-lg shadow-lg">
-      <div className="mt-5 w-[380px] h- rounded-t-lg">
-        <div className="p-5 flex justify-between text-lg font-semibold  border-b">
+    <div className="find-people mt-5 pb-2 w-fit border rounded-lg shadow-lg">
+      <div className="rounded-t-lg">
+        <div className="p-5 flex justify-between text-base font-semibold  border-b">
           <h2 className="text-gray-800">Find People</h2>
           <a href="#" className="text-blue-600">
             See all
@@ -59,9 +55,9 @@ const FindPeople = () => {
         return <PersonCard person={person} index={index} />;
       })}
     </div>
-    <div className="my-friends mt-5 pb-2 border rounded-lg shadow-lg">
-      <div className="mt-5 w-[380px] h- rounded-t-lg">
-        <div className="p-5 flex justify-between text-lg font-semibold  border-b">
+    <div className="my-friends mt-5 pb-2 w-fit border rounded-lg shadow-lg">
+      <div className="rounded-t-lg">
+        <div className="p-5 flex justify-between text-base font-semibold  border-b">
           <h2 className="text-gray-800">My Friends</h2>
           <a href="#" className="text-blue-600">
             See all
@@ -81,17 +77,17 @@ export default FindPeople;
 
 const PersonCard = ({ person, index }) => {
   return (
-    <li className="profile mx-2 my-5 px-2 flex items-center justify-between">
+    <li className="profile mx-2 my-5 px-2 flex gap-6 items-center justify-between">
       <div>
         <div className="flex items-center justify-center">
           <img
-            className="w-14 h-14 object-cover rounded-full"
+            className="w-12 h-12 object-cover rounded-full"
             src={person.profileImage || noUser}
           />
           <div className="text-start ml-2">
-            <h3 className="text-base text-gray-800 font-bold">
+            <h3 className="text-sm text-gray-800 font-bold">
               {person.name || "Anonymous"}
-              <span className="text-sm text-gray-400 block">
+              <span className="text-xs text-gray-400 block">
                 {person.time || "new account.."}
               </span>
             </h3>
@@ -99,7 +95,7 @@ const PersonCard = ({ person, index }) => {
         </div>
       </div>
 
-      <button className="m-l2 px-5 py-2 rounded-full border-2 border-blue-500 bg-blue-500 text-white text-sm font-bold duration-200">
+      <button className="m-l2 px-[10px] py-[5px] rounded-full border-2 border-blue-500 bg-blue-500 text-white text-xs font-bold duration-200">
         Follow
       </button>
     </li>
