@@ -17,7 +17,6 @@ const LoginPage = () => {
     setFormData((prevData) => ({ ...prevData, [id]: value }));
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -34,10 +33,11 @@ const LoginPage = () => {
       });
 
       const data = await response.json();
+      console.log(data);
 
       if (data.user && data.token) {
         dispatch(login({ user: data.user, token: data.token }));
-        navigate('/home');
+        navigate('/home'); // Redirect to home page after successful login
       } else {
         setErrMsg('Invalid Username or Password');
       }
@@ -79,7 +79,6 @@ const LoginPage = () => {
         <p>
           New to Connectify? <NavLink to="/signup">Sign up now.</NavLink>
         </p>
-        
       </div>
     </main>
   );
