@@ -8,6 +8,7 @@ import DefaultSettings from "./components/settings/DefaultSettings.jsx";
 
 import { Outlet } from "react-router-dom";
 import Header from "./components/Header.jsx";
+import MobileFooter from "./components/MobileFooter.jsx";
 
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
       <Header/>
       <Sidebar/>
       <Outlet/>
-
+      <MobileFooter/>
     </>
   );
 }
