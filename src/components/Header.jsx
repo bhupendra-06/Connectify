@@ -16,9 +16,23 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Link, NavLink } from "react-router-dom";
 
-gsap.registerPlugin(useGSAP);
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { logout } from '../redux/authSlice';
+
+// gsap.registerPlugin(useGSAP);
 
 const Header = () => {
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/login');
+  };
+
+
   // GSAP ANIMATION
   useGSAP(() => {
     gsap.to(".gsapRotate", {
@@ -65,11 +79,12 @@ const Header = () => {
                   <HiUserGroup className="icon" />
                 </NavLink>
               </li>
-              <li className="icon-gola">
+              <li onClick={handleLogout}  className="icon-gola">
                 <NavLink>
                   <LuShoppingBag className="icon" />
                 </NavLink>
               </li>
+
             </ul>
           </div>
           <ul className="px-2 flex items-center justify-start *:lg:text-3xl">
