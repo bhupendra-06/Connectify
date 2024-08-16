@@ -29,12 +29,9 @@ const App = () => {
       />
       <Route
         path="/"
-        element={<Navigate to={isAuthenticated ? "/home" : "/login"} />}
+        element={<Navigate to= "/login" />}
       />
-      <Route
-        path="*"
-        element={<Navigate to={isAuthenticated ? "/home" : "/login"} />}
-      />
+      
     </Routes>
   );
 }
