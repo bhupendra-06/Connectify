@@ -15,10 +15,23 @@ const App = () => {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
-      <Route path="/home" element={isAuthenticated ? <Home /> : <Navigate to="/login" />} />
-      <Route path="account-info" element={isAuthenticated ? <AccountInformation /> : <Navigate to="/login" />} />
-      <Route path="default-settings" element={isAuthenticated ? <DefaultSettings /> : <Navigate to="/login" />} />
-      <Route path="/" element={<Navigate to={isAuthenticated ? "/home" : "/login"} />} />
+      <Route
+        path="/home"
+        element={isAuthenticated ? <Home /> : <Navigate to="/login" />}
+      />
+      <Route
+        path="/account-info"
+        element={isAuthenticated ? <AccountInformation /> : <Navigate to="/login" />}
+      />
+      <Route
+        path="/default-settings"
+        element={isAuthenticated ? <DefaultSettings /> : <Navigate to="/login" />}
+      />
+      <Route
+        path="/"
+        element={<Navigate to= "/login" />}
+      />
+      
     </Routes>
   );
 }
