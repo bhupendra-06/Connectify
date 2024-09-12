@@ -16,7 +16,7 @@ function DefaultSettings() {
         <div className='mx-auto mt-10 lg:pl-48 pt-5 md:pt-12 lg:pt-16 max-w-[900px] rounded overflow-hidden bg-white'>
             <div className='align-left mt-3'>
                 <div className='flex items-center px-7'>
-                    <a href="http://"><GoArrowLeft className='inline-block m-1' size={30}/></a>
+                    <Link to="/home"><GoArrowLeft className='inline-block m-1' size={30}/></Link>
                     <h1 className='pl-4 text-xl sm:text-3xl font-bold'>Settings</h1>
                 </div>
             </div>

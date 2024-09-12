@@ -71,7 +71,7 @@ const UserPost = ({ post, index }) => {
               </div>
             </div>
           </div>
-          <div className="w-10 h-10 text-xl font-bold bg-[#eee] rounded-full">
+          <div className="w-10 h-10 text-xl text-center font-bold bg-[#eee] rounded-full">
             ...
           </div>
         </div>
@@ -93,13 +93,13 @@ const UserPost = ({ post, index }) => {
           ))}
         {/* MAPPING THE POST PICTURES HERE */}
         {post.pictures && (
-          <div className="grid grid-cols-3 gap-2">
+          <div className="flex overflow-hidden gap-2 relative">
             {post.pictures.map((url, picIndex) => {
               return (
                 <img
                   onClick={() => displayPostImages(picIndex)}
                   key={picIndex}
-                  className="h-full object-cover rounded-lg"
+                  className="w-[32.4%] object-cover after:w-full after:h-full after:top-0 after:left-0 after:bg-black after:absolute from-cyan-800 to-blue-800 rounded-lg"
                   src={url}
                 />
               );

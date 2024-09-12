@@ -22,7 +22,7 @@ import { logout } from '../redux/authSlice';
 
 // gsap.registerPlugin(useGSAP);
 
-const Header = () => {
+const Header = ({onToggleSidebar}) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -84,16 +84,15 @@ const Header = () => {
                   <LuShoppingBag className="icon" />
                 </NavLink>
               </li>
-
             </ul>
           </div>
           <ul className="px-2 flex items-center justify-start *:lg:text-3xl">
-            <Link to="settings">
-              <SlSettings className="icon gsapRotate text-blue-600 hidden sm:inline-block" />
+            <Link to="/settings">
+              <SlSettings className="icon gsapRotate text-blue-600 " />
             </Link>
-            <BiComment className="icon text-blue-600" />
-            <LuBell className="icon text-blue-600" />
-            <CgMenuRight className="icon text-3xl lg:hidden" />
+            <BiComment className="icon text-blue-600 hidden sm:inline-block" />
+            <LuBell className="icon text-blue-600 hidden sm:inline-block"/>
+            <CgMenuRight onClick={onToggleSidebar} className="icon text-3xl lg:hidden" />
             <FaCircleUser className="icon text-red-700 hidden lg:block" />
           </ul>
         </div>

@@ -4,7 +4,7 @@ const people = [
   {
     profileImage:
       "https://media.istockphoto.com/id/864516870/photo/young-woman-photographing-the-autumn-season.jpg?s=612x612&w=0&k=20&c=M3G2SwKJ15zolsSaFABsneLitdWXCrrJ3LkTEKnIOys=",
-    name: "Rajdewangan02",
+    name: "Rajdewangan02 sahu",
     time: "1 month ago",
   },
   {
@@ -22,16 +22,6 @@ const people = [
       "https://media.istockphoto.com/id/864516870/photo/young-woman-photographing-the-autumn-season.jpg?s=612x612&w=0&k=20&c=M3G2SwKJ15zolsSaFABsneLitdWXCrrJ3LkTEKnIOys=",
     name: "Rajdewangan02",
     time: "1 month ago",
-  },
-  {
-    name: "Bhupendra26",
-    time: "2 days ago",
-  },
-  {
-    profileImage:
-      "https://media.istockphoto.com/id/864516870/photo/young-woman-photographing-the-autumn-season.jpg?s=612x612&w=0&k=20&c=M3G2SwKJ15zolsSaFABsneLitdWXCrrJ3LkTEKnIOys=",
-    name: "Bhupendra26",
-    time: "2 weeks ago",
   }
 ];
 
@@ -42,33 +32,32 @@ const noUser =
 const FindPeople = () => {
   return (
     <>
-    <div className="find-people mt-5 pb-2 w-fit border rounded-lg shadow-lg">
-      <div className="rounded-t-lg">
-        <div className="p-5 flex justify-between text-base font-semibold  border-b">
-          <h2 className="text-gray-800">Find People</h2>
-          <a href="#" className="text-blue-600">
-            See all
-          </a>
+      <div className="find-people mt-5 pb-2 w-fit border rounded-lg shadow-lg">
+        <div className="rounded-t-lg">
+          <div className="p-5 flex justify-between text-base font-semibold  border-b">
+            <h2 className="text-gray-800">Find People</h2>
+            <a href="#" className="text-blue-600">
+              See all
+            </a>
+          </div>
         </div>
+        {people.map((person, index) => {
+          return <PersonCard person={person} index={index} />;
+        })}
       </div>
-      {people.map((person, index) => {
-        return <PersonCard person={person} index={index} />;
-      })}
-    </div>
-    <div className="my-friends mt-5 pb-2 w-fit border rounded-lg shadow-lg">
-      <div className="rounded-t-lg">
-        <div className="p-5 flex justify-between text-base font-semibold  border-b">
-          <h2 className="text-gray-800">My Friends</h2>
-          <a href="#" className="text-blue-600">
-            See all
-          </a>
+      <div className="my-friends mt-5 pb-2 w-fit border rounded-lg shadow-lg">
+        <div className="rounded-t-lg">
+          <div className="p-5 flex justify-between text-base font-semibold  border-b">
+            <h2 className="text-gray-800">My Friends</h2>
+            <a href="#" className="text-blue-600">
+              See all
+            </a>
+          </div>
         </div>
+        {people.map((person, index) => {
+          return <PersonCard person={person} index={index} />;
+        })}
       </div>
-      {people.map((person, index) => {
-        return <PersonCard person={person} index={index} />;
-      })}
-    </div>
-
     </>
   );
 };
@@ -77,9 +66,9 @@ export default FindPeople;
 
 const PersonCard = ({ person, index }) => {
   return (
-    <li className="profile mx-2 my-5 px-2 flex gap-6 items-center justify-between">
+    <li className="profile mx-10 my-2 p-3 px-5 list-none border rounded-md shadow-sm">
       <div>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-start gap-2">
           <img
             className="w-12 h-12 object-cover rounded-full"
             src={person.profileImage || noUser}
@@ -94,10 +83,15 @@ const PersonCard = ({ person, index }) => {
           </div>
         </div>
       </div>
-
-      <button className="m-l2 px-[10px] py-[5px] rounded-full border-2 border-blue-500 bg-blue-500 text-white text-xs font-bold duration-200">
-        Follow
-      </button>
+      <div className="buttons mt-2 flex items-center justify-center gap-4 *:w-full *:px-3 *:py-1 *:rounded-md hover:*:shadow-md">
+        <button className="border border-gray-500 bgwhihte
+         text-gray-500 text-xs font-semibold duration-200">
+          Ignore
+        </button>
+        <button className="border-2 border-blue-500 bg-blue-500 text-white text-xs font-bold duration-200">
+          Follow
+        </button>
+      </div>
     </li>
   );
 };

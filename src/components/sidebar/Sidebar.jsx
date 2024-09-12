@@ -11,25 +11,18 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineWatchLater } from "react-icons/md";
 import { MdOutlineChatBubbleOutline } from "react-icons/md";
 
-function Sidebar() {
-  const [position, setposition] = useState(0);
+function Sidebar({isVisible}) {
+  const [position, setPosition] = useState(1);
 
-  const slider = () => setposition(position === 0 ? -280 : 0);
 
   console.log(position);
 
   return (
-    <div className="hidden lg:block my-[72px] lg:my-[85px] fixed top-0 h-screen w-screen lg:w-fit bg-[#00000038] overflow-hidden hide-scrollbar z-10">
-    {/* TOGGE BUTTON */}
-      <div className="w-40 hidden">
-        <button className="bg-red-400 p-4" onClick={slider}>
-          X
-        </button>
-      </div>
+    <div className={`${isVisible? "translate-x-[0%] w-screen":""} fixed translate-x-[-100%] lg:translate-x-0 my-[72px] lg:my-[85px] lg:w-fit h-screen bg-[#00000038] overflow-hidden hide-scrollbar z-10`}>
       <div className="w-fit bg-white ">
         <div
           className={`pt-4 h-[calc(100vh-73px)] min-w-[280px] w-[280px] transition-all overflow-scroll hide-scrollbar duration-500`}
-          style={{ left: `${position}px` }}
+        
         >
           <div className="mb-3 w-[250px] bg-white shadow-lg m-auto rounded-xl border-2 border-gray-100">
             <div className="text-[#ADB5BD] w-28 text-[13px] p-3 font-bold ">
