@@ -137,23 +137,24 @@ const Header = () => {
   }, []);
 
   // Handle Logout Function
-  const handleLogout = async () => {
-    try {
-      // Send logout request to backend
-      const response = await axios.get('https://connectify-backend-2uq0.onrender.com/api/v1/users/logout', {
-        withCredentials: true  // Important: Send cookies with the request
-      });
+  // const handleLogout = async () => {
+  //   try {
+  //     // Send logout request to backend
+  //     const response = await axios.get('https://connectify-backend-2uq0.onrender.com/api/v1/users/logout', {
+  //       withCredentials: true  // Important: Send cookies with the request
+  //     });
 
-      if (response.status === 200) {
-        // Redirect to login page after logout
-        navigate('/login');
-      } else {
-        console.error("Logout failed", response);
-      }
-    } catch (error) {
-      console.error("Error during logout:", error);
-    }
-  };
+  //     if (response.status === 200) {
+  //       // Redirect to login page after logout
+  //       navigate('/login');
+  //     } else {
+  //       console.error("Logout failed", response);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during logout:", error);
+  //   }
+  // };
+  
 
   return (
     <>
