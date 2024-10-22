@@ -4,12 +4,8 @@ const people = [
   {
     profileImage:
       "https://media.istockphoto.com/id/864516870/photo/young-woman-photographing-the-autumn-season.jpg?s=612x612&w=0&k=20&c=M3G2SwKJ15zolsSaFABsneLitdWXCrrJ3LkTEKnIOys=",
-<<<<<<< HEAD
     name: "Bhupendra Nirmalkar",
     // name: "RajKumar Dewangan",
-=======
-    name: "Rajdewangan02 sahu",
->>>>>>> 1bc91a2a9d77a25d6201b42148a021332b3123ad
     time: "1 month ago",
   },
   {
@@ -19,18 +15,13 @@ const people = [
   {
     profileImage:
       "https://media.istockphoto.com/id/864516870/photo/young-woman-photographing-the-autumn-season.jpg?s=612x612&w=0&k=20&c=M3G2SwKJ15zolsSaFABsneLitdWXCrrJ3LkTEKnIOys=",
-<<<<<<< HEAD
     name: "Bhupendra Nirmalkar",
     // name: "Deepak Sahu",
-=======
-    name: "Deepak1211",
->>>>>>> 1bc91a2a9d77a25d6201b42148a021332b3123ad
     time: "2 weeks ago",
   },
   {
     profileImage:
       "https://media.istockphoto.com/id/864516870/photo/young-woman-photographing-the-autumn-season.jpg?s=612x612&w=0&k=20&c=M3G2SwKJ15zolsSaFABsneLitdWXCrrJ3LkTEKnIOys=",
-<<<<<<< HEAD
     name: "Bhupendra Nirmalkar",
     // name: "RajKumar Dewangan",
     time: "1 month ago",
@@ -45,10 +36,6 @@ const people = [
     name: "Bhupendra Nirmalkar",
     // name: "Deepak Sahu",
     time: "2 weeks ago",
-=======
-    name: "Rajdewangan02",
-    time: "1 month ago",
->>>>>>> 1bc91a2a9d77a25d6201b42148a021332b3123ad
   }
 ];
 
