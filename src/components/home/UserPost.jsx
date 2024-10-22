@@ -130,8 +130,6 @@ const UserPost = ({ post }) => {
             )}
             <RxCrossCircled
               onClick={() => removePostImages()}
-            <RxCrossCircled
-              onClick={() => removePostImages()}
               className="text-5xl md:text-5xl text-gray-600 absolute left-2 lg:left-10 top-2 lg:top-5 select-none cursor-pointer"
             />
 
