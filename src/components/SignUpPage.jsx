@@ -8,7 +8,7 @@ const SignUpPage = () => {
 
   const [formData, setFormData] = useState({
     email: '',
-    name: '',
+    fullName: '',
     username: '',
     password: ''
   });
@@ -27,39 +27,42 @@ const SignUpPage = () => {
     e.preventDefault();
 
     const requestBody = {
-      name: formData.name,
+      fullName: formData.fullName,
       email: formData.email,
       username: formData.username,
       password: formData.password
     };
+    console.log("requestBody",requestBody);
 
     // console.log(requestBody);
 
-    fetch('https://vivacious-stillness-production.up.railway.app/v1/users/register', {
+    fetch('https://connectify-backend-2uq0.onrender.com/api/v1/users/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(requestBody)
     })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok ' + response.statusText);
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log('Response data:', data);
-      if (data.user && data.token) {
-        setMessage('Registration successfully Done!');
-      } else {
-        setMessage('Registration failed: Unexpected response format');
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      setMessage('Registration failed: ' + error.message);
-    });
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Response data:', data);
+        if (data) {
+          setMessage('Registration successfully Done!');
+        } else {
+          setMessage('Registration failed: Unexpected response format');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        setMessage('Registration failed: ' + error.message);
+      });
+
+      navigate('/login');
   };
 
   return (
@@ -73,22 +76,22 @@ const SignUpPage = () => {
           {message && <div className="text-green-600 text-xl font-bold">{message}</div>} {/* Display message */}
           <form onSubmit={handleSubmit}>
             <div className="input-field mt-4 w-full h-14 bg-white rounded-sm relative overflow-hidden">
-              <input 
+              <input
                 id="email"
                 type="email"
                 value={formData.email}
                 onChange={handleChange}
-                required 
+                required
               />
               <label htmlFor="email">Email </label>
             </div>
             <div className="input-field mt-4 w-full h-14 bg-white rounded-sm relative overflow-hidden">
-              <input 
-                id="name"
+              <input
+                id="fullName"
                 type="text"
-                value={formData.name}
+                value={formData.fullName}
                 onChange={handleChange}
-                required 
+                required
               />
               <label htmlFor="name">Full name</label>
             </div>
@@ -98,21 +101,21 @@ const SignUpPage = () => {
                 type="text"
                 value={formData.username}
                 onChange={handleChange}
-                required 
+                required
               />
               <label htmlFor="username">Username</label>
             </div>
             <div className="input-field mt-4 w-full h-14 bg-white rounded-sm relative">
-              <input 
+              <input
                 id="password"
-                type="password" 
+                type="password"
                 value={formData.password}
                 onChange={handleChange}
-                required 
+                required
               />
               <label htmlFor="password">Password</label>
             </div>
-            <input type="submit" value="Sign Up" className="hover:cursor-pointer"/>
+            <input type="submit" value="Sign Up" className="hover:cursor-pointer" />
             <div className="remember">
               <div className="checkbox">
                 <input type="checkbox" defaultChecked className="cursor-pointer" />

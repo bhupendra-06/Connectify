@@ -6,6 +6,7 @@ import { login } from '../redux/authSlice';
 import "./LoginPage.css";
 import { NavLink } from "react-router-dom";
 
+
 const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const LoginPage = () => {
     };
 
     try {
-      const response = await fetch('https://vivacious-stillness-production.up.railway.app/v1/users/login', {
+      const response = await fetch('https://connectify-backend-2uq0.onrender.com/api/v1/users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(requestBody),
@@ -34,9 +35,11 @@ const LoginPage = () => {
 
       const data = await response.json();
       console.log(data);
+      
 
-      if (data.user && data.token) {
-        dispatch(login({ user: data.user, token: data.token }));
+      if (data.data.user && data.data.refreshToken) {
+        dispatch(login({ user: data.data.user, token: data.data.accessToken}));
+       
         navigate('/home'); // Redirect to home page after successful login
       } else {
         setErrMsg('Invalid Username or Password');
