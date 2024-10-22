@@ -26,8 +26,15 @@ const SignUpPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // const requestBody = {
+    //   name: formData.name,
+    //   email: formData.email,
+    //   username: formData.username,
+    //   password: formData.password
+    // };
+
     const requestBody = {
-      name: formData.name,
+      fullName: formData.name,
       email: formData.email,
       username: formData.username,
       password: formData.password
@@ -35,30 +42,30 @@ const SignUpPage = () => {
 
     // console.log(requestBody);
 
-    fetch('https://vivacious-stillness-production.up.railway.app/v1/users/register', {
+    // fetch('https://vivacious-stillness-production.up.railway.app/v1/users/register', {
+    fetch('https://connectify-backend-2uq0.onrender.com/api/v1/users/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(requestBody)
     })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok ' + response.statusText);
-      }
-      return response.json();
-    })
     .then(data => {
       console.log('Response data:', data);
-      if (data.user && data.token) {
-        setMessage('Registration successfully Done!');
-      } else {
-        setMessage('Registration failed: Unexpected response format');
+      if (data.username) {
+        navigate("/login")
+      }
+      else if(data.status === 409){
+        setMessage("User with email or username already exist.")
+      }
+      else if(data.status === 500){
+        setMessage("Something went wrong while registering the user.")
       }
     })
     .catch(error => {
       console.error('Error:', error);
-      setMessage('Registration failed: ' + error.message);
+      // setMessage('Registration failed: ' + error.message);
+      setMessage('Registration failed: Please try again later..');
     });
   };
 
