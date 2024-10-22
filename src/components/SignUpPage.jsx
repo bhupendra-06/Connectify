@@ -26,6 +26,13 @@ const SignUpPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // const requestBody = {
+    //   name: formData.name,
+    //   email: formData.email,
+    //   username: formData.username,
+    //   password: formData.password
+    // };
+
     const requestBody = {
       fullName: formData.fullName,
       email: formData.email,

@@ -18,6 +18,7 @@ const LoginPage = () => {
     setFormData((prevData) => ({ ...prevData, [id]: value }));
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -82,6 +83,7 @@ const LoginPage = () => {
         <p>
           New to Connectify? <NavLink to="/signup">Sign up now.</NavLink>
         </p>
+        
       </div>
     </main>
   );

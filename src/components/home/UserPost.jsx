@@ -10,100 +10,92 @@ import { RxCrossCircled } from "react-icons/rx";
 const NoUser =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA3W3oppN7sdVCsUWwwnPIn9pX6E6G2UW70w&s";
 
-const UserPost = ({ post, index }) => {
-  // const [posts, setPosts] = useState([]);
-
-  // useEffect(() => {
-  //   // Fetch posts data from the JSON file
-  //   setPosts(postsData);
-  // }, []);
-
+const UserPost = ({ post }) => {
   const [seeMore, setSeeMore] = useState(false);
   const [see, setSee] = useState("See More.");
 
   const seeMoreFunction = () => {
     setSeeMore(!seeMore);
-    see == "See More." ? setSee("See Less.") : setSee("See More.");
+    see === "See More." ? setSee("See Less.") : setSee("See More.");
   };
 
   // FOR FULL SCREEN POST IMAGES
-
   const [currentIndex, setCurrentIndex] = useState(0);
   const [postImages, setPostImages] = useState(null);
 
   const displayPostImages = (picIndex) => {
     setPostImages(true);
     setCurrentIndex(picIndex);
-    console.log(picIndex);
   };
+
   const removePostImages = () => {
     setPostImages(null);
   };
+
   const goBack = () => {
     const isFirstImage = currentIndex === 0;
     const newIndex = isFirstImage ? post.pictures.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
   };
+
   const goForward = () => {
     const isLastImage = currentIndex === post.pictures.length - 1;
     const newIndex = isLastImage ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
   };
 
-  // RETURN FUNCTION FOR USER POST COMPONENT IS HERE
   return (
-    <div key={index}>
+    <div>
       <div className="m-2 mt-0 p-5 rounded-lg bg-white shadow-xl shadow-gray-200 border">
         <div className="profile mb-5 flex items-center justify-between">
-          <div>
-            <div className="flex items-center justify-center">
-              <img
-                className="w-14 h-14 object-cover rounded-full"
-                src={post.profileImage || NoUser}
-              />
-              <div className="text-start ml-3">
-                <h3 className="text-lg font-bold">
-                  {post.name || "Anonymous"}
-                  <span className="text-sm text-gray-400 block">
-                    {post.lastSeen || "Last seen.."}
-                  </span>
-                </h3>
-              </div>
+          <div className="flex items-center">
+            <img
+              className="w-14 h-14 object-cover rounded-full"
+              src={post.profileImage || NoUser}
+            />
+            <div className="text-start ml-3">
+              <h3 className="text-xl font-bold">
+                {post.name || "Anonymous"}
+                <span className="text-base text-gray-400 block">
+                  {post.lastSeen || "Last seen.."}
+                </span>
+              </h3>
             </div>
           </div>
           <div className="w-10 h-10 text-xl text-center font-bold bg-[#eee] rounded-full">
             ...
           </div>
         </div>
-        {post.caption &&
-          (post.caption.length > 150 ? (
-            <p className="mb-5 text-base text-gray-400 text-justify select-none">
-              {seeMore ? post.caption : post.caption.slice(0, 150) + ".."}{" "}
-              <span
-                onClick={seeMoreFunction}
-                className="text-blue-600 font-semibold cursor-pointer"
-              >
-                {see}
-              </span>
-            </p>
-          ) : (
-            <p className="mb-5 text-lg text-gray-400 text-justify">
-              {post.caption}
-            </p>
-          ))}
+
+        {post.caption && (
+          <p className="mb-5 text-lg text-gray-400 text-justify select-none">
+            {post.caption.length > 150 ? (
+              <>
+                {seeMore ? post.caption : post.caption.slice(0, 100) + ".."}{" "}
+                <span
+                  onClick={seeMoreFunction}
+                  className="text-blue-600 font-semibold cursor-pointer"
+                >
+                  {see}
+                </span>
+              </>
+            ) : (
+              post.caption
+            )}
+          </p>
+        )}
+
         {/* MAPPING THE POST PICTURES HERE */}
         {post.pictures && (
-          <div className="flex overflow-hidden gap-2 relative">
-            {post.pictures.map((url, picIndex) => {
-              return (
-                <img
-                  onClick={() => displayPostImages(picIndex)}
-                  key={picIndex}
-                  className="w-[32.4%] object-cover after:w-full after:h-full after:top-0 after:left-0 after:bg-black after:absolute from-cyan-800 to-blue-800 rounded-lg"
-                  src={url}
-                />
-              );
-            })}
+          <div className="grid grid-cols-3 gap-2">
+            {post.pictures.map((url, picIndex) => (
+              <img
+                onClick={() => displayPostImages(picIndex)}
+                key={url} // Using URL as the key
+                className="h-full object-cover rounded-lg"
+                src={url}
+              />
+            ))}
           </div>
         )}
 
@@ -121,10 +113,11 @@ const UserPost = ({ post, index }) => {
           </div>
           <div className="flex items-center text-md">
             <FiShare2 className="mx-1" />
-            <span className=" hidden sm:block">Share</span>
+            <span className="hidden sm:block">Share</span>
           </div>
         </div>
       </div>
+
       {/* WHEN POST HAS MULTIPLE IMAGES */}
       {postImages && (
         <div className="w-screen h-screen absolute top-0 left-0 select-none z-50">
@@ -146,7 +139,7 @@ const UserPost = ({ post, index }) => {
             />
             <IoIosArrowForward
               onClick={goForward}
-              className="text-3xl md:text-5xl text-gray-300 border border-gray-500 absolute right-2  lg:right-10 top-1/2 -translate-y-1/2 select-none cursor-pointer"
+              className="text-3xl md:text-5xl text-gray-300 border border-gray-500 absolute right-2 lg:right-10 top-1/2 -translate-y-1/2 select-none cursor-pointer"
             />
           </div>
         </div>
