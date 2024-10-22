@@ -62,7 +62,7 @@ const UserPost = ({ post }) => {
               </h3>
             </div>
           </div>
-          <div className="w-10 h-10 text-xl font-bold bg-[#eee] rounded-full">
+          <div className="w-10 h-10 text-xl text-center font-bold bg-[#eee] rounded-full">
             ...
           </div>
         </div>
@@ -100,14 +100,16 @@ const UserPost = ({ post }) => {
         )}
 
         <div className="my-6 mx-1 flex justify-between">
-          <div className="flex items-center text-md">
-            <FaRegThumbsUp className="p-1 mx-1 text-xl text-white bg-blue-500 rounded-full" />
-            <FaRegHeart className="p-1 mx-1 text-xl text-white bg-red-500 rounded-full" />
-            <span>{`${post.likes || ""} Likes`}</span>
-          </div>
-          <div className="flex items-center text-md">
-            <FaRegComment className="mx-1" />
-            <span>{`${post.comments || ""} Comments`}</span>
+          <div className="min-w-1/2 flex gap-4 justify-between">
+            <div className="flex items-center text-md">
+              <FaRegThumbsUp className="p-1 mx-1 text-xl text-white bg-blue-500 rounded-full" />
+              {/* <FaRegHeart className="p-1 mx-1 text-xl text-white bg-red-500 rounded-full" /> */}
+              <span>{`${post.likes || ""} Likes`}</span>
+            </div>
+            <div className="flex items-center text-md">
+              <FaRegComment className="mx-1" />
+              <span>{`${post.comments || ""} Comments`}</span>
+            </div>
           </div>
           <div className="flex items-center text-md">
             <FiShare2 className="mx-1" />
@@ -126,6 +128,8 @@ const UserPost = ({ post }) => {
                 className="w-[85vw] h-[90vh] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 object-contain"
               />
             )}
+            <RxCrossCircled
+              onClick={() => removePostImages()}
             <RxCrossCircled
               onClick={() => removePostImages()}
               className="text-5xl md:text-5xl text-gray-600 absolute left-2 lg:left-10 top-2 lg:top-5 select-none cursor-pointer"

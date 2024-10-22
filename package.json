@@ -12,7 +12,10 @@
   "dependencies": {
     "@gsap/react": "^2.1.1",
     "@reduxjs/toolkit": "^2.2.7",
+<<<<<<< HEAD
     "axios": "^1.7.7",
+=======
+>>>>>>> 1bc91a2a9d77a25d6201b42148a021332b3123ad
     "connectify": "file:",
     "gsap": "^3.12.5",
     "react": "^18.3.1",

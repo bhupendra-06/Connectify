@@ -109,7 +109,6 @@ const LoginPage = () => {
     setFormData((prevData) => ({ ...prevData, [id]: value }));
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -126,12 +125,20 @@ const LoginPage = () => {
       });
 
       const data = await response.json();
+<<<<<<< HEAD
       console.log("response:", data);
       
 
       if (data) {
         // dispatch(login({ user: data.user, token: data.token }));
         navigate('/home');
+=======
+      console.log(data);
+
+      if (data.user && data.token) {
+        dispatch(login({ user: data.user, token: data.token }));
+        navigate('/home'); // Redirect to home page after successful login
+>>>>>>> 1bc91a2a9d77a25d6201b42148a021332b3123ad
       } else {
         setErrMsg('Invalid Username or Password');
       }
@@ -173,7 +180,6 @@ const LoginPage = () => {
         <p>
           New to Connectify? <NavLink to="/signup">Sign up now.</NavLink>
         </p>
-        
       </div>
     </main>
   );
