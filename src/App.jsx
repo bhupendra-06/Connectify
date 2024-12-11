@@ -7,6 +7,7 @@ import LoginPage from "./components/LoginPage.jsx";
 import SignUpPage from "./components/SignUpPage.jsx";
 import AccountInformation from "./components/settings/AccountInformation.jsx";
 import DefaultSettings from "./components/settings/DefaultSettings.jsx";
+import { Outlet } from "react-router-dom";
 
 const App = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -21,8 +22,8 @@ const App = () => {
       <Route path="account-info" element={isAuthenticated ? <AccountInformation /> : <Navigate to="/login" />} />
       <Route path="default-settings" element={isAuthenticated ? <DefaultSettings /> : <Navigate to="/login" />} />
 
-      <Route path="/home" element={isAuthenticated ? <Home /> : <LoginPage />} />
-      <Route path="account-info" element={<AccountInformation />} />
+      <Route path="/home" element={isAuthenticated ? <Home /> : <LoginPage />} /> 
+      <Route path="/account-info" element={<AccountInformation />} />
       <Route path="settings" element={isAuthenticated ? <DefaultSettings /> : <LoginPage />} />
       {/* <Route path="account-info" element={isAuthenticated ? <AccountInformation /> : <Navigate to="/login" />} /> */}
       <Route path="/" element={<Navigate to={isAuthenticated ? "/home" : "/login"} />} />

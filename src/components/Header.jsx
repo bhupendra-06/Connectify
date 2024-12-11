@@ -4,7 +4,7 @@ import { IoSearch } from "react-icons/io5";
 import { LuHome } from "react-icons/lu";
 import { MdOutlineElectricBolt } from "react-icons/md";
 import { LuVideo } from "react-icons/lu";
-import { LuUser } from "react-icons/lu";// this is user icon
+import { LuUser } from "react-icons/lu"; // this is user icon
 import { HiUserGroup } from "react-icons/hi2";
 import { LuShoppingBag } from "react-icons/lu";
 import { LuBell } from "react-icons/lu";
@@ -15,32 +15,30 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { NavLink } from "react-router-dom";
 
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { logout } from '../redux/authSlice';
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../redux/authSlice";
 
 // gsap.registerPlugin(useGSAP);
 
 const Header = () => {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate('/login');
+    navigate("/login");
   };
-
 
   // GSAP ANIMATION
   useGSAP(() => {
-    gsap.to(".gsapRotate", { 
+    gsap.to(".gsapRotate", {
       rotate: 90,
       duration: 2,
       delay: 0,
       ease: "none",
       repeat: Infinity,
-      });
+    });
   }, []);
   return (
     <>
@@ -56,17 +54,17 @@ const Header = () => {
             </div>
             <ul className="hidden xl:flex">
               <li className="icon-gola text-blue-600 bg-[#d2e3ff] rounded-full">
-                <NavLink to="/" >
+                <NavLink to="/">
                   <LuHome className="icon text-blue-600" />
                 </NavLink>
               </li>
               <li className="icon-gola">
-                <NavLink to="/login" >
+                <NavLink to="/login">
                   <MdOutlineElectricBolt className="icon" />
                 </NavLink>
               </li>
               <li className="icon-gola">
-                <NavLink to="/signup" >
+                <NavLink to="/signup">
                   <LuVideo className="icon" />
                 </NavLink>
               </li>
@@ -75,20 +73,19 @@ const Header = () => {
                   <HiUserGroup className="icon" />
                 </NavLink>
               </li>
-              <li className="icon-gola">
+              <li onClick={handleLogout} className="icon-gola">
                 <NavLink>
                   <LuShoppingBag className="icon" />
                 </NavLink>
-              </li>
-              <li onClick={handleLogout} className="logout-button">
-                Logout
               </li>
             </ul>
           </div>
           <ul className="px-2 flex items-center *:mx-3 *:lg:text-3xl">
             <LuBell className="icon text-blue-600" />
             <BiComment className="icon text-blue-600" />
-            <SlSettings className="icon gsapRotate text-blue-600 hidden sm:inline-block" />
+            <NavLink to="/settings">
+              <SlSettings className="icon gsapRotate text-blue-600 hidden sm:inline-block" />
+            </NavLink>
             <FaCircleUser className="icon text-red-700" />
           </ul>
         </div>
@@ -98,8 +95,3 @@ const Header = () => {
 };
 
 export default Header;
-
-
-
-
-

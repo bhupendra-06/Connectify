@@ -5,7 +5,7 @@ import Stories from "./Stories";
 import FindPeople from "./FindPeople";
 import Header from "../Header";
 import Sidebar from "../sidebar/Sidebar";
-import CreatPost from "./CreatPost";
+import CreatePost from "./CreatePost";
 import { useState } from "react";
 
 const Home = () => {
@@ -26,7 +26,7 @@ const Home = () => {
           <section className="w-full lg:w-9/12 h-screen overflow-y-scroll hide-scrollbar">
             <div className="mx-auto xl:max-w-[650px]">
               <Stories />
-              <CreatPost />
+              <CreatePost />
               {posts.map((post, index) => {
                 return <UserPost post={post} index={index} />;
               })}
