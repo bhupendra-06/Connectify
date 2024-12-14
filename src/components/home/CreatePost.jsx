@@ -21,31 +21,57 @@ const CreatePost = () => {
         return;
       }
       setImage({
-        image: URL.createObjectURL(img),
+        file: img, // Store the actual file
+        preview: URL.createObjectURL(img), // Preview URL
       });
     }
   };
-  
-  const onTextChange = (e)=>{
+
+  const onTextChange = (e) => {
     setCaption(e.target.value);
-  }
+  };
 
   // ON SUBMISSION
-  const handleSubmit = async () => {
-    if (!image && !caption) {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    // Ensures image or caption is provided
+    if (!image || !caption) {
       alert("Please add an Image or a Text before sharing!");
       return;
     }
-
-    setLoading(true);
+    //Creating FormData Object to store inputs
+    const formData = new FormData();
+    formData.append("description", caption);
+    formData.append("postMedia", image.file);
+    
     try {
-          const postData = { text: caption, image: image };
-      console.log("Sharing post...", postData);
-      // Will Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      alert("Post shared successfully!");
-      setImage(null);
-      setCaption("");
+      setLoading(true); //shows loader
+      const token = localStorage.getItem("token");
+
+      // Make API call
+      const response = await fetch(
+        "https://connectify-backend-2uq0.onrender.com/api/v1/posts/create-post",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `{token}`,
+          },
+          body: formData,
+        }
+      );
+
+      // Parse the response
+      const data = await response.json();
+
+      // Handle response
+      if (response.ok) {
+        alert("Post created successfully!");
+        setCaption(""); // Reset caption
+        setImage(null); // Reset image
+      } else {
+        alert(`Failed to create post: ${data.message}`);
+      }
     } catch (error) {
       console.error("Error sharing post:", error);
       alert("Failed to share the post. Please try again.");
@@ -54,12 +80,15 @@ const CreatePost = () => {
     }
   };
   return (
-    <div className="mx-2 my-5 p-5 border shadow-lg shadow-gray-200 rounded-lg">
+    <form
+      className="mx-2 my-5 p-5 border shadow-lg shadow-gray-200 rounded-lg"
+      onSubmit={handleSubmit}
+    >
       <div className="flex items-center">
         <div className="w-10 h-10 text-xl font-bold bg-[#eee] grid place-items-center rounded-full">
           <HiOutlinePencilAlt className="text-2xl text-blue-600" />
         </div>
-        <h4 className="mx-2 text-sm text-gray-400 font-bold">Creat Post</h4>
+        <h4 className="mx-2 text-sm text-gray-400 font-bold">Create Post</h4>
       </div>
       <div className="caption relative my-5 h-20 rounded-lg border-2 border-gray-300 overflow-hidden">
         <figure className="absolute top-0 left-0">
@@ -69,14 +98,15 @@ const CreatePost = () => {
           placeholder="Type here..."
           className="pl-12 pt-3 w-full h-full rounded-lg p-2 outline-none"
           aria-label="Post caption"
+          maxLength={500}
           value={caption}
           onChange={onTextChange}
         ></textarea>
       </div>
-      {/* UPLOADED IMAGE */}
+      {/* PREVIEW UPLOADED IMAGE */}
       {image && (
         <div className="previewImage w-full flex justify-start items-start">
-          <img src={image.image} alt="previewImage" className="w-56" />
+          <img src={image.preview} alt="preview" className="w-56" />
           <RxCross2
             className="mx-2 p-0.5 rounded-full bg-gray-300 text-gray-600 text-2xl cursor-pointer"
             onClick={() => setImage(null)}
@@ -91,7 +121,7 @@ const CreatePost = () => {
           className="w-full h-full flex items-center justify-start cursor-pointer select-none"
         >
           <MdOutlineAddPhotoAlternate className="mx-1 text-xl text-green-500" />
-          <span>Photo /Video</span>
+          <span>Photo / Video</span>
         </div>
         <input
           id="file"
@@ -101,17 +131,18 @@ const CreatePost = () => {
           onChange={onImageChange}
           className="hidden"
         />
-        
         <button
           type="submit"
-          onClick={handleSubmit}
           className="px-3 py-0.5 rounded-sm border-2 border-blue-500 bg-blue-500 text-white text-base font-bold hover:scale-105 duration-200"
         >
-        {/* ADDING CLIPLOADER ON SUBMISSION */}
-      {loading ? <ClipLoader size={15} color="white" className="mx-2" />: "Share"}
+          {loading ? (
+            <ClipLoader size={15} color="white" className="mx-2" />
+          ) : (
+            "Share"
+          )}
         </button>
       </div>
-    </div>
+    </form>
   );
 };
 

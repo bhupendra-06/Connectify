@@ -34,12 +34,12 @@ const UserPost = ({ post }) => {
 
   const goBack = () => {
     const isFirstImage = currentIndex === 0;
-    const newIndex = isFirstImage ? post.pictures.length - 1 : currentIndex - 1;
+    const newIndex = isFirstImage ? post.postFile.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
   };
 
   const goForward = () => {
-    const isLastImage = currentIndex === post.pictures.length - 1;
+    const isLastImage = currentIndex === post.postFile.length - 1;
     const newIndex = isLastImage ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
   };
@@ -67,11 +67,11 @@ const UserPost = ({ post }) => {
           </div>
         </div>
 
-        {post.caption && (
-          <p className="mb-5 text-lg text-gray-400 text-justify select-none">
-            {post.caption.length > 150 ? (
+        {post.description && (
+          <p className="mb-5 text-lg text-gray-600 text-justify select-none">
+            {post.description.length > 150 ? (
               <>
-                {seeMore ? post.caption : post.caption.slice(0, 100) + ".."}{" "}
+                {seeMore ? post.description : post.description.slice(0, 100) + ".."}{" "}
                 <span
                   onClick={seeMoreFunction}
                   className="text-blue-600 font-semibold cursor-pointer"
@@ -80,15 +80,15 @@ const UserPost = ({ post }) => {
                 </span>
               </>
             ) : (
-              post.caption
+              post.description
             )}
           </p>
         )}
 
-        {/* MAPPING THE POST PICTURES HERE */}
-        {post.pictures && (
+        {/* MAPPING THE POST postFile HERE */}
+        {post.postFile && (
           <div className="grid grid-cols-3 gap-2">
-            {post.pictures.map((url, picIndex) => (
+            {post.postFile.map((url, picIndex) => (
               <img
                 onClick={() => displayPostImages(picIndex)}
                 key={url} // Using URL as the key
@@ -122,9 +122,9 @@ const UserPost = ({ post }) => {
       {postImages && (
         <div className="w-screen h-screen absolute top-0 left-0 select-none z-50">
           <div className="p-2 w-full h-full bg-[#000] flex items-center overflow-hidden">
-            {post.pictures && (
+            {post.postFile && (
               <img
-                src={`${post.pictures[currentIndex]}`}
+                src={`${post.postFile[currentIndex]}`}
                 className="w-[85vw] h-[90vh] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 object-contain"
               />
             )}

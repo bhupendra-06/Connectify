@@ -35,6 +35,7 @@ const LoginPage = () => {
   
       const data = await response.json();
       console.log("data",data);
+      console.log("MyUserID :",data.data.user._id);
   
       if (data.statusCode === 200 && data.data.accessToken && data.data.refreshToken) {
         
@@ -48,7 +49,7 @@ const LoginPage = () => {
       }
     } catch (error) {
       console.error("Error:", error);
-      setErrMsg("An error occurred. Please try again.");
+      setErrMsg("Invalid Username or Password. Please try again.");
     }
   };
 

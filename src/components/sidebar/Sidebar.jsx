@@ -14,9 +14,6 @@ import { MdOutlineChatBubbleOutline } from "react-icons/md";
 function Sidebar({isVisible}) {
   const [position, setPosition] = useState(1);
 
-
-  console.log(position);
-
   return (
     <div className={`${isVisible? "translate-x-[0%] w-screen":""} fixed translate-x-[-100%] lg:translate-x-0 my-[72px] lg:my-[85px] lg:w-fit h-screen bg-[#00000038] overflow-hidden hide-scrollbar z-10`}>
       <div className="w-fit bg-white ">
