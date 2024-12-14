@@ -5,6 +5,7 @@ import { FaCircleUser } from "react-icons/fa6";
 import { HiOutlinePencilAlt } from "react-icons/hi";
 import { useState, useRef } from "react";
 import { ClipLoader } from "react-spinners";
+import Cookies from "js-cookie";
 
 const CreatePost = () => {
   const [image, setImage] = useState(null);
@@ -34,43 +35,40 @@ const CreatePost = () => {
   // ON SUBMISSION
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Ensures image or caption is provided
+  
     if (!image || !caption) {
       alert("Please add an Image or a Text before sharing!");
       return;
     }
-    //Creating FormData Object to store inputs
+  
     const formData = new FormData();
     formData.append("description", caption);
     formData.append("postMedia", image.file);
-    
+  
     try {
-      setLoading(true); //shows loader
-      const token = localStorage.getItem("token");
+      setLoading(true);
 
-      // Make API call
+      const accessToken = Cookies.get("accessToken")
+  
       const response = await fetch(
         "https://connectify-backend-2uq0.onrender.com/api/v1/posts/create-post",
         {
           method: "POST",
           headers: {
-            Authorization: `{token}`,
+            Authorization: `Bearer ${accessToken}`, // Correct format
           },
           body: formData,
         }
       );
-
-      // Parse the response
+  
       const data = await response.json();
-
-      // Handle response
+  
       if (response.ok) {
         alert("Post created successfully!");
-        setCaption(""); // Reset caption
-        setImage(null); // Reset image
+        setCaption(""); 
+        setImage(null); 
       } else {
-        alert(`Failed to create post: ${data.message}`);
+        alert(`Failed to create post: ${data.message || "Unknown error"}`);
       }
     } catch (error) {
       console.error("Error sharing post:", error);
@@ -79,6 +77,7 @@ const CreatePost = () => {
       setLoading(false);
     }
   };
+  
   return (
     <form
       className="mx-2 my-5 p-5 border shadow-lg shadow-gray-200 rounded-lg"
