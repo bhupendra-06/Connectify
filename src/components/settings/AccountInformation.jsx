@@ -8,7 +8,7 @@ import { IoCloudDownloadOutline } from "react-icons/io5";
 function AccountInformation() {
 
     return (
-        <div className='mx-2 md:mx-auto mt-10 lg:pl-48 pt-7 md:pt-12 lg:pt-16 max-w-[800px] bg-white  rounded-md my-4'>
+        <div className='mx-2 md:mx-auto max-w-[800px] bg-white  rounded-md my-4'>
             <div className='bg-[#05f] align-left rounded-md'>
                 <div className='flex p-7 text-white '>
                     <Link to="/settings"><GoArrowLeft className='inline-block pb-1' size={30}/></Link>

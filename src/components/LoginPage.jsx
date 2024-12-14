@@ -1,15 +1,14 @@
 // src/components/LoginPage.jsx
 import React, { useState } from "react";
-import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { login } from '../redux/authSlice';
 import "./LoginPage.css";
 import { NavLink } from "react-router-dom";
+import Cookies from "js-cookie";
 
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [errMsg, setErrMsg] = useState('');
 
@@ -21,33 +20,36 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const requestBody = {
       email: formData.email,
-      password: formData.password
+      password: formData.password,
     };
-
+  
     try {
-      const response = await fetch('https://connectify-backend-2uq0.onrender.com/api/v1/users/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("https://connectify-backend-2uq0.onrender.com/api/v1/users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(requestBody),
       });
-
+  
       const data = await response.json();
-      console.log(data);
-      
-
-      if (data.data.user && data.data.refreshToken) {
-        dispatch(login({ user: data.data.user, token: data.data.accessToken}));
-       
-        navigate('/home'); // Redirect to home page after successful login
+      console.log("data",data);
+      console.log("MyUserID :",data.data.user._id);
+  
+      if (data.statusCode === 200 && data.data.accessToken && data.data.refreshToken) {
+        
+        Cookies.set("accessToken", data.data.accessToken, { expires: 1 }); // Expires in 1 day
+        Cookies.set("refreshToken", data.data.refreshToken, { expires: 7 }); // Expires in 7 days
+  
+        navigate("/home");
+        
       } else {
-        setErrMsg('Invalid Username or Password');
+        setErrMsg("Invalid Username or Password");
       }
     } catch (error) {
-      console.error('Error:', error);
-      setErrMsg('An error occurred. Please try again.');
+      console.error("Error:", error);
+      setErrMsg("Invalid Username or Password. Please try again.");
     }
   };
 

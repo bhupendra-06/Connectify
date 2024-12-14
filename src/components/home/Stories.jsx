@@ -38,12 +38,11 @@ const SingleStory = ({ story, index }) => {
     setShowStory("");
     setTimeout(() => {
       setShowStory("hidden");
-      console.log(showStory);
     }, 1800);
   };
-  useEffect(() => {
-    console.log(showStory);
-  }, [showStory]);
+  // useEffect(() => {
+  //   console.log(showStory);
+  // }, [showStory]);
 
   return (
     <>

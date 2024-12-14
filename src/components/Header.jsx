@@ -4,9 +4,8 @@ import { IoSearch } from "react-icons/io5";
 import { LuHome } from "react-icons/lu";
 import { MdOutlineElectricBolt } from "react-icons/md";
 import { LuVideo } from "react-icons/lu";
-import { LuUser } from "react-icons/lu";// this is user icon
+import { FiLogOut } from "react-icons/fi";
 import { HiUserGroup } from "react-icons/hi2";
-import { LuShoppingBag } from "react-icons/lu";
 import { LuBell } from "react-icons/lu";
 import { BiComment } from "react-icons/bi";
 import { SlSettings } from "react-icons/sl";
@@ -15,33 +14,19 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { NavLink } from "react-router-dom";
 
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { logout } from '../redux/authSlice';
-
-// gsap.registerPlugin(useGSAP);
-
 const Header = () => {
+  
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    dispatch(logout());
-    navigate('/login');
-  };
-
-
-  // GSAP ANIMATION
   useGSAP(() => {
-    gsap.to(".gsapRotate", { 
+    gsap.to(".gsapRotate", {
       rotate: 90,
       duration: 2,
       delay: 0,
       ease: "none",
       repeat: Infinity,
-      });
+    });
   }, []);
+
   return (
     <>
       <header className="fixed top-0 w-full pl-5 py-2 md:py-4 flex items-center bg-white justify-between shadow-sm shadow-gray-300 z-10">
@@ -56,17 +41,17 @@ const Header = () => {
             </div>
             <ul className="hidden xl:flex">
               <li className="icon-gola text-blue-600 bg-[#d2e3ff] rounded-full">
-                <NavLink to="/" >
+                <NavLink to="/">
                   <LuHome className="icon text-blue-600" />
                 </NavLink>
               </li>
               <li className="icon-gola">
-                <NavLink to="/login" >
+                <NavLink to="/login">
                   <MdOutlineElectricBolt className="icon" />
                 </NavLink>
               </li>
               <li className="icon-gola">
-                <NavLink to="/signup" >
+                <NavLink to="/signup">
                   <LuVideo className="icon" />
                 </NavLink>
               </li>
@@ -77,19 +62,20 @@ const Header = () => {
               </li>
               <li className="icon-gola">
                 <NavLink>
-                  <LuShoppingBag className="icon" />
+                  <FiLogOut className="icon" />
                 </NavLink>
-              </li>
-              <li onClick={handleLogout} className="logout-button">
-                Logout
               </li>
             </ul>
           </div>
           <ul className="px-2 flex items-center *:mx-3 *:lg:text-3xl">
             <LuBell className="icon text-blue-600" />
             <BiComment className="icon text-blue-600" />
-            <SlSettings className="icon gsapRotate text-blue-600 hidden sm:inline-block" />
+            <NavLink to="/">
+              <SlSettings className="icon gsapRotate text-blue-600 hidden sm:inline-block" />
+            </NavLink>
+            <NavLink to="/settings">
             <FaCircleUser className="icon text-red-700" />
+            </NavLink>
           </ul>
         </div>
       </header>
@@ -98,8 +84,3 @@ const Header = () => {
 };
 
 export default Header;
-
-
-
-
-
