@@ -51,7 +51,7 @@ const SignUpPage = () => {
       body: JSON.stringify(requestBody)
     })
       .then(response => {
-        if (!response.ok) {
+        if (!response) {
           throw new Error('Network response was not ok ' + response.statusText);
         }
         return response.json();
