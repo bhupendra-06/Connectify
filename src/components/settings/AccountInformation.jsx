@@ -7,6 +7,11 @@ import { IoCloudDownloadOutline } from "react-icons/io5";
 
 function AccountInformation() {
 
+    // ON FORM SUBMISSION
+    const handleSubmit= ()=>{
+
+    }
+
     return (
         <div className='mx-2 md:mx-auto max-w-[800px] bg-white  rounded-md my-4'>
             <div className='bg-[#05f] align-left rounded-md'>
@@ -60,7 +65,7 @@ function AccountInformation() {
                         </div>
                     </div>
                     <div className='grid gap-8 m-4 w-44'>
-                        <button className='bg-[#05f] text-white py-4 font-bold rounded-md'>
+                        <button type='submit' className='bg-[#05f] text-white py-4 font-bold rounded-md'>
                             Save
                         </button>
                     </div>

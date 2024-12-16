@@ -32,12 +32,15 @@ const CreatePost = () => {
     setCaption(e.target.value);
   };
 
-  // ON SUBMISSION
+  // ON FORM SUBMISSION
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    if (!image || !caption) {
-      alert("Please add an Image or a Text before sharing!");
+    if (!image) {
+      alert("Please add Image !");
+      return;
+    }else if(!caption){
+      alert("Please add Caption !");
       return;
     }
   
@@ -48,7 +51,7 @@ const CreatePost = () => {
     try {
       setLoading(true);
 
-      const accessToken = Cookies.get("accessToken")
+      const accessToken = Cookies.get("accessToken");
   
       const response = await fetch(
         "https://connectify-backend-2uq0.onrender.com/api/v1/posts/create-post",

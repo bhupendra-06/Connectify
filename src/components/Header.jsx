@@ -15,8 +15,6 @@ import { useGSAP } from "@gsap/react";
 import { NavLink } from "react-router-dom";
 
 const Header = () => {
-  
-
   useGSAP(() => {
     gsap.to(".gsapRotate", {
       rotate: 90,
@@ -70,11 +68,9 @@ const Header = () => {
           <ul className="px-2 flex items-center *:mx-3 *:lg:text-3xl">
             <LuBell className="icon text-blue-600" />
             <BiComment className="icon text-blue-600" />
-            <NavLink to="/">
-              <SlSettings className="icon gsapRotate text-blue-600 hidden sm:inline-block" />
-            </NavLink>
+            <SlSettings className="icon gsapRotate text-blue-600 hidden sm:inline-block" />
             <NavLink to="/settings">
-            <FaCircleUser className="icon text-red-700" />
+              <FaCircleUser className="icon text-red-700" />
             </NavLink>
           </ul>
         </div>

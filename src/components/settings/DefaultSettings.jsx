@@ -18,12 +18,12 @@ function DefaultSettings() {
 
   const handleLogout = async () => {
     const accessToken = Cookies.get("accessToken");
-
+  
     if (!accessToken) {
       console.error("Access token not found. User might not be logged in.");
       return;
     }
-
+  
     try {
       const response = await fetch(
         "https://connectify-backend-2uq0.onrender.com/api/v1/users/logout",
@@ -31,14 +31,15 @@ function DefaultSettings() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${accessToken}`, 
           },
+          
         }
       );
-
+  
       const data = await response.json();
       console.log("Logout Response:", data);
-
+  
       if (response.status === 200) {
         Cookies.remove("accessToken");
         Cookies.remove("refreshToken");
@@ -50,9 +51,10 @@ function DefaultSettings() {
       console.error("Error during logout:", error);
     }
   };
+ 
 
   return (
-    <div className="mx-auto mt-5 lg:pl-48 max-w-[900px] rounded overflow-hidden bg-white">
+    <div className="mx-auto mt-5 lg:pl-48 max-w-[900px] rounded overflow-hidden bg-white select-none">
       <div className="align-left mt-3">
         <div className="flex items-center px-7">
           <Link to="/home">
