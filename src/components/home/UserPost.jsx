@@ -46,8 +46,8 @@ const UserPost = ({ post }) => {
 
   return (
     <div>
-      <div className="m-2 mt-0 p-5 rounded-lg bg-white shadow-xl shadow-gray-200 border">
-        <div className="profile mb-5 flex items-center justify-between">
+      <div className="m-2 mt-0 p-4 rounded-lg bg-white shadow-xl shadow-gray-200 border">
+        <div className="profile mb-3 flex items-center justify-between">
           <div className="flex items-center">
             <img
               className="w-14 h-14 object-cover rounded-full"
@@ -68,10 +68,10 @@ const UserPost = ({ post }) => {
         </div>
 
         {post.description && (
-          <p className="mb-5 text-lg text-gray-600 text-justify select-none">
-            {post.description.length > 150 ? (
+          <p className="mb-3 text-lg text-gray-600 text-justify select-none">
+            {post.description.length > 200 ? (
               <>
-                {seeMore ? post.description : post.description.slice(0, 100) + ".."}{" "}
+                {seeMore ? post.description : post.description.slice(0, 160) + ".."}{" "}
                 <span
                   onClick={seeMoreFunction}
                   className="text-blue-600 font-semibold cursor-pointer"
@@ -87,19 +87,19 @@ const UserPost = ({ post }) => {
 
         {/* MAPPING THE POST postFile HERE */}
         {post.postFile && (
-          <div className="grid grid-cols-3 gap-2">
+          <div className={`grid ${"grid-cols-" + post.postFile.length} gap-2`}>
             {post.postFile.map((url, picIndex) => (
               <img
                 onClick={() => displayPostImages(picIndex)}
                 key={url} // Using URL as the key
-                className="h-full object-cover rounded-lg"
+                className={`${post.postFile.length==1?"max-h-72 md:max-h-96 ":"h-full"} object-cover rounded-md `}
                 src={url}
               />
             ))}
           </div>
         )}
 
-        <div className="my-6 mx-1 flex justify-between">
+        <div className="mt-4 mx-1 flex justify-between">
           <div className="min-w-1/2 flex gap-4 justify-between">
             <div className="flex items-center text-md">
               <FaRegThumbsUp className="p-1 mx-1 text-xl text-white bg-blue-500 rounded-full" />
@@ -118,7 +118,7 @@ const UserPost = ({ post }) => {
         </div>
       </div>
 
-      {/* WHEN POST HAS MULTIPLE IMAGES */}
+      {/* FULL SCREEN VIEW OF IMAGES */}
       {postImages && (
         <div className="w-screen h-screen absolute top-0 left-0 select-none z-50">
           <div className="p-2 w-full h-full bg-[#000] flex items-center overflow-hidden">
