@@ -92,7 +92,7 @@ const UserPost = ({ post }) => {
               <img
                 onClick={() => displayPostImages(picIndex)}
                 key={url} // Using URL as the key
-                className={`${post.postFile.length==1?"max-h-72 md:max-h-96 ":"h-full"} object-cover rounded-md `}
+                className={`${post.postFile.length==1?"max-h-72 md:max-h-96 ":"h-full"} object-cover rounded-md inline-block`}
                 src={url}
               />
             ))}
