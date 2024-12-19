@@ -86,18 +86,26 @@ const UserPost = ({ post }) => {
         )}
 
         {/* MAPPING THE POST postFile HERE */}
-        {post.postFile && (
-          <div className={`grid ${"grid-cols-"+ post.postFile.length} gap-2 place-items-center`}>
-            {post.postFile.map((url, picIndex) => (
-              <img
-                onClick={() => displayPostImages(picIndex)}
-                key={url} // Using URL as the key
-                className={`${post.postFile.length==1?"max-h-96 h-72 max-w-96 w-full sm:h-96 border":"grid-cols-3 h-full"} object-cover rounded-md `}
-                src={url}
-              />
-            ))}
-          </div>
-        )}
+        <div
+          className={`grid gap-2 place-items-center ${post.postFile.length === 1
+              ? "grid-cols-1"
+              : post.postFile.length === 2
+                ? "grid-cols-2"
+                : "grid-cols-3"
+            }`}
+        >
+          {post.postFile.map((url, picIndex) => (
+            <img
+              onClick={() => displayPostImages(picIndex)}
+              key={url} // Using URL as the key
+              className={`${post.postFile.length === 1
+                  ? "max-h-96 h-72 max-w-96 w-full sm:h-96 border"
+                  : "h-full"
+                } object-cover rounded-md`}
+              src={url}
+            />
+          ))}
+        </div>
 
         <div className="mt-4 mx-1 flex justify-between">
           <div className="min-w-1/2 flex gap-4 justify-between">
