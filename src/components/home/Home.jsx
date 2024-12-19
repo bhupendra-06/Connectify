@@ -11,27 +11,31 @@ import UserPost from "./UserPost";
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [reload, setReload] = useState(true);
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        // Replace with your actual API URL
-        const response = await fetch(
-          "https://connectify-backend-2uq0.onrender.com/api/v1/posts/get-all-posts"
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch posts");
-        }
-        const allPosts = await response.json();
+  const handlePostAdded = ()=>{
+    fetchPosts();
+  }
 
-        setPosts(allPosts.data); // our array is stored in data
-      } catch (error) {
-        console.error("Error fetching posts:", error);
-      } finally {
-        setLoading(false);
+  const fetchPosts = async () => {
+    try {
+      // Replace with your actual API URL
+      const response = await fetch(
+        "https://connectify-backend-2uq0.onrender.com/api/v1/posts/get-all-posts"
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch posts");
       }
-    };
+      const allPosts = await response.json();
 
+      setPosts(allPosts.data); // our array is stored in data
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
     fetchPosts();
   }, []);
 
@@ -49,9 +53,9 @@ const Home = () => {
         <Sidebar isVisible={isSidebarVisible} />
         <div className="lg:pl-[270px] pt-20 h-screen overflow-hidden flex justify-start">
           <section className="w-full lg:w-9/12 h-screen overflow-y-scroll hide-scrollbar">
-            <div className="mx-auto xl:max-w-[650px]">
+            <div className="mb-36 mx-auto xl:max-w-[650px]">
               <Stories />
-              <CreatePost />
+              <CreatePost onPostAdded = {handlePostAdded} />
               {loading && <p className="m-5 w-full text-xl text-gray-700">Loading posts...</p>}
               {/* {posts.map((post, index) => {
                 return <div>div</div>;

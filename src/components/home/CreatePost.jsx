@@ -7,7 +7,7 @@ import { useState, useRef } from "react";
 import { ClipLoader } from "react-spinners";
 import Cookies from "js-cookie";
 
-const CreatePost = () => {
+const CreatePost = ({onPostAdded}) => {
   const [image, setImage] = useState(null);
   const [caption, setCaption] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -69,7 +69,8 @@ const CreatePost = () => {
       if (response.ok) {
         alert("Post created successfully!");
         setCaption(""); 
-        setImage(null); 
+        setImage(null);
+        onPostAdded();
       } else {
         alert(`Failed to create post: ${data.message || "Unknown error"}`);
       }
@@ -129,6 +130,7 @@ const CreatePost = () => {
           id="file"
           type="file"
           accept="image/*"
+          multiple
           ref={imageRef}
           onChange={onImageChange}
           className="hidden"

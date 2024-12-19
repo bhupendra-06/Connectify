@@ -6,11 +6,15 @@ import { FiShare2 } from "react-icons/fi";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { RxCrossCircled } from "react-icons/rx";
+import moment from 'moment'; //for date formatting
 
 const NoUser =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA3W3oppN7sdVCsUWwwnPIn9pX6E6G2UW70w&s";
 
 const UserPost = ({ post }) => {
+
+  const formattedDate = moment(post.createdAt).fromNow();
+
   const [seeMore, setSeeMore] = useState(false);
   const [see, setSee] = useState("See More.");
 
@@ -51,13 +55,13 @@ const UserPost = ({ post }) => {
           <div className="flex items-center">
             <img
               className="w-14 h-14 object-cover rounded-full"
-              src={post.profileImage || NoUser}
+              src={post.avatar || NoUser}
             />
             <div className="text-start ml-3">
               <h3 className="text-xl font-bold">
-                {post.name || "Anonymous"}
-                <span className="text-base text-gray-400 block">
-                  {post.lastSeen || "Last seen.."}
+                {post.username || "Anonymous"}
+                <span className="text-sm text-gray-400 block">
+                  {"" + formattedDate || ""}
                 </span>
               </h3>
             </div>
@@ -68,10 +72,12 @@ const UserPost = ({ post }) => {
         </div>
 
         {post.description && (
-          <p className="mb-3 text-lg text-gray-600 text-justify select-none">
+          <p className="mb-3 text-base text-gray-600 text-justify select-none">
             {post.description.length > 200 ? (
               <>
-                {seeMore ? post.description : post.description.slice(0, 160) + ".."}{" "}
+                {seeMore
+                  ? post.description
+                  : post.description.slice(0, 160) + ".."}{" "}
                 <span
                   onClick={seeMoreFunction}
                   className="text-blue-600 font-semibold cursor-pointer"
@@ -87,12 +93,24 @@ const UserPost = ({ post }) => {
 
         {/* MAPPING THE POST postFile HERE */}
         {post.postFile && (
-          <div className={`grid ${"grid-cols-"+ post.postFile.length} gap-2 place-items-center`}>
+          <div
+            className={`grid ${
+              post.postFile.length === 1
+                ? "grid-cols-1"
+                : post.postFile.length === 2
+                ? "grid-cols-2"
+                : "grid-cols-3"
+            } gap-2 place-items-center`}
+          >
             {post.postFile.map((url, picIndex) => (
               <img
                 onClick={() => displayPostImages(picIndex)}
                 key={url} // Using URL as the key
-                className={`${post.postFile.length==1?"max-h-96 h-72 max-w-96 w-full sm:h-96 border":"grid-cols-3 h-full"} object-cover rounded-md `}
+                className={`${
+                  post.postFile.length == 1
+                    ? "max-h-96 h-72 max-w-96 w-full sm:h-96 border"
+                    : "grid-cols-3 h-full"
+                } wfit object-cover rounded-md `}
                 src={url}
               />
             ))}
