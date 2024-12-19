@@ -87,12 +87,12 @@ const UserPost = ({ post }) => {
 
         {/* MAPPING THE POST postFile HERE */}
         {post.postFile && (
-          <div className={`grid ${post.postFile.length==1?"grid-cols-1":"grid-cols-3"} gap-2`}>
+          <div className={`grid ${"grid-cols-"+ post.postFile.length} gap-2 place-items-center`}>
             {post.postFile.map((url, picIndex) => (
               <img
                 onClick={() => displayPostImages(picIndex)}
                 key={url} // Using URL as the key
-                className={`${post.postFile.length==1?"max-h-72 md:max-h-96 ":"h-full"} object-conatin rounded-md `}
+                className={`${post.postFile.length==1?"max-h-96 h-72 max-w-96 w-full sm:h-96 border":"grid-cols-3 h-full"} object-cover rounded-md `}
                 src={url}
               />
             ))}
