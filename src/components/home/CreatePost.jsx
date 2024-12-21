@@ -1,61 +1,211 @@
-import React, { useRef, useState } from "react";
+// import React from "react";
+// import { MdOutlineAddPhotoAlternate } from "react-icons/md";
+// import { RxCross2 } from "react-icons/rx";
+// import { FaCircleUser } from "react-icons/fa6";
+// import { HiOutlinePencilAlt } from "react-icons/hi";
+// import { useState, useRef } from "react";
+// import { ClipLoader } from "react-spinners";
+// import Cookies from "js-cookie";
+
+// const CreatePost = () => {
+//   const [image, setImage] = useState(null);
+//   const [caption, setCaption] = useState(null);
+//   const [loading, setLoading] = useState(false);
+//   const imageRef = useRef();
+
+//   const onImageChange = (e) => {
+//     if (e.target.files && e.target.files[0]) {
+//       let img = e.target.files[0];
+//       if (img.size > 5 * 1024 * 1024) {
+//         // 5MB limit
+//         alert("File size should be less than 5MB!");
+//         return;
+//       }
+//       setImage({
+//         file: img, // Store the actual file
+//         preview: URL.createObjectURL(img), // Preview URL
+//       });
+//     }
+//   };
+
+//   const onTextChange = (e) => {
+//     setCaption(e.target.value);
+//   };
+
+//   // ON SUBMISSION
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+  
+//     if (!image || !caption) {
+//       alert("Please add an Image or a Text before sharing!");
+//       return;
+//     }
+  
+//     const formData = new FormData();
+//     formData.append("description", caption);
+//     formData.append("postMedia", image.file);
+  
+//     try {
+//       setLoading(true);
+
+//       const accessToken = Cookies.get("accessToken")
+  
+//       const response = await fetch(
+//         "https://connectify-backend-2uq0.onrender.com/api/v1/posts/create-post",
+//         {
+//           method: "POST",
+//           headers: {
+//             Authorization: `Bearer ${accessToken}`, // Correct format
+//           },
+//           body: formData,
+//         }
+//       );
+  
+//       const data = await response.json();
+  
+//       if (response.ok) {
+//         alert("Post created successfully!");
+//         setCaption(""); 
+//         setImage(null); 
+//       } else {
+//         alert(`Failed to create post: ${data.message || "Unknown error"}`);
+//       }
+//     } catch (error) {
+//       console.error("Error sharing post:", error);
+//       alert("Failed to share the post. Please try again.");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+  
+//   return (
+//     <form
+//       className="mx-2 my-5 p-5 border shadow-lg shadow-gray-200 rounded-lg"
+//       onSubmit={handleSubmit}
+//     >
+//       <div className="flex items-center">
+//         <div className="w-10 h-10 text-xl font-bold bg-[#eee] grid place-items-center rounded-full">
+//           <HiOutlinePencilAlt className="text-2xl text-blue-600" />
+//         </div>
+//         <h4 className="mx-2 text-sm text-gray-400 font-bold">Create Post</h4>
+//       </div>
+//       <div className="caption relative my-5 h-20 rounded-lg border-2 border-gray-300 overflow-hidden">
+//         <figure className="absolute top-0 left-0">
+//           <FaCircleUser className="icon text-yellow-500" />
+//         </figure>
+//         <textarea
+//           placeholder="Type here..."
+//           className="pl-12 pt-3 w-full h-full rounded-lg p-2 outline-none"
+//           aria-label="Post caption"
+//           maxLength={500}
+//           value={caption}
+//           onChange={onTextChange}
+//         ></textarea>
+//       </div>
+//       {/* PREVIEW UPLOADED IMAGE */}
+//       {image && (
+//         <div className="previewImage w-full flex justify-start items-start">
+//           <img src={image.preview} alt="preview" className="w-56" />
+//           <RxCross2
+//             className="mx-2 p-0.5 rounded-full bg-gray-300 text-gray-600 text-2xl cursor-pointer"
+//             onClick={() => setImage(null)}
+//           />
+//         </div>
+//       )}
+//       <div className="mx-auto flex items-center justify-between">
+//         <div
+//           onClick={() => {
+//             imageRef.current.click();
+//           }}
+//           className="w-full h-full flex items-center justify-start cursor-pointer select-none"
+//         >
+//           <MdOutlineAddPhotoAlternate className="mx-1 text-xl text-green-500" />
+//           <span>Photo / Video</span>
+//         </div>
+//         <input
+//           id="file"
+//           type="file"
+//           accept="image/*"
+//           ref={imageRef}
+//           onChange={onImageChange}
+//           multiple
+//           className="hidden"
+//         />
+//         <button
+//           type="submit"
+//           className="px-3 py-0.5 rounded-sm border-2 border-blue-500 bg-blue-500 text-white text-base font-bold hover:scale-105 duration-200"
+//         >
+//           {loading ? (
+//             <ClipLoader size={15} color="white" className="mx-2" />
+//           ) : (
+//             "Share"
+//           )}
+//         </button>
+//       </div>
+//     </form>
+//   );
+// };
+
+// export default CreatePost;
+
+import React, { useState, useRef } from "react";
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
+import { FaCircleUser } from "react-icons/fa6";
+import { HiOutlinePencilAlt } from "react-icons/hi";
+import { ClipLoader } from "react-spinners";
 import Cookies from "js-cookie";
 
 const CreatePost = () => {
+  const [images, setImages] = useState([]); // Array of images
   const [caption, setCaption] = useState("");
-  const [images, setImages] = useState([]); // Array to hold multiple images
   const [loading, setLoading] = useState(false);
   const imageRef = useRef();
 
-  // Handle image selection
   const onImageChange = (e) => {
-    const files = Array.from(e.target.files); // Convert FileList to array
-    const validFiles = files.filter((file) => file.size <= 5 * 1024 * 1024); // 5MB limit
+    if (e.target.files) {
+      const selectedFiles = Array.from(e.target.files);
 
-    if (validFiles.length < files.length) {
-      alert("Some files exceed the size limit of 5MB and were not added.");
+      const validFiles = selectedFiles.filter((file) => {
+        if (file.size > 5 * 1024 * 1024) {
+          alert(`${file.name} exceeds the 5MB size limit!`);
+          return false;
+        }
+        return true;
+      });
+
+      const newImages = validFiles.map((file) => ({
+        file,
+        preview: URL.createObjectURL(file),
+      }));
+
+      setImages((prevImages) => [...prevImages, ...newImages]);
     }
-
-    const imagePreviews = validFiles.map((file) => ({
-      file,
-      preview: URL.createObjectURL(file),
-    }));
-
-    setImages([...images, ...imagePreviews]); // Add new files to the existing array
   };
 
-  // Remove a specific image
   const removeImage = (index) => {
-    const updatedImages = images.filter((_, i) => i !== index);
-    setImages(updatedImages);
+    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
 
-  // Submit the post
+  const onTextChange = (e) => {
+    setCaption(e.target.value);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!images.length) {
-      alert("Please add at least one image!");
-      return;
-    }
-    if (!caption.trim()) {
-      alert("Please add a caption!");
+    if (images.length === 0 || !caption) {
+      alert("Please add at least one image and a caption before sharing!");
       return;
     }
 
     const formData = new FormData();
     formData.append("description", caption);
+    images.forEach((img) => formData.append("postMedia", img.file));
 
-    // Append each image file to the form data
-    images.forEach((image) => {
-      formData.append("postMedia", image.file);
-    });
-    
-    console.log(formData);
     try {
       setLoading(true);
+
       const accessToken = Cookies.get("accessToken");
 
       const response = await fetch(
@@ -63,7 +213,7 @@ const CreatePost = () => {
         {
           method: "POST",
           headers: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${accessToken}`, // Correct format
           },
           body: formData,
         }
@@ -87,62 +237,72 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="m-2 max-w-full bg-red-50 shadow-lg p-4 rounded-lg">
-      <form onSubmit={handleSubmit}>
-        {/* Caption Input */}
-        <textarea
-          value={caption}
-          onChange={(e) => setCaption(e.target.value)}
-          placeholder="Write your post here..."
-          className="w-full h-20 p-2 border rounded-lg mb-4 focus:outline-blue-500"
-        />
-
-        {/* Image Previews */}
-        <div className="flex flex-wrap gap-4 mb-4">
-          {images.map((image, index) => (
-            <div key={index} className="relative">
-              <img
-                src={image.preview}
-                alt={`preview-${index}`}
-                className="w-32 h-32 object-cover border rounded-lg"
-              />
-              <RxCross2
-                className="absolute top-1 right-1 text-2xl text-red-500 bg-gray-200 rounded-full cursor-pointer"
-                onClick={() => removeImage(index)}
-              />
-            </div>
-          ))}
+    <form
+      className="mx-2 my-5 p-5 border shadow-lg shadow-gray-200 rounded-lg"
+      onSubmit={handleSubmit}
+    >
+      <div className="flex items-center">
+        <div className="w-10 h-10 text-xl font-bold bg-[#eee] grid place-items-center rounded-full">
+          <HiOutlinePencilAlt className="text-2xl text-blue-600" />
         </div>
-
-        {/* Add Photo / Video */}
+        <h4 className="mx-2 text-sm text-gray-400 font-bold">Create Post</h4>
+      </div>
+      <div className="caption relative my-5 h-20 rounded-lg border-2 border-gray-300 overflow-hidden">
+        <figure className="absolute top-0 left-0">
+          <FaCircleUser className="icon text-yellow-500" />
+        </figure>
+        <textarea
+          placeholder="Type here..."
+          className="pl-12 pt-3 w-full h-full rounded-lg p-2 outline-none"
+          aria-label="Post caption"
+          maxLength={500}
+          value={caption}
+          onChange={onTextChange}
+        ></textarea>
+      </div>
+      {/* PREVIEW UPLOADED IMAGES */}
+      <div className="previewImages grid grid-cols-2 gap-2">
+        {images.map((img, index) => (
+          <div key={index} className="relative">
+            <img src={img.preview} alt={`preview-${index}`} className="w-56" />
+            <RxCross2
+              className="absolute top-0 right-0 p-0.5 rounded-full bg-gray-300 text-gray-600 text-2xl cursor-pointer"
+              onClick={() => removeImage(index)}
+            />
+          </div>
+        ))}
+      </div>
+      <div className="mx-auto flex items-center justify-between mt-4">
         <div
-          onClick={() => imageRef.current.click()}
-          className="cursor-pointer flex items-center mb-4"
+          onClick={() => {
+            imageRef.current.click();
+          }}
+          className="w-full h-full flex items-center justify-start cursor-pointer select-none"
         >
-          <MdOutlineAddPhotoAlternate className="text-2xl text-green-500 mr-2" />
-          <span>Add Photo / Video</span>
+          <MdOutlineAddPhotoAlternate className="mx-1 text-xl text-green-500" />
+          <span>Photo / Video</span>
         </div>
         <input
+          id="file"
           type="file"
           accept="image/*"
-          multiple
           ref={imageRef}
           onChange={onImageChange}
+          multiple
           className="hidden"
         />
-
-        {/* Submit Button */}
         <button
           type="submit"
-          disabled={loading}
-          className={`w-full p-2 rounded-lg text-white ${
-            loading ? "bg-gray-400" : "bg-blue-500 hover:bg-blue-600"
-          }`}
+          className="px-3 py-0.5 rounded-sm border-2 border-blue-500 bg-blue-500 text-white text-base font-bold hover:scale-105 duration-200"
         >
-          {loading ? "Sharing..." : "Share Post"}
+          {loading ? (
+            <ClipLoader size={15} color="white" className="mx-2" />
+          ) : (
+            "Share"
+          )}
         </button>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 };
 
