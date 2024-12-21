@@ -1,25 +1,24 @@
 import { React, useState, useEffect } from "react";
-import posts from "./posts.json";
 import Stories from "./Stories";
 import FindPeople from "./FindPeople";
 import Header from "../Header";
 import Sidebar from "../sidebar/Sidebar";
 import CreatePost from "./CreatePost";
-
 import UserPost from "./UserPost";
+
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [reload, setReload] = useState(true);
 
-  const handlePostAdded = ()=>{
+  const handlePostAdded = () => {
     fetchPosts();
-  }
+  };
 
   const fetchPosts = async () => {
     try {
-      // Replace with your actual API URL
+      //API call heres
       const response = await fetch(
         "https://connectify-backend-2uq0.onrender.com/api/v1/posts/get-all-posts"
       );
@@ -55,8 +54,12 @@ const Home = () => {
           <section className="w-full lg:w-9/12 h-screen overflow-y-scroll hide-scrollbar">
             <div className="mb-36 mx-auto xl:max-w-[650px]">
               <Stories />
-              <CreatePost onPostAdded = {handlePostAdded} />
-              {loading && <p className="m-5 w-full text-xl text-gray-700">Loading posts...</p>}
+              <CreatePost onPostAdded={handlePostAdded} />
+              {loading && (
+                <p className="m-5 w-full text-xl text-gray-700">
+                  Loading posts...
+                </p>
+              )}
               {/* {posts.map((post, index) => {
                 return <div>div</div>;
               })} */}

@@ -108,9 +108,9 @@ const UserPost = ({ post }) => {
                 key={url} // Using URL as the key
                 className={`${
                   post.postFile.length == 1
-                    ? "max-h-96 h-72 max-w-96 w-full sm:h-96 border"
-                    : "grid-cols-3 h-full"
-                } wfit object-cover rounded-md `}
+                    ? "max-h-96 object-contain border"
+                    : "grid-cols-3 h-full object-cover"
+                } rounded-md `}
                 src={url}
               />
             ))}
