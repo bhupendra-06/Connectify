@@ -35,7 +35,7 @@ const CreatePost = () => {
   // Submit the post
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (!images.length) {
       alert("Please add at least one image!");
       return;
@@ -44,20 +44,24 @@ const CreatePost = () => {
       alert("Please add a caption!");
       return;
     }
-
+  
     const formData = new FormData();
     formData.append("description", caption);
-
-    // Append each image file to the form data
+  
+    // Prepare an array to store the files
+    const postMediaArray = [];
     images.forEach((image) => {
-      formData.append("postMedia", image.file);
+      postMediaArray.push(image.file); // Add the File object to the array
     });
-    
-    console.log(formData);
+  
+    // Append the array of files under the key `postMedia`
+    formData.append("postMedia", JSON.stringify(postMediaArray));
+  
     try {
       setLoading(true);
+  
       const accessToken = Cookies.get("accessToken");
-
+  
       const response = await fetch(
         "https://connectify-backend-2uq0.onrender.com/api/v1/posts/create-post",
         {
@@ -65,19 +69,20 @@ const CreatePost = () => {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
-          body: formData,
+          body: formData, // FormData will handle the request payload
         }
       );
-
-      const data = await response.json();
-
-      if (response.ok) {
-        alert("Post created successfully!");
-        setCaption("");
-        setImages([]);
-      } else {
-        alert(`Failed to create post: ${data.message || "Unknown error"}`);
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        alert(`Failed to create post: ${errorData.message || "Server error"}`);
+        return;
       }
+  
+      const data = await response.json();
+      alert("Post created successfully!");
+      setCaption("");
+      setImages([]);
     } catch (error) {
       console.error("Error sharing post:", error);
       alert("Failed to share the post. Please try again.");
@@ -85,6 +90,8 @@ const CreatePost = () => {
       setLoading(false);
     }
   };
+  
+  
 
   return (
     <div className="m-2 max-w-full bg-red-50 shadow-lg p-4 rounded-lg">
@@ -98,7 +105,7 @@ const CreatePost = () => {
         />
 
         {/* Image Previews */}
-        <div className="flex flex-wrap gap-4 mb-4">
+        <div className="flex flex-wrap gap-4 mb-1">
           {images.map((image, index) => (
             <div key={index} className="relative">
               <img
@@ -117,7 +124,7 @@ const CreatePost = () => {
         {/* Add Photo / Video */}
         <div
           onClick={() => imageRef.current.click()}
-          className="cursor-pointer flex items-center mb-4"
+          className="mb-2 p-1 w-fit flex items-center border border-dashed border-gray-300 rounded-md cursor-pointer bg-gray-"
         >
           <MdOutlineAddPhotoAlternate className="text-2xl text-green-500 mr-2" />
           <span>Add Photo / Video</span>
