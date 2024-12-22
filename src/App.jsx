@@ -8,8 +8,6 @@ import LoginPage from "./components/LoginPage.jsx";
 import SignUpPage from "./components/SignUpPage.jsx";
 import AccountInformation from "./components/settings/AccountInformation.jsx";
 import DefaultSettings from "./components/settings/DefaultSettings.jsx";
-import RajFooter from "./components/RajFooter.jsx";
-import RajContact from "./components/RajContact.jsx";
 
 const App = () => {
   
@@ -24,7 +22,6 @@ const App = () => {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
-      <Route path="/footer" element={<><RajContact/> <RajFooter/></>} />
 
       {/* Protected Routes */}
       <Route
