@@ -8,7 +8,7 @@ import {
 } from "@headlessui/react";
 import Cookies from "js-cookie";
 
-const CreateStoryForm = () => {
+const CreateStoryForm = ({ onStoryAdded }) => {
   const [caption, setCaption] = useState("");
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -74,6 +74,10 @@ const CreateStoryForm = () => {
       setOpen(false);
       setCaption("");
       setImage(null);
+
+      if (onStoryAdded) {
+        onStoryAdded();
+      }
     } catch (error) {
       console.error("Error sharing story:", error);
       alert("Failed to share the story. Please try again.");
@@ -81,9 +85,12 @@ const CreateStoryForm = () => {
       setLoading(false);
     }
   };
+ 
 
   return (
     <>
+
+
       {/* FORM MODAL TO POST STROY  */}
       <Dialog open={open} onClose={setOpen} className="relative z-10">
         <DialogBackdrop transition className="fixed inset-0 bg-gray-600/90" />

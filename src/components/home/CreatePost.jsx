@@ -6,7 +6,7 @@ import { HiOutlinePencilAlt } from "react-icons/hi";
 import { ClipLoader } from "react-spinners";
 import Cookies from "js-cookie";
 
-const CreatePost = () => {
+const CreatePost = ({onPostAdded}) => {
   const [images, setImages] = useState([]); // Array of images
   const [caption, setCaption] = useState("");
   const [loading, setLoading] = useState(false);
@@ -79,6 +79,9 @@ const CreatePost = () => {
       alert("Post created successfully!");
       setCaption("");
       setImages([]);
+      if(onPostAdded){
+        onPostAdded();
+      }
     } catch (error) {
       console.error("Error sharing post:", error);
       alert("Failed to share the post. Please try again.");

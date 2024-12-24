@@ -64,7 +64,7 @@ const Home = () => {
                 return <div>div</div>;
               })} */}
               {posts.map((post, index) => {
-                return <UserPost post={post} index={index} />;
+                return <UserPost post={post} index={index} onPostAdded={handlePostAdded}/>;
               })}
             </div>
           </section>
