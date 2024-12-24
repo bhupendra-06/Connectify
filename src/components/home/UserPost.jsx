@@ -140,23 +140,21 @@ const UserPost = ({ post, onPostAdded }) => {
 
         {post.postFile && (
           <div
-            className={`grid ${
-              post.postFile.length === 1
+            className={`grid ${post.postFile.length === 1
                 ? "grid-cols-1"
                 : post.postFile.length === 2
-                ? "grid-cols-2"
-                : "grid-cols-3"
-            } gap-2 place-items-center`}
+                  ? "grid-cols-2"
+                  : "grid-cols-3"
+              } gap-2 place-items-center`}
           >
             {post.postFile.map((url, picIndex) => (
               <img
                 onClick={() => displayPostImages(picIndex)}
                 key={url}
-                className={`${
-                  post.postFile.length == 1
+                className={`${post.postFile.length == 1
                     ? "max-h-96 object-contain border"
                     : "grid-cols-3 h-full object-cover"
-                } rounded-md `}
+                  } rounded-md `}
                 src={url}
               />
             ))}
@@ -185,8 +183,44 @@ const UserPost = ({ post, onPostAdded }) => {
             <FiShare2 className="mx-1" />
             <span className="hidden sm:block">Share</span>
           </div>
+
+
         </div>
+
+
+
       </div>
+
+      {/* FULL SCREEN VIEW OF IMAGES */}
+      {postImages && (
+        <div className="w-screen h-screen fixed top-0 left-0 select-none z-50">
+          <div className="p-2 w-full h-full bg-black flex items-center overflow-hidden">
+            {post.postFile && (
+              <img
+                src={post.postFile[currentIndex]} // Corrected template string syntax
+                className="w-[85vw] h-[90vh] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 object-contain"
+                alt="Post"
+              />
+            )}
+            <RxCrossCircled
+              onClick={removePostImages}
+              className="text-5xl md:text-5xl text-gray-600 absolute left-2 lg:left-10 top-2 lg:top-5 select-none cursor-pointer"
+            />
+
+            <IoIosArrowBack
+              onClick={goBack}
+              className="text-3xl md:text-5xl text-gray-300 border border-gray-500 absolute left-2 lg:left-10 top-1/2 -translate-y-1/2 select-none cursor-pointer"
+            />
+            <IoIosArrowForward
+              onClick={goForward}
+              className="text-3xl md:text-5xl text-gray-300 border border-gray-500 absolute right-2 lg:right-10 top-1/2 -translate-y-1/2 select-none cursor-pointer"
+            />
+          </div>
+        </div>
+      )}
+
+
+
     </div>
   );
 };
