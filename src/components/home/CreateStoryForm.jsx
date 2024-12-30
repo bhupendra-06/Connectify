@@ -89,8 +89,6 @@ const CreateStoryForm = ({ onStoryAdded }) => {
 
   return (
     <>
-
-
       {/* FORM MODAL TO POST STROY  */}
       <Dialog open={open} onClose={setOpen} className="relative z-10">
         <DialogBackdrop transition className="fixed inset-0 bg-gray-600/90" />
@@ -103,7 +101,7 @@ const CreateStoryForm = ({ onStoryAdded }) => {
                   Preview Story
                 </h2>
 
-                {/* Mobile Screen Preview */}
+                {/*Story Preview Screen*/}
                 {image && (
                   <div className="mb-6 flex justify-center">
                     <div className="w-[180px] h-[360px] sm:w-[234px] sm:h-[468px] border-4 border-gray-400 rounded-2xl relative bg-gray-200 overflow-hidden">

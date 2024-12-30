@@ -60,9 +60,6 @@ const Home = () => {
                   Loading posts...
                 </p>
               )}
-              {/* {posts.map((post, index) => {
-                return <div>div</div>;
-              })} */}
               {posts.map((post, index) => {
                 return <UserPost post={post} index={index} onPostAdded={handlePostAdded}/>;
               })}

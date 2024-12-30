@@ -94,7 +94,7 @@ const CreatePost = ({onPostAdded}) => {
 
   return (
     <form
-      className="mx-2 my-5 p-5 border shadow-lg shadow-gray-200 rounded-lg"
+      className="mx-2 my-2 p-4 border shadow-lg shadow-gray-200 rounded-lg"
       onSubmit={handleSubmit}
     >
       <div className="flex items-center">
@@ -103,7 +103,7 @@ const CreatePost = ({onPostAdded}) => {
         </div>
         <h4 className="mx-2 text-sm text-gray-400 font-bold">Create Post</h4>
       </div>
-      <div className="caption relative my-5 h-20 rounded-lg border-2 border-gray-300 overflow-hidden">
+      <div className="caption relative my-3 h-20 rounded-lg border-2 border-gray-300 overflow-hidden">
         <figure className="absolute top-0 left-0">
           <FaCircleUser className="icon text-yellow-500" />
         </figure>
@@ -128,7 +128,7 @@ const CreatePost = ({onPostAdded}) => {
           </div>
         ))}
       </div>
-      <div className="mx-auto flex items-center justify-between mt-4">
+      <div className="mx-auto flex items-center justify-between mt-1">
         <div
           onClick={() => {
             imageRef.current.click();
