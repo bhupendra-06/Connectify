@@ -5,6 +5,7 @@ import Header from "../Header";
 import Sidebar from "../sidebar/Sidebar";
 import CreatePost from "./CreatePost";
 import UserPost from "./UserPost";
+import PostShimmer from "./PostShimmer";
 
 
 const Home = () => {
@@ -56,9 +57,7 @@ const Home = () => {
               <Stories />
               <CreatePost onPostAdded={handlePostAdded} />
               {loading && (
-                <p className="m-5 w-full text-xl text-gray-700">
-                  Loading posts...
-                </p>
+                <PostShimmer/>
               )}
               {posts.map((post, index) => {
                 return <UserPost post={post} index={index} onPostAdded={handlePostAdded}/>;

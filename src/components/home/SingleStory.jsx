@@ -47,27 +47,27 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
   };
 
   const biggerStory = () => {
-      setShowStory("");
-      setTimeout(() => {
-          setShowStory("hidden");
-        }, 1800);
+    //   setShowStory("");
+    //   setTimeout(() => {
+    //       setShowStory("hidden");
+    //     }, 1800);
 
-    // setShowStory("");
-    // if (storyRef.current.requestFullscreen) {
-    //   storyRef.current.requestFullscreen();
-    // } else if (storyRef.current.webkitRequestFullscreen) {
-    //   // For Safari
-    //   storyRef.current.webkitRequestFullscreen();
-    // }
-    // setTimeout(() => {
-    //   setShowStory("hidden");
-    //   if (document.exitFullscreen) {
-    //     document.exitFullscreen();
-    //   } else if (document.webkitExitFullscreen) {
-    //     // For Safari
-    //     document.webkitExitFullscreen();
-    //   }
-    // }, 1800);
+    setShowStory("");
+    if (storyRef.current.requestFullscreen) {
+      storyRef.current.requestFullscreen();
+    } else if (storyRef.current.webkitRequestFullscreen) {
+      // For Safari
+      storyRef.current.webkitRequestFullscreen();
+    }
+    setTimeout(() => {
+      setShowStory("hidden");
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        // For Safari
+        document.webkitExitFullscreen();
+      }
+    }, 1800);
   };
 
   useEffect(() => {
@@ -96,7 +96,7 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
           style={storyStyle} // For background image
           onClick={biggerStory}
         >
-          <div className="p-2 bg-gradient-to-b from-transparent from-0% via-gray-900/10 via-50% to-[#000000ee] to-100% w-full h-full flex flex-col items-center justify-end gap-1">
+          <div className="p-2 bg-gradient-to-b from-transparent from-0% via-gray-900/10 via-50% to-[#000000ee] to-100% w-full h-full flex flex-col items-center justify-end gap-1 shadow-sm border border-gray-200">
             <figure className="mx-auto w-10 h-10 object-cover border border-[#959595] rounded-full overflow-hidden">
               <img
                 className="rounded-full w-10 h-10 object-cover"
@@ -122,7 +122,7 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
             <figure className="p-1 mx-auto h-screen w-screen flex items-start justify-center">
               <img
                 src={story.stories[0].postFile[0]}
-                className="h-[90%] aspect-[6/10] object-cover object-center"
+                className="h-[95%] aspect-[6/10] object-cover object-center"
               />
             </figure>
           </section>
