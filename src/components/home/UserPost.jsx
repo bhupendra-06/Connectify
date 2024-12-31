@@ -184,11 +184,7 @@ const UserPost = ({ post, onPostAdded }) => {
             <span className="hidden sm:block">Share</span>
           </div>
 
-
         </div>
-
-
-
       </div>
 
       {/* FULL SCREEN VIEW OF IMAGES */}

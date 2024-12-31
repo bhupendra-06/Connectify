@@ -42,14 +42,6 @@ const Stories = () => {
 
       const res = await response.json();
       const data = res.data;
-      // const fetchedStories = data.data.map((story) => ({
-      //   name: story.fullName || story.username,
-      //   // storyId : story._id,
-      //   profileImage: story.avatar,
-      //   picture: story.stories[0],
-      //   description: story.description,
-      //   createdAt: story.createdAt,
-      // }));
 
       setStories(data);
       setLoading(false);

@@ -5,7 +5,7 @@ const PostShimmer = () => {
     <>
     <div
       role="status"
-      className="m-2 mt-0 p-4 border shadow-xl shadow-gray-200 space-y-5 text-center animate-pulse"
+      className="m-2 mt-0 p-4 border-2 shadow-md shadow-gray-200 space-y-5 text-center animate-pulse"
     >
       <div className="flex justify-start items-center">
         <div className="h-14 w-14 bg-gray-200 rounded-full"></div>
@@ -31,7 +31,7 @@ const PostShimmer = () => {
     </div>
     <div
       role="status"
-      className="m-2 mt-0 p-4 border shadow-xl shadow-gray-200 space-y-5 text-center animate-pulse"
+      className="m-2 mt-0 p-4 border-2 shadow-md shadow-gray-200 space-y-5 text-center animate-pulse"
     >
       <div className="flex justify-start items-center">
         <div className="h-14 w-14 bg-gray-200 rounded-full"></div>
@@ -57,7 +57,7 @@ const PostShimmer = () => {
     </div>
     <div
       role="status"
-      className="m-2 mt-0 p-4 border shadow-xl shadow-gray-200 space-y-5 text-center animate-pulse"
+      className="m-2 mt-0 p-4 border-2 shadow-md shadow-gray-200 space-y-5 text-center animate-pulse"
     >
       <div className="flex justify-start items-center">
         <div className="h-14 w-14 bg-gray-200 rounded-full"></div>

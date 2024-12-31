@@ -38,11 +38,6 @@ const CreateStoryForm = ({ onStoryAdded }) => {
       return;
     }
 
-    if (!caption.trim()) {
-      alert("Please add a caption!");
-      return;
-    }
-
     const formData = new FormData();
     formData.append("description", caption);
     formData.append("postMedia", image);
@@ -70,7 +65,6 @@ const CreateStoryForm = ({ onStoryAdded }) => {
       }
 
       const data = await response.json();
-      alert("Story created successfully!");
       setOpen(false);
       setCaption("");
       setImage(null);

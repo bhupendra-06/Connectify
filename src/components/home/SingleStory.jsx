@@ -4,13 +4,23 @@ import { MdDelete } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 
 const SingleStory = ({ story, index, onStoryAdded }) => {
-  const [showStory, setShowStory] = useState("hidden");
+  const [showStory, setShowStory] = useState(false);
+  //   const [fetchedStories, setFetchedStories] = useState();
   const [showOptions, setShowOptions] = useState(false);
   const storyRef = useRef();
 
+  //   console.log(story);
   const storyStyle = {
     backgroundImage: `url(${story.stories[0].postFile[0]})`,
   };
+  //   const  = data.data.map((story) => ({
+  //     name: story.fullName || story.username,
+  //     // storyId : story._id,
+  //     profileImage: story.avatar,
+  //     picture: story.stories[0],
+  //     description: story.description,
+  //     createdAt: story.createdAt,
+  //   }));
 
   const toggleOptions = () => {
     setShowOptions(!showOptions);
@@ -47,27 +57,26 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
   };
 
   const biggerStory = () => {
-    //   setShowStory("");
-    //   setTimeout(() => {
-    //       setShowStory("hidden");
-    //     }, 1800);
-
-    setShowStory("");
-    if (storyRef.current.requestFullscreen) {
-      storyRef.current.requestFullscreen();
-    } else if (storyRef.current.webkitRequestFullscreen) {
-      // For Safari
-      storyRef.current.webkitRequestFullscreen();
-    }
+    setShowStory(true); // Show the story view
+    
+    // Use a setTimeout to hide the story view after 2 seconds
     setTimeout(() => {
-      setShowStory("hidden");
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      } else if (document.webkitExitFullscreen) {
-        // For Safari
-        document.webkitExitFullscreen();
-      }
-    }, 1800);
+      setShowStory(false); // Hide the story view
+      setCurrentIndex(0); // Reset the index
+    }, 6000);
+  };
+  
+
+  const storyBack = () => {
+    // if (document.exitFullscreen) {
+    //   document.exitFullscreen();
+    // } else if (document.webkitExitFullscreen) {
+    //   document.webkitExitFullscreen();
+    // } else if (document.msExitFullscreen) {
+    //   document.msExitFullscreen();
+    // }
+    setShowStory(false); // Ensure this hides the story view
+    setCurrentIndex(0);
   };
 
   useEffect(() => {
@@ -85,6 +94,21 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  //FOR STORY OPEN
+  const [currentIndex, setCurrentIndex] = useState(0); // Tracking current image index
+
+  const nextImage = () => {
+    if (currentIndex < story.stories.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+
+  const prevImage = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
 
   return (
     <>
@@ -110,23 +134,40 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
               {story.username || "Person"}
             </h4>
           </div>
-          {/* Full Screen Preview of Story */}
-          <section
-            id="story-image"
-            ref={storyRef}
-            className={`${showStory} w-full h-screen absolute top-0 left-0 bg-[#000000f4] z-50`}
-          >
-            <span className="absolute top-0 cursor-pointer left-0 text-gray-400 text-2xl sm:text-3xl lg:text-4xl">
-              <FaArrowLeft className="m-4 drop-shadow-sm" />
-            </span>
-            <figure className="p-1 mx-auto h-screen w-screen flex items-start justify-center">
-              <img
-                src={story.stories[0].postFile[0]}
-                className="h-[95%] aspect-[6/10] object-cover object-center"
-              />
-            </figure>
-          </section>
         </div>
+      )}
+      {/* Full Screen Preview of Story */}
+      {showStory && (
+        <section
+          id="story-image"
+          ref={storyRef}
+          className={`${""} w-full h-screen bg-black absolute top-0 left-0 z-50`}
+        >
+          <span
+            onClick={storyBack}
+            className="absolute top-0 left-0 text-gray-400 text-2xl sm:text-3xl lg:text-4xl cursor-pointer z-10"
+          >
+            <FaArrowLeft className="m-4 drop-shadow-sm" />
+          </span>
+          <figure className="p-1 mx-auto h-screen w-screen flex items-start justify-center">
+            <img
+              src={story.stories[currentIndex].postFile[0]}
+              className="h-[99%] aspect-[6/10] object-cover object-center mb-4"
+              alt={`Story ${index + 1}`}
+            />
+            {/* FOR NAVIGATING THROUGH STORIES  */}
+            <div className="absolute w-full h-full flex ">
+              <div
+                onClick={prevImage}
+                className="w-full h-full bg-white/20"
+              ></div>
+              <div
+                onClick={nextImage}
+                className="w-full h-full bg-white/20"
+              ></div>
+            </div>
+          </figure>
+        </section>
       )}
     </>
   );
