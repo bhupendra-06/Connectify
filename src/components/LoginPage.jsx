@@ -35,12 +35,13 @@ const LoginPage = () => {
   
       const data = await response.json();
       console.log("data",data);
-      console.log("MyUserID :",data.data.user._id);
+      // console.log("MyUserID :",data.data.user._id);
   
       if (data.statusCode === 200 && data.data.accessToken && data.data.refreshToken) {
         
         Cookies.set("accessToken", data.data.accessToken, { expires: 1 }); // Expires in 1 day
         Cookies.set("refreshToken", data.data.refreshToken, { expires: 7 }); // Expires in 7 days
+        Cookies.set("MyOwnerId", data.data.user._id, { expires: 7 }); // Owner Id for use
   
         navigate("/home");
         

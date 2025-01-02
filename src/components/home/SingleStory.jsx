@@ -1,26 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
+import Cookies from "js-cookie"
 import { FaArrowLeft } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { RxCross2 } from "react-icons/rx";
 
 const SingleStory = ({ story, index, onStoryAdded }) => {
   const [showStory, setShowStory] = useState(false);
-  //   const [fetchedStories, setFetchedStories] = useState();
   const [showOptions, setShowOptions] = useState(false);
   const storyRef = useRef();
 
-  //   console.log(story);
   const storyStyle = {
-    backgroundImage: `url(${story.stories[0].postFile[0]})`,
+    backgroundImage: `url(${story.stories[story.stories.length-1].postFile[0]})`,
   };
-  //   const  = data.data.map((story) => ({
-  //     name: story.fullName || story.username,
-  //     // storyId : story._id,
-  //     profileImage: story.avatar,
-  //     picture: story.stories[0],
-  //     description: story.description,
-  //     createdAt: story.createdAt,
-  //   }));
 
   const toggleOptions = () => {
     setShowOptions(!showOptions);
@@ -59,14 +49,13 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
   const biggerStory = () => {
     setShowStory(true); // Show the story view
     
-    // Use a setTimeout to hide the story view after 2 seconds
+    // setTimeout to hide the story view after 6 seconds
     setTimeout(() => {
       setShowStory(false); // Hide the story view
       setCurrentIndex(0); // Reset the index
     }, 6000);
   };
   
-
   const storyBack = () => {
     // if (document.exitFullscreen) {
     //   document.exitFullscreen();
@@ -75,7 +64,7 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
     // } else if (document.msExitFullscreen) {
     //   document.msExitFullscreen();
     // }
-    setShowStory(false); // Ensure this hides the story view
+    setShowStory(false);
     setCurrentIndex(0);
   };
 
@@ -109,6 +98,12 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
       setCurrentIndex(currentIndex - 1);
     }
   };
+  
+  // CHECK OWNER ID FOR STORY
+  const MyOwnerId = Cookies.get("MyOwnerId");
+  // console.log("MyOwnerId:", MyOwnerId);
+  
+  if(story.storyOwner === MyOwnerId) return "";
 
   return (
     <>
@@ -120,7 +115,7 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
           style={storyStyle} // For background image
           onClick={biggerStory}
         >
-          <div className="p-2 bg-gradient-to-b from-transparent from-0% via-gray-900/10 via-50% to-[#000000ee] to-100% w-full h-full flex flex-col items-center justify-end gap-1 shadow-sm border border-gray-200">
+          <div className="p-2 bg-gradient-to-b from-transparent from-0% via-gray-900/10 via-50% to-[#000000ee] to-100% w-full max-w-28 overflow-hidden h-full flex flex-col items-center justify-end gap-1 shadow-sm border border-gray-200">
             <figure className="mx-auto w-10 h-10 object-cover border border-[#959595] rounded-full overflow-hidden">
               <img
                 className="rounded-full w-10 h-10 object-cover"
@@ -130,7 +125,7 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
                 }
               />
             </figure>
-            <h4 className="text-xs font-bold text-white text-center">
+            <h4 className="max-w-20 overflow-hidden text-xs font-bold text-white text-center">
               {story.username || "Person"}
             </h4>
           </div>
@@ -141,7 +136,7 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
         <section
           id="story-image"
           ref={storyRef}
-          className={`${""} w-full h-screen bg-black absolute top-0 left-0 z-50`}
+          className={`${""} w-full h-screen overflow-hidden bg-black absolute top-0 left-0 cursor-pointer z-50`}
         >
           <span
             onClick={storyBack}
@@ -149,21 +144,21 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
           >
             <FaArrowLeft className="m-4 drop-shadow-sm" />
           </span>
-          <figure className="p-1 mx-auto h-screen w-screen flex items-start justify-center">
+          <figure className="p-1 mx-auto h-full w-screen flex items-start justify-center">
             <img
               src={story.stories[currentIndex].postFile[0]}
-              className="h-[99%] aspect-[6/10] object-cover object-center mb-4"
+              className="h-[98%] aspect-[6/10] object-cover object-center mb-4"
               alt={`Story ${index + 1}`}
             />
             {/* FOR NAVIGATING THROUGH STORIES  */}
-            <div className="absolute w-full h-full flex ">
+            <div className="absolute w-full h-full flex bg-transparent">
               <div
                 onClick={prevImage}
-                className="w-full h-full bg-white/20"
+                className="w-full h-full"
               ></div>
               <div
                 onClick={nextImage}
-                className="w-full h-full bg-white/20"
+                className="w-full h-full"
               ></div>
             </div>
           </figure>

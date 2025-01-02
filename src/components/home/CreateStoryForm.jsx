@@ -19,7 +19,7 @@ const CreateStoryForm = ({ onStoryAdded }) => {
   const handleButtonClick = () => {
     setOpen(true);
     setTimeout(() => {
-      imageRef.current.click();
+      imageRef.current.click("");
     }, 1); // Small delay to ensure the click event has time to trigger
   };
 
@@ -158,7 +158,7 @@ const CreateStoryForm = ({ onStoryAdded }) => {
       <button
         type="button"
         onClick={handleButtonClick}
-        className="mx-auto text-center inline-flex w-auto justify-center rounded-full bg-blue-600 px-3 py-1 text-2xl font-medium text-white focus:outline-none"
+        className="mx-auto text-center inline-flex w-auto justify-center rounded-full bg-blue-600 px-3 py-1 text-2xl font-medium text-white focus:outline-none z-10"
       >
         +
       </button>

@@ -4,6 +4,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import Home from "./components/home/Home.jsx";
+import MyProfile from "./components/home/MyProfile.jsx";
 import LoginPage from "./components/LoginPage.jsx";
 import SignUpPage from "./components/SignUpPage.jsx";
 import AccountInformation from "./components/settings/AccountInformation.jsx";
@@ -27,6 +28,10 @@ const App = () => {
       <Route
         path="/home"
         element={isAuthenticated() ? <Home /> : <Navigate to="/login" />}
+      />
+      <Route
+        path="/my-profile"
+        element={isAuthenticated() ? <MyProfile /> : <Navigate to="/login" />}
       />
       <Route
         path="/account-info"
