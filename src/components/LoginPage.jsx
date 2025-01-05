@@ -42,6 +42,7 @@ const LoginPage = () => {
         Cookies.set("accessToken", data.data.accessToken, { expires: 1 }); // Expires in 1 day
         Cookies.set("refreshToken", data.data.refreshToken, { expires: 7 }); // Expires in 7 days
         Cookies.set("MyOwnerId", data.data.user._id, { expires: 7 }); // Owner Id for use
+        Cookies.set("avatar", data.data.user.avatar, { expires: 7 });
   
         navigate("/home");
         

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import Cookies from "js-cookie"
+import Cookies from "js-cookie";
 import { FaArrowLeft } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
@@ -53,7 +53,7 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
     setTimeout(() => {
       setShowStory(false); // Hide the story view
       setCurrentIndex(0); // Reset the index
-    }, 6000);
+    }, 9000);
   };
   
   const storyBack = () => {
@@ -147,8 +147,8 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
           <figure className="p-1 mx-auto h-full w-screen flex items-start justify-center">
             <img
               src={story.stories[currentIndex].postFile[0]}
-              className="h-[98%] aspect-[6/10] object-cover object-center mb-4"
-              alt={`Story ${index + 1}`}
+              className="h-[92%] sm:h-[98%] aspect-[6/10] max-w-screen-sm object-cover object-center mb-4"
+              alt={`Story ${currentIndex + 1}`}
             />
             {/* FOR NAVIGATING THROUGH STORIES  */}
             <div className="absolute w-full h-full flex bg-transparent">

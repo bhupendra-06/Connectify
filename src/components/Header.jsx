@@ -13,6 +13,7 @@ import { FaCircleUser } from "react-icons/fa6";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { NavLink } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const Header = () => {
   useGSAP(() => {
@@ -25,12 +26,18 @@ const Header = () => {
     });
   }, []);
 
+  //
+  const avatar = Cookies.get("avatar");
+
   return (
     <>
       <header className="fixed top-0 w-full pl-5 py-2 md:py-4 flex items-center bg-white justify-between shadow-sm shadow-gray-300 z-10">
-        <div className="logo text-2xl md:text-3xl font-bold text-blue-600">
+        <NavLink
+          to="/"
+          className="logo text-2xl md:text-3xl font-bold text-blue-600 select-none"
+        >
           Connectify.
-        </div>
+        </NavLink>
         <div className="2 w-full flex justify-between">
           <div className="sm:pl-20 flex items-center">
             <div className="search-box hidden lg:flex">
@@ -65,12 +72,25 @@ const Header = () => {
               </li>
             </ul>
           </div>
-          <ul className="px-2 flex items-center *:mx-3 *:lg:text-3xl">
-            <LuBell className="icon text-blue-600" />
-            <BiComment className="icon text-blue-600" />
-            <SlSettings className="icon gsapRotate text-blue-600 hidden sm:inline-block" />
+          <ul className="sm:px-2 flex items-center sm:*:mx-2 *:lg:text-3xl">
+            <NavLink>
+              <LuBell className="icon text-blue-600" />
+            </NavLink>
+            <NavLink>
+              <BiComment className="icon text-blue-600 hidden sm:inline-block" />
+            </NavLink>
             <NavLink to="/settings">
-              <FaCircleUser className="icon text-red-700" />
+              <SlSettings className="icon gsapRotate text-blue-600" />
+            </NavLink>
+            <NavLink>
+              {avatar ? (
+                <img
+                  src={avatar}
+                  className="mx-3 w-10 h-10 object-cover rounded-full border border-blue-200 shadow-sm"
+                />
+              ) : (
+                <FaCircleUser className="mx-2 text-blue-600 text-2xl" />
+              )}
             </NavLink>
           </ul>
         </div>

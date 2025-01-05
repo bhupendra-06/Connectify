@@ -6,6 +6,8 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
+import { RxCrossCircled } from "react-icons/rx";
+
 import Cookies from "js-cookie";
 
 const CreateStoryForm = ({ onStoryAdded }) => {
@@ -14,12 +16,13 @@ const CreateStoryForm = ({ onStoryAdded }) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false); // For form modal
 
-  const imageRef = useRef(null);
+  const imageRef = useRef();
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (e) => {
+    e.stopPropagation();
     setOpen(true);
     setTimeout(() => {
-      imageRef.current.click("");
+      imageRef.current.click();
     }, 1); // Small delay to ensure the click event has time to trigger
   };
 
@@ -79,26 +82,32 @@ const CreateStoryForm = ({ onStoryAdded }) => {
       setLoading(false);
     }
   };
- 
 
   return (
     <>
       {/* FORM MODAL TO POST STROY  */}
-      <Dialog open={open} onClose={setOpen} className="relative z-10">
+      <Dialog open={open} onClose={setOpen} className="relative z-20">
         <DialogBackdrop transition className="fixed inset-0 bg-gray-600/90" />
         <div className="fixed inset-0 z-10 overflow-y-auto">
           <div className="mx-auto flex min-h-full items-center justify-center text-center sm:items-center">
             {/* Here is the Dialog Panel  */}
             <DialogPanel>
-              <div className="mx-auto p-4 w-screen sm:max-w-lg h-screen sm:h-auto bg-blue-100/5 sm:bg-blue-100  shadow-lg rounded-lg">
+              <div className="mx-auto p-4 w-screen sm:max-w-lg h-screen sm:h-auto bg-blue-100/5 sm:bg-blue-100 shadow-lg rounded-lg relative">
                 <h2 className="text-2xl font-bold text-gray-800 mb-2 hidden sm:block">
                   Preview Story
                 </h2>
+                <button
+                  type="button"
+                  class="p-1 text-2xl ms-auto text-gray-900 bg-transparent hover:bg-gray-800 hover:text-gray-200 rounded-lg absolute top-2 right-2"
+                  onClick={() => setOpen(false)}
+                >
+                  <RxCrossCircled />
+                </button>
 
-                {/*Story Preview Screen*/}
+                {/*Story Preview Mobile Screen*/}
                 {image && (
                   <div className="mb-6 flex justify-center">
-                    <div className="w-[180px] h-[360px] sm:w-[234px] sm:h-[468px] border-4 border-gray-400 rounded-2xl relative bg-gray-200 overflow-hidden">
+                    <div className="aspect-[6/10] h-[360px] sm:h-[468px] border-4 border-gray-400 rounded-2xl relative bg-gray-200 overflow-hidden">
                       <div className=""></div>
                       <div className="absolute w-full h-full bg-black flex items-center justify-center">
                         <img
@@ -158,7 +167,7 @@ const CreateStoryForm = ({ onStoryAdded }) => {
       <button
         type="button"
         onClick={handleButtonClick}
-        className="mx-auto text-center inline-flex w-auto justify-center rounded-full bg-blue-600 px-3 py-1 text-2xl font-medium text-white focus:outline-none z-10"
+        className="mx-auto text-center inline-flex w-auto justify-center rounded-full bg-blue-600 px-3 py-1 text-2xl font-medium text-white focus:outline-none z-20"
       >
         +
       </button>

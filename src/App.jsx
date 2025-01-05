@@ -11,7 +11,6 @@ import AccountInformation from "./components/settings/AccountInformation.jsx";
 import DefaultSettings from "./components/settings/DefaultSettings.jsx";
 
 const App = () => {
-  
   const navigate = useNavigate();
   const isAuthenticated = () => {
     const accessToken = Cookies.get("accessToken");
@@ -21,7 +20,10 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path="/login" element={<LoginPage />} />
+      <Route
+        path="/login"
+        element={isAuthenticated() ? <Home /> : <LoginPage />}
+      />
       <Route path="/signup" element={<SignUpPage />} />
 
       {/* Protected Routes */}

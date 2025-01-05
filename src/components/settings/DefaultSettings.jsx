@@ -54,16 +54,16 @@ function DefaultSettings() {
  
 
   return (
-    <div className="mx-auto mt-5 lg:pl-48 max-w-[900px] rounded overflow-hidden bg-white select-none">
+    <div className="mx-auto sm:mt-2 lg:pl-48 max-w-[900px] rounded overflow-hidden bg-white select-none">
       <div className="align-left mt-3">
-        <div className="flex items-center px-7">
+        <div className="flex items-center px-2 sm:px-7">
           <Link to="/home">
             <GoArrowLeft className="inline-block m-1" size={30} />
           </Link>
           <h1 className="pl-4 text-xl sm:text-3xl font-bold">Settings</h1>
         </div>
       </div>
-      <div className="w-full m-auto mb-3 px-7">
+      <div className="w-full m-auto mb-3 px-2 sm:px-7">
         <div>
           <div className="text-[#ADB5BD] text-[13px] p-3 font-bold text-start ml-2">
             General
