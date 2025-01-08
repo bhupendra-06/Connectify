@@ -82,7 +82,7 @@ const Header = () => {
             <NavLink to="/settings">
               <SlSettings className="icon gsapRotate text-blue-600" />
             </NavLink>
-            <NavLink>
+            <NavLink to="/profile">
               {avatar ? (
                 <img
                   src={avatar}

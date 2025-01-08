@@ -9,6 +9,7 @@ import LoginPage from "./components/LoginPage.jsx";
 import SignUpPage from "./components/SignUpPage.jsx";
 import AccountInformation from "./components/settings/AccountInformation.jsx";
 import DefaultSettings from "./components/settings/DefaultSettings.jsx";
+import UserProfile from "./components/home/userProfile.jsx";
 import TestPage from "./components/TestPage.jsx";
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
         element={isAuthenticated() ? <Navigate to="/home"/>: <LoginPage />}
       />
       <Route path="/signup" element={<SignUpPage />} />
+      <Route path="/profile" element={<UserProfile />} />
       <Route path="/test" element={<TestPage />} />
 
       {/* Protected Routes */}
