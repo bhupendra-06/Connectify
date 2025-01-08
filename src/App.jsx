@@ -9,7 +9,7 @@ import LoginPage from "./components/LoginPage.jsx";
 import SignUpPage from "./components/SignUpPage.jsx";
 import AccountInformation from "./components/settings/AccountInformation.jsx";
 import DefaultSettings from "./components/settings/DefaultSettings.jsx";
-import UserProfile from "./components/home/userProfile.jsx";
+import UserProfile from "./components/home/UserProfile.jsx";
 import TestPage from "./components/TestPage.jsx";
 
 const App = () => {
