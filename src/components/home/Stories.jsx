@@ -217,6 +217,7 @@ const MyStory = ({ story, onStoryAdded }) => {
               src={story?.stories[currentIndex].postFile[0]}
               className="h-[98%] aspect-[6/10] object-cover object-center mb-4"
               alt={`Story ${currentIndex + 1}`}
+              loading="lazy"
             />
             {/* FOR NAVIGATING THROUGH STORIES  */}
             <div className="absolute w-full h-full flex bg-transparent">

@@ -6,7 +6,7 @@ import { HiOutlinePencilAlt } from "react-icons/hi";
 import { ClipLoader } from "react-spinners";
 import Cookies from "js-cookie";
 
-const CreatePost = ({onPostAdded}) => {
+const CreatePost = ({ onPostAdded }) => {
   const [images, setImages] = useState([]); // Array of images
   const [caption, setCaption] = useState("");
   const [loading, setLoading] = useState(false);
@@ -48,7 +48,7 @@ const CreatePost = ({onPostAdded}) => {
       alert("Please add at least one image and a caption before sharing!");
       return;
     }
-  
+
     const formData = new FormData();
     formData.append("description", caption);
     images.forEach((img) => formData.append("postMedia", img.file));
@@ -57,7 +57,7 @@ const CreatePost = ({onPostAdded}) => {
       setLoading(true);
 
       const accessToken = Cookies.get("accessToken");
-  
+
       const response = await fetch(
         "https://connectify-backend-2uq0.onrender.com/api/v1/posts/create-post",
         {
@@ -68,18 +68,18 @@ const CreatePost = ({onPostAdded}) => {
           body: formData, // FormData will handle the request payload
         }
       );
-  
+
       if (!response.ok) {
         const errorData = await response.json();
         alert(`Failed to create post: ${errorData.message || "Server error"}`);
         return;
       }
-  
+
       const data = await response.json();
       alert("Post created successfully!");
       setCaption("");
       setImages([]);
-      if(onPostAdded){
+      if (onPostAdded) {
         onPostAdded();
       }
     } catch (error) {
@@ -89,8 +89,8 @@ const CreatePost = ({onPostAdded}) => {
       setLoading(false);
     }
   };
-  
-  
+
+  const avatar = Cookies.get("avatar");
 
   return (
     <form
@@ -105,11 +105,18 @@ const CreatePost = ({onPostAdded}) => {
       </div>
       <div className="caption relative my-3 h-20 rounded-lg border-2 border-gray-300 overflow-hidden">
         <figure className="absolute top-0 left-0">
-          <FaCircleUser className="icon text-yellow-500" />
+          {avatar ? (
+            <img
+              src={avatar}
+              className="icon mx-2 w-6 h-6 object-cover rounded-full border border-blue-200 shadow-sm"
+            />
+          ) : (
+            <FaCircleUser className="icon text-gray-400 text-2xl" />
+          )}
         </figure>
         <textarea
           placeholder="Type here..."
-          className="pl-12 pt-3 w-full h-full rounded-lg p-2 outline-none"
+          className="resize-none pl-9 pt-1 w-full h-full rounded-lg p-2 outline-none"
           aria-label="Post caption"
           maxLength={500}
           value={caption}

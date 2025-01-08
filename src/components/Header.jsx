@@ -74,7 +74,7 @@ const Header = () => {
           </div>
           <ul className="sm:px-2 flex items-center sm:*:mx-2 *:lg:text-3xl">
             <NavLink>
-              <LuBell className="icon text-blue-600" />
+              <LuBell className="icon text-blue-600 hidden sm:inline-block" />
             </NavLink>
             <NavLink>
               <BiComment className="icon text-blue-600 hidden sm:inline-block" />
@@ -89,7 +89,7 @@ const Header = () => {
                   className="mx-3 w-10 h-10 object-cover rounded-full border border-blue-200 shadow-sm"
                 />
               ) : (
-                <FaCircleUser className="mx-2 text-blue-600 text-2xl" />
+                <FaCircleUser className="mx-2 text-gray-400 text-4xl" />
               )}
             </NavLink>
           </ul>

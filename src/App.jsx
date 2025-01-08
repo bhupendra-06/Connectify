@@ -9,6 +9,7 @@ import LoginPage from "./components/LoginPage.jsx";
 import SignUpPage from "./components/SignUpPage.jsx";
 import AccountInformation from "./components/settings/AccountInformation.jsx";
 import DefaultSettings from "./components/settings/DefaultSettings.jsx";
+import TestPage from "./components/TestPage.jsx";
 
 const App = () => {
   const navigate = useNavigate();
@@ -22,9 +23,10 @@ const App = () => {
     <Routes>
       <Route
         path="/login"
-        element={isAuthenticated() ? <Home /> : <LoginPage />}
+        element={isAuthenticated() ? <Navigate to="/home"/>: <LoginPage />}
       />
       <Route path="/signup" element={<SignUpPage />} />
+      <Route path="/test" element={<TestPage />} />
 
       {/* Protected Routes */}
       <Route

@@ -51,7 +51,7 @@ const Home = () => {
       <div className="">
         <Header onToggleSidebar={toggleSidebar} />
         <Sidebar isVisible={isSidebarVisible} />
-        <div className="lg:pl-[270px] pt-20 h-screen overflow-hidden flex justify-start">
+        <div className="lg:pl-[270px] pt-16 sm:pt-20 h-screen overflow-hidden flex justify-start">
           <section className="w-full lg:w-9/12 h-screen overflow-y-scroll hide-scrollbar">
             <div className="mb-36 mx-auto xl:max-w-[650px]">
               <Stories />

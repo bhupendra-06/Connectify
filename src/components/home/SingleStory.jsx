@@ -118,6 +118,7 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
           <div className="p-2 bg-gradient-to-b from-transparent from-0% via-gray-900/10 via-50% to-[#000000ee] to-100% w-full max-w-28 overflow-hidden h-full flex flex-col items-center justify-end gap-1 shadow-sm border border-gray-200">
             <figure className="mx-auto w-10 h-10 object-cover border border-[#959595] rounded-full overflow-hidden">
               <img
+              loading="lazy"
                 className="rounded-full w-10 h-10 object-cover"
                 src={
                   story.avatar ||
@@ -149,6 +150,7 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
               src={story.stories[currentIndex].postFile[0]}
               className="h-[92%] sm:h-[98%] aspect-[6/10] max-w-screen-sm object-cover object-center mb-4"
               alt={`Story ${currentIndex + 1}`}
+              loading="lazy"
             />
             {/* FOR NAVIGATING THROUGH STORIES  */}
             <div className="absolute w-full h-full flex bg-transparent">

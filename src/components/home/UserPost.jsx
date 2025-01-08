@@ -156,6 +156,7 @@ const UserPost = ({ post, onPostAdded }) => {
                     : "grid-cols-3 h-full object-cover"
                   } rounded-md `}
                 src={url}
+                loading="lazy"
               />
             ))}
           </div>
@@ -196,6 +197,7 @@ const UserPost = ({ post, onPostAdded }) => {
                 src={post.postFile[currentIndex]} // Corrected template string syntax
                 className="w-[85vw] h-[90vh] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 object-contain"
                 alt="Post"
+                loading="lazy"
               />
             )}
             <RxCrossCircled
