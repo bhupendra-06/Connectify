@@ -11,7 +11,6 @@ import PostShimmer from "./PostShimmer";
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [reload, setReload] = useState(true);
 
   const handlePostAdded = () => {
     fetchPosts();

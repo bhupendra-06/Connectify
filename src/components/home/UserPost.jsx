@@ -9,11 +9,16 @@ import { RxCrossCircled } from "react-icons/rx";
 import { MdDelete } from "react-icons/md";
 import moment from "moment"; // for date formatting
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const NoUser =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA3W3oppN7sdVCsUWwwnPIn9pX6E6G2UW70w&s";
 
 const UserPost = ({ post, onPostAdded }) => {
+
+  console.log(post.owner);
+  
+  const navigate = useNavigate();
   const formattedDate = moment(post.createdAt).fromNow();
 
   const [seeMore, setSeeMore] = useState(false);

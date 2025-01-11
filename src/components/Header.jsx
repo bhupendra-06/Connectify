@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Header.css";
 import { IoSearch } from "react-icons/io5";
 import { LuHome } from "react-icons/lu";
@@ -16,6 +16,10 @@ import { NavLink } from "react-router-dom";
 import Cookies from "js-cookie";
 
 const Header = () => {
+  // getting avatar and owner id to fetch user profile
+  const avatar = Cookies.get("avatar");
+
+  // Using gsap animation to rotate settings icon
   useGSAP(() => {
     gsap.to(".gsapRotate", {
       rotate: 90,
@@ -26,8 +30,6 @@ const Header = () => {
     });
   }, []);
 
-  //
-  const avatar = Cookies.get("avatar");
 
   return (
     <>
@@ -82,7 +84,7 @@ const Header = () => {
             <NavLink to="/settings">
               <SlSettings className="icon gsapRotate text-blue-600" />
             </NavLink>
-            <NavLink to="/profile">
+            <NavLink to={`/my-profile`}>
               {avatar ? (
                 <img
                   src={avatar}
