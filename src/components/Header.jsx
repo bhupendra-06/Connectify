@@ -18,6 +18,7 @@ import Cookies from "js-cookie";
 const Header = () => {
   // getting avatar and owner id to fetch user profile
   const avatar = Cookies.get("avatar");
+  const MyOwnerId = Cookies.get("MyOwnerId");
 
   // Using gsap animation to rotate settings icon
   useGSAP(() => {
@@ -29,7 +30,6 @@ const Header = () => {
       repeat: Infinity,
     });
   }, []);
-
 
   return (
     <>
@@ -84,7 +84,7 @@ const Header = () => {
             <NavLink to="/settings">
               <SlSettings className="icon gsapRotate text-blue-600" />
             </NavLink>
-            <NavLink to={`/my-profile`}>
+            <NavLink to={`/profile/${MyOwnerId}`}>
               {avatar ? (
                 <img
                   src={avatar}

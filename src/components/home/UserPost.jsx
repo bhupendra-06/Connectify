@@ -15,8 +15,6 @@ const NoUser =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA3W3oppN7sdVCsUWwwnPIn9pX6E6G2UW70w&s";
 
 const UserPost = ({ post, onPostAdded }) => {
-
-  console.log(post.owner);
   
   const navigate = useNavigate();
   const formattedDate = moment(post.createdAt).fromNow();
@@ -95,13 +93,17 @@ const UserPost = ({ post, onPostAdded }) => {
     }
   };
 
+  const handleUserProfile = ()=>{
+    navigate(`/profile/${post.owner}`);
+  }
+
   // console.log("post",post);
 
   return (
     <div>
       <div className="m-2 mt-0 p-4 rounded-lg bg-white shadow-xl shadow-gray-200 border">
         <div className="profile mb-3 flex items-center justify-between">
-          <div className="flex items-center">
+          <div className="flex items-center cursor-pointer" onClick={handleUserProfile}>
             <img
               className="w-14 h-14 object-cover rounded-full"
               src={post.avatar || NoUser}

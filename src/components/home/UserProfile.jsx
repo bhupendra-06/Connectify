@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { GoArrowLeft } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
@@ -15,14 +15,17 @@ const posts = [
 ];
 
 const NoUser =
-// "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA3W3oppN7sdVCsUWwwnPIn9pX6E6G2UW70w&s";
-"https://images.pexels.com/photos/3792581/pexels-photo-3792581.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
-
+  // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA3W3oppN7sdVCsUWwwnPIn9pX6E6G2UW70w&s";
+  "https://images.pexels.com/photos/3792581/pexels-photo-3792581.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
 
 const UserProfile = () => {
   const [myProfile, setMyProfile] = useState(null);
   const MyOwnerId = Cookies.get("MyOwnerId");
 
+  const {id} = useParams();
+  // console.log("params id: ",id);
+  
+  useEffect(() => {
   const fetchMyProfile = async () => {
     try {
       const token = Cookies.get("accessToken");
@@ -31,7 +34,7 @@ const UserProfile = () => {
         throw new Error("No access token found in cookies");
       }
       const response = await fetch(
-        `https://connectify-backend-2uq0.onrender.com/api/v1/users/profile/${MyOwnerId}`,
+        `https://connectify-backend-2uq0.onrender.com/api/v1/users/profile/${id}`,
         {
           method: "GET",
           headers: {
@@ -52,22 +55,28 @@ const UserProfile = () => {
       console.log("end");
     }
   };
-  useEffect(() => {
-    fetchMyProfile();
-  }, []);
+  fetchMyProfile();
+  }, [id]);
+  
   const navigate = useNavigate(); // to navigate back
+  if (!myProfile)
+    return (
+      <div className="w-screen h-screen text-3xl text-gray-600 flex items-center justify-center ">
+        <p>Loading Profile...</p>
+      </div>
+    );
 
   return (
     myProfile && (
       <div className="max-w-4xl mx-auto p-4">
-        <Link onClick={() => navigate(-1)}>
+        <Link to="/home">
           {/* go to previous page in the routing path */}
           <GoArrowLeft className="inline-block m-1 text-xl sm:text-3xl" />
         </Link>
         {/* Profile Header */}
         <div className="flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6 border-b pb-6">
           {/* Profile Picture */}
-          <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden">
+          <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden bg-gray-200">
             <img
               src={myProfile.data.avatar || NoUser}
               alt="User Avatar"

@@ -24,10 +24,13 @@ const App = () => {
     <Routes>
       <Route
         path="/login"
-        element={isAuthenticated() ? <Navigate to="/home"/>: <LoginPage />}
+        element={isAuthenticated() ? <Navigate to="/home" /> : <LoginPage />}
       />
       <Route path="/signup" element={<SignUpPage />} />
-      <Route path="/my-profile" element={<UserProfile />} />
+      <Route
+        path="/profile/:id"
+        element={isAuthenticated() ? <UserProfile /> : <Navigate to="/login" />}
+      />
       <Route path="/test" element={<TestPage />} />
 
       {/* Protected Routes */}
