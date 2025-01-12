@@ -48,7 +48,7 @@ const CreateStoryForm = ({ onStoryAdded }) => {
     try {
       setLoading(true);
 
-      const accessToken = Cookies.get("accessToken"); //Authentication token
+      const accessToken = Cookies.get("accessToken"); //Authentication token for user
 
       const response = await fetch(
         "https://connectify-backend-2uq0.onrender.com/api/v1/story/post-story",
@@ -164,6 +164,7 @@ const CreateStoryForm = ({ onStoryAdded }) => {
           </div>
         </div>
       </Dialog>
+      {/* MAIN COMPONENT */}
       <button
         type="button"
         onClick={handleButtonClick}

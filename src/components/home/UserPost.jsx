@@ -12,7 +12,7 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
 const NoUser =
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA3W3oppN7sdVCsUWwwnPIn9pX6E6G2UW70w&s";
+  "https://i.pinimg.com/736x/16/18/20/1618201e616f4a40928c403f222d7562.jpg";
 
 const UserPost = ({ post, onPostAdded }) => {
   
