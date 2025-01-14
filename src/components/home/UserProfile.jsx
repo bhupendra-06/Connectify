@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { GoArrowLeft } from "react-icons/go";
+import { ClipLoader } from "react-spinners";
 import Cookies from "js-cookie";
 
 const NoUser =
@@ -133,13 +134,19 @@ const UserProfile = () => {
                       : "text-white bg-blue-500 hover:bg-blue-600" // Follow style
                   }`}
                 >
-                  {loading
-                    ? "Loading..."
-                    : isFollowing
-                    ? "Following"
-                    : myProfile.data.isFollowedBy
-                    ? "Follow Back"
-                    : "Follow"}
+                  {loading ? (
+                    <ClipLoader
+                      size={14}
+                      color=""
+                      className="mx-5 text-gray-300"
+                    />
+                  ) : isFollowing ? (
+                    "Following"
+                  ) : myProfile.data.isFollowedBy ? (
+                    "Follow Back"
+                  ) : (
+                    "Follow"
+                  )}
                 </button>
               )}
             </div>
@@ -174,7 +181,7 @@ const UserProfile = () => {
         </div>
 
         {/* Posts Grid */}
-        <div className="grid grid-cols-3 gap-2 sm:gap-4 mt-6">
+        <div className="grid grid-cols-3 gap-1 sm:gap-4 mt-6">
           {myProfile.data.posts.map((post, index) => (
             <div
               key={index}

@@ -14,6 +14,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { NavLink } from "react-router-dom";
 import Cookies from "js-cookie";
+// import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   // getting avatar and owner id to fetch user profile
@@ -30,6 +31,16 @@ const Header = () => {
       repeat: Infinity,
     });
   }, []);
+
+  const handleClick = ()=>{
+    if (document.startViewTransition) {
+      document.startViewTransition(() => {
+        navigate(`/profile/${post.owner}`);
+      });
+    } else {
+      navigate(`/profile/${post.owner}`); // Fallback for unsupported browsers
+    }
+  }
 
   return (
     <>
@@ -81,7 +92,7 @@ const Header = () => {
             <NavLink>
               <BiComment className="icon text-blue-600 hidden sm:inline-block" />
             </NavLink>
-            <NavLink to="/settings">
+            <NavLink to={"/settings"}>
               <SlSettings className="icon gsapRotate text-blue-600" />
             </NavLink>
             <NavLink to={`/profile/${MyOwnerId}`}>

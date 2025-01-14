@@ -92,7 +92,7 @@ const CreateStoryForm = ({ onStoryAdded }) => {
           <div className="mx-auto flex min-h-full items-center justify-center text-center sm:items-center">
             {/* Here is the Dialog Panel  */}
             <DialogPanel>
-              <div className="mx-auto p-4 w-screen sm:max-w-lg h-screen sm:h-auto bg-blue-100/5 sm:bg-blue-100 shadow-lg rounded-lg relative">
+              <div className="mx-auto p-4 pt-10 w-screen sm:max-w-lg h-screen sm:h-auto bg-blue-100/5 sm:bg-blue-100 shadow-lg rounded-lg relative">
                 <h2 className="text-2xl font-bold text-gray-800 mb-2 hidden sm:block">
                   Preview Story
                 </h2>

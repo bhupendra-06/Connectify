@@ -94,7 +94,13 @@ const UserPost = ({ post, onPostAdded }) => {
   };
 
   const handleUserProfile = ()=>{
-    navigate(`/profile/${post.owner}`);
+    if (document.startViewTransition) {
+      document.startViewTransition(() => {
+        navigate(`/profile/${post.owner}`);
+      });
+    } else {
+      navigate(`/profile/${post.owner}`); // Fallback for unsupported browsers
+    }
   }
 
   // console.log("post",post);
