@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaRegThumbsUp } from "react-icons/fa";
 import { FaThumbsUp } from "react-icons/fa6";
 import { FaRegComment } from "react-icons/fa6";
@@ -10,21 +10,24 @@ import { MdDelete } from "react-icons/md";
 import moment from "moment"; // for date formatting
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+// import Cookies from "js-cookie";
 
 const NoUser =
   "https://i.pinimg.com/736x/16/18/20/1618201e616f4a40928c403f222d7562.jpg";
 
 const UserPost = ({ post, onPostAdded }) => {
-  
+
   const navigate = useNavigate();
   const formattedDate = moment(post.createdAt).fromNow();
 
   const [seeMore, setSeeMore] = useState(false);
   const [see, setSee] = useState("See More.");
-  const [likes, setLikes] = useState(post.likes || 0);
-  const [liked, setLiked] = useState(false);
+  const [likes, setLikes] = useState(post.likes?.length || 0);
+const [liked, setLiked] = useState(post.isLiked || false);
   const [postImages, setPostImages] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const token = Cookies.get("accessToken");
 
   const seeMoreFunction = () => {
     setSeeMore(!seeMore);
@@ -52,13 +55,39 @@ const UserPost = ({ post, onPostAdded }) => {
     setCurrentIndex(newIndex);
   };
 
-  const handleLikeClick = () => {
-    if (liked) {
-      setLikes((prevLikes) => prevLikes - 1);
-    } else {
-      setLikes((prevLikes) => prevLikes + 1);
+  // Import axios for API requests
+
+  const handleLikeClick = async () => {
+    if (!token) {
+      alert("Please log in to like posts!");
+      navigate("/login");
+      return;
     }
-    setLiked(!liked);
+  
+    try {
+      const response = await axios.put(
+        `https://connectify-backend-2uq0.onrender.com/api/v1/posts/like-post/${post._id}`,
+        {}, // No request body needed
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+  
+      if (response.data.success) {
+        
+        setLikes(response.data.data.likes.length);
+        setLiked(true);
+      } else {
+        console.error("Failed to update like status:", response.data);
+        alert("Failed to update like status. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error updating like status:", error.response?.data || error.message);
+      alert("Failed to update like status. Please try again.");
+    }
   };
 
   const deletePost = async () => {
@@ -93,7 +122,7 @@ const UserPost = ({ post, onPostAdded }) => {
     }
   };
 
-  const handleUserProfile = ()=>{
+  const handleUserProfile = () => {
     if (document.startViewTransition) {
       document.startViewTransition(() => {
         navigate(`/profile/${post.owner}`);
@@ -103,7 +132,7 @@ const UserPost = ({ post, onPostAdded }) => {
     }
   }
 
-  // console.log("post",post);
+  // console.log("post", post);
 
   return (
     <div>
@@ -154,10 +183,10 @@ const UserPost = ({ post, onPostAdded }) => {
         {post.postFile && (
           <div
             className={`grid ${post.postFile.length === 1
-                ? "grid-cols-1"
-                : post.postFile.length === 2
-                  ? "grid-cols-2"
-                  : "grid-cols-3"
+              ? "grid-cols-1"
+              : post.postFile.length === 2
+                ? "grid-cols-2"
+                : "grid-cols-3"
               } gap-2 place-items-center`}
           >
             {post.postFile.map((url, picIndex) => (
@@ -165,8 +194,8 @@ const UserPost = ({ post, onPostAdded }) => {
                 onClick={() => displayPostImages(picIndex)}
                 key={url}
                 className={`${post.postFile.length == 1
-                    ? "max-h-96 object-contain border"
-                    : "grid-cols-3 h-full object-cover"
+                  ? "max-h-96 object-contain border"
+                  : "grid-cols-3 h-full object-cover"
                   } rounded-md `}
                 src={url}
                 loading="lazy"
@@ -186,7 +215,12 @@ const UserPost = ({ post, onPostAdded }) => {
               ) : (
                 <FaRegThumbsUp className="p-1 mx-1 text-xl text-white bg-blue-500 rounded-full" />
               )}
+
+
+              {/* <span>{`${post.likesCount} Likes`}</span> */}
               <span>{`${likes} Likes`}</span>
+
+
             </div>
             <div className="flex items-center text-md">
               <FaRegComment className="mx-1" />
