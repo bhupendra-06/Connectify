@@ -24,10 +24,12 @@ const UserPost = ({ post, onPostAdded }) => {
   const [seeMore, setSeeMore] = useState(false);
   const [see, setSee] = useState("See More.");
   const [likes, setLikes] = useState(post.likes?.length || 0);
-const [liked, setLiked] = useState(post.isLiked || false);
+  const [liked, setLiked] = useState(post.isLiked );
   const [postImages, setPostImages] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const token = Cookies.get("accessToken");
+
+  console.log("post.isLiked",post.isLiked );
 
   const seeMoreFunction = () => {
     setSeeMore(!seeMore);
@@ -77,9 +79,10 @@ const [liked, setLiked] = useState(post.isLiked || false);
       );
   
       if (response.data.success) {
+        // console.log("response" ,response);
         
         setLikes(response.data.data.likes.length);
-        setLiked(true);
+       setLiked(!liked);
       } else {
         console.error("Failed to update like status:", response.data);
         alert("Failed to update like status. Please try again.");

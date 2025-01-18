@@ -26,6 +26,7 @@ const Home = () => {
         throw new Error("Failed to fetch posts");
       }
       const allPosts = await response.json();
+      // console.log("post data", allPosts);
 
       setPosts(allPosts.data); // our array is stored in data
     } catch (error) {
@@ -44,6 +45,7 @@ const Home = () => {
   const toggleSidebar = () => {
     setSidebarVisible(!isSidebarVisible);
   };
+
 
   return (
     <>
