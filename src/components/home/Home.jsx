@@ -6,7 +6,7 @@ import Sidebar from "../sidebar/Sidebar";
 import CreatePost from "./CreatePost";
 import UserPost from "./UserPost";
 import PostShimmer from "./PostShimmer";
-
+import Cookies from "js-cookie";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -18,10 +18,19 @@ const Home = () => {
 
   const fetchPosts = async () => {
     try {
-      //API call heres
+      const token = Cookies.get("accessToken");
+
       const response = await fetch(
-        "https://connectify-backend-2uq0.onrender.com/api/v1/posts/get-all-posts"
+        "https://connectify-backend-2uq0.onrender.com/api/v1/posts/get-all-posts",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
+
       if (!response.ok) {
         throw new Error("Failed to fetch posts");
       }
@@ -29,6 +38,8 @@ const Home = () => {
       // console.log("post data", allPosts);
 
       setPosts(allPosts.data); // our array is stored in data
+      // console.log(allPosts.data);
+      
     } catch (error) {
       console.error("Error fetching posts:", error);
     } finally {
