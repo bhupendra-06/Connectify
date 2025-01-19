@@ -3,14 +3,17 @@ import { FaRegThumbsUp } from "react-icons/fa";
 import { FaThumbsUp } from "react-icons/fa6";
 import { FaRegComment } from "react-icons/fa6";
 import { FiShare2 } from "react-icons/fi";
-import { IoIosArrowBack } from "react-icons/io";
-import { IoIosArrowForward } from "react-icons/io";
-import { RxCrossCircled } from "react-icons/rx";
+// import { IoIosArrowBack } from "react-icons/io";
+// import { IoIosArrowForward } from "react-icons/io";
+// import { RxCrossCircled } from "react-icons/rx";
 import { MdDelete } from "react-icons/md";
 import moment from "moment"; // for date formatting
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
+
+import ImageCarousel from "./ImageCarousel";
 // import Cookies from "js-cookie";
 
 const NoUser =
@@ -135,7 +138,6 @@ const UserPost = ({ post, onPostAdded }) => {
     }
   }
 
-  // console.log("post", post);
 
   return (
     <div>
@@ -239,7 +241,7 @@ const UserPost = ({ post, onPostAdded }) => {
       </div>
 
       {/* FULL SCREEN VIEW OF IMAGES */}
-      {postImages && (
+      {/* {postImages && (
         <div className="w-screen h-screen fixed top-0 left-0 select-none z-50">
           <div className="p-2 w-full h-full bg-black flex items-center overflow-hidden">
             {post.postFile && (
@@ -265,7 +267,18 @@ const UserPost = ({ post, onPostAdded }) => {
             />
           </div>
         </div>
-      )}
+      )} */}
+
+      {postImages && (
+  <ImageCarousel
+    post={post}
+    currentIndex={currentIndex}
+    removePostImages={removePostImages}
+  />
+)}
+
+   
+
 
 
 
