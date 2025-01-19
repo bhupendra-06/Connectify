@@ -32,7 +32,7 @@ const UserPost = ({ post, onPostAdded }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const token = Cookies.get("accessToken");
 
-  console.log("post.isLiked",post.isLiked );
+  // console.log("post.isLiked",post.isLiked );
 
   const seeMoreFunction = () => {
     setSeeMore(!seeMore);
@@ -85,7 +85,7 @@ const UserPost = ({ post, onPostAdded }) => {
         // console.log("response" ,response);
         
         setLikes(response.data.data.likes.length);
-       setLiked(!liked);
+        setLiked(!liked);
       } else {
         console.error("Failed to update like status:", response.data);
         alert("Failed to update like status. Please try again.");
