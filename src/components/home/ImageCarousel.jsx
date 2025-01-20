@@ -28,7 +28,7 @@ const InstagramCarousel = ({ post, currentIndex, removePostImages }) => {
 
   return (
     <div className="w-screen h-screen fixed top-0 left-0 z-50 bg-black flex flex-col">
-      <div className="relative h-full flex items-center justify-center">
+      <div className="relative h-[93vh] sm:h-screen">
         {/* Close Button */}
         <RxCrossCircled
           onClick={removePostImages}
@@ -36,21 +36,21 @@ const InstagramCarousel = ({ post, currentIndex, removePostImages }) => {
         />
 
         {/* Image Carousel */}
-        <Slider {...settings} className="w-full h-full">
+        <Slider {...settings} className="w-full h-full flex items-center justify-center">
           {post.postFile &&
             post.postFile.map((url, index) => (
               <div
                 key={`slide-${index}`} // Unique key to ensure proper rendering
-                className="flex justify-center items-center h-full relative"
+                className="flex justify-center items-center h-[90vh] sm:h-screen relative"
               >
                 <img
                   src={url}
                   alt={`Slide ${index}`}
-                  className="w-[100vw] h-[100vh] left-1/2 top-1/2 object-contain"
+                  className="w-full h-full left-1/2 top-1/2 object-contain "
                   loading="lazy"
                 />
                 {post.postFile.length > 1 && (
-                  <div className="p-[0.4rem] text-xs sm:text-sm text-white bg-gray-950/90 flex items-center gap-0.5 border border-gray-700 rounded-full absolute bottom-3 right-1/2 translate-x-1/2 z-50">
+                  <div className="p-[0.4rem] text-xs sm:text-sm text-white bg-gray-950/90 flex items-center gap-0.5 border border-gray-700 rounded-full absolute  right-1/2 bottom-2 translate-x-1/2 z-50">
                     <span>{index + 1}</span>
                     <span>/</span>
                     <span>{post.postFile.length}</span>
