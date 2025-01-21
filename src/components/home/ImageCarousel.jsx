@@ -41,15 +41,21 @@ const InstagramCarousel = ({ post, currentIndex, removePostImages }) => {
             post.postFile.map((url, index) => (
               <div
                 key={`slide-${index}`} // Unique key to ensure proper rendering
-                className="flex justify-center items-center h-full"
+                className="flex justify-center items-center h-full outline-none relative"
               >
                 <img
                   src={url}
                   alt={`Slide ${index}`}
-                  className="w-[100vw] h-[100vh] left-1/2 top-1/2    object-contain"
+                  className="w-[100vw] h-[93vh] sm:h-[100vh] left-1/2 top-1/2 object-contain"
                   loading="lazy"
                 />
-                 
+                {post.postFile.length > 0 && (
+                  <div className="p-[0.4rem] text-xs sm:text-sm text-white bg-gray-950/90 flex items-center gap-0.5 border border-gray-700 rounded-full absolute bottom-5 sm:bottom-3 right-1/2 translate-x-1/2 z-50">
+                    <span>{index + 1}</span>
+                    <span>/</span>
+                    <span>{post.postFile.length}</span>
+                  </div>
+                )}
               </div>
             ))}
         </Slider>
