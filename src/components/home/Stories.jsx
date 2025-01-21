@@ -4,12 +4,13 @@ import Cookies from "js-cookie";
 import SingleStory from "./SingleStory";
 import StoryShimmer from "./StoryShimmer";
 import { FaArrowLeft } from "react-icons/fa";
+import { IoSendOutline } from "react-icons/io5";
+import moment from "moment"; // for date formatting
+import { use } from "react";
 
 const yourStory = {
   name: "Add Story",
-  profileImage:
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEOSyWpWSVvNFScD4JijQAi4C2zjhFnDOESQ&s",
-  picture: "https://images.pexels.com/photos/753626/pexels-photo-753626.jpe",
+
 };
 
 // STORIES COMPONENT STARTS HERE
@@ -64,9 +65,7 @@ const Stories = () => {
   const MyOwnerId = Cookies.get("MyOwnerId");
   // console.log("MyOwnerId:", MyOwnerId);
 
-  const myStoryObject = stories.find(
-    (story) => story.storyOwner === MyOwnerId
-  );
+  const myStoryObject = stories.find((story) => story.storyOwner === MyOwnerId);
   // console.log(myStoryObject);
 
   if (error) return <div>{error}</div>;
@@ -74,11 +73,11 @@ const Stories = () => {
   return (
     <div className="pl-1 pr-2 w-full lg:max-w-[] z-0">
       <div className="-mt-1 md:mt-3 lg:mt-5 h-48 w-full story-section flex items-center overflow-scroll hide-scrollbar">
-        {loading ? (
-          <MyStory story={yourStory} onStoryAdded={handleStoryAdded} />
-        ) : (
-          <MyStory story={myStoryObject} onStoryAdded={handleStoryAdded} />
-        )}
+        <MyStory
+          story={loading ? yourStory : myStoryObject || yourStory}
+          onStoryAdded={handleStoryAdded}
+        />
+
         {loading ? (
           <StoryShimmer />
         ) : (
@@ -103,12 +102,16 @@ const MyStory = ({ story, onStoryAdded }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [myStoryBg, setMyStoryBg] = useState("");
   const storyRef = useRef();
+  const [currentIndex, setCurrentIndex] = useState(0); // Tracking current image index
+  const NoUser =
+    "https://i.pinimg.com/736x/16/18/20/1618201e616f4a40928c403f222d7562.jpg";
 
   useEffect(() => {
     if (story?.stories?.length > 0) {
       // console.log(story.stories[story.stories.length - 1]);
       setMyStoryBg(story.stories[story.stories.length - 1].postFile[0]);
-      // console.log("My story", myStoryBg);
+      console.log("My story", story);
+      console.log(story.stories[currentIndex].createdAt);
     }
   }, [story]);
 
@@ -168,7 +171,6 @@ const MyStory = ({ story, onStoryAdded }) => {
   };
 
   //FOR STORY OPEN
-  const [currentIndex, setCurrentIndex] = useState(0); // Tracking current image index
 
   const nextImage = () => {
     if (currentIndex < story.stories.length - 1) {
@@ -181,6 +183,10 @@ const MyStory = ({ story, onStoryAdded }) => {
       setCurrentIndex(currentIndex - 1);
     }
   };
+  const formattedDate = story.stories && story.stories[currentIndex] ?
+  moment(story.stories[currentIndex].createdAt).fromNow() :
+  "few seconds ago";
+  // const formattedDate = "few seconds ago";
 
   return (
     <>
@@ -200,27 +206,50 @@ const MyStory = ({ story, onStoryAdded }) => {
         </div>
       }
       {/* Full Screen Preview of Story */}
-      {(showStory && story) && (
+      {showStory && story.stories && (
         <section
           id="story-image"
           ref={storyRef}
-          className="w-full h-screen overflow-hidden bg-black absolute top-0 left-0 cursor-pointer z-50"
+          className={`w-full h-screen overflow-y-hidden bg-black absolute top-0 left-0 cursor-pointer z-50`}
         >
-          <span
-            onClick={storyBack}
-            className="absolute top-0 left-0 text-gray-400 text-2xl sm:text-3xl lg:text-4xl cursor-pointer z-10"
-          >
-            <FaArrowLeft className="m-4 drop-shadow-sm" />
-          </span>
-          <figure className="p-1 mx-auto h-full w-screen flex items-start justify-center">
+          {/* USER PROFILE */}
+          <div className="absolute top-0 py-2 left-0 w-full h-full  bg-gradient-to-b from-[#000000c1] from-0% to-transparent to-10%">
+            <div className="flex items-center justify-start">
+              <span
+                onClick={storyBack}
+                className="mx-4 text-gray-300 text-2xl sm:text-3xl lg:text-4xl cursor-pointer z-10"
+              >
+                <FaArrowLeft className="drop-shadow-sm" />
+              </span>
+              <div
+                className="flex items-center cursor-pointer"
+                // onClick={openUserProfile}
+              >
+                <img
+                  className="w-12 h-12 object-cover rounded-full border border-gray-400 shadow-lg"
+                  src={story.avatar || NoUser}
+                />
+                <div className="text-start ml-2">
+                  <h3 className="text-lg text-white font-bold">
+                    {story.username || "Anonymous"}
+                    <span className="text-xs text-gray-300/95 block">
+                      {formattedDate || "few seconds ago"}
+                    </span>
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Story Images */}
+          <figure className="p-1 pt-5 mx-auto h-[calc(100vh)] w-screen flex items-start justify-center">
             <img
-              src={story?.stories[currentIndex].postFile[0]}
-              className="h-[98%] aspect-[6/10] object-cover object-center mb-4"
+              src={story.stories[currentIndex].postFile[0]}
+              className="h-[92%] sm:h-[98%] aspect-[6/10] max-w-screen-sm object-cover object-center mb-4"
               alt={`Story ${currentIndex + 1}`}
               loading="lazy"
             />
             {/* FOR NAVIGATING THROUGH STORIES  */}
-            <div className="absolute w-full h-full flex bg-transparent">
+            <div className="absolute my-28 w-full h-[calc(100vh-15rem)] flex bg-">
               <div onClick={prevImage} className="w-full h-full"></div>
               <div onClick={nextImage} className="w-full h-full"></div>
             </div>

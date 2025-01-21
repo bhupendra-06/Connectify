@@ -67,7 +67,7 @@ function DefaultSettings() {
     >
       <div className="align-left mt-3">
         <div className="flex items-center px-2 sm:px-7">
-          <Link to="/home">
+          <Link onClick={()=>{navigate(-1)}}>
             <GoArrowLeft className="inline-block m-1" size={30} />
           </Link>
           <h1 className="pl-4 text-xl sm:text-3xl font-bold">Settings</h1>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { GoArrowLeft } from "react-icons/go";
+import { SlSettings } from "react-icons/sl";
 import { ClipLoader } from "react-spinners";
 import Cookies from "js-cookie";
 
@@ -100,13 +101,19 @@ const UserProfile = () => {
 
   return (
     myProfile && (
-      <div className="max-w-4xl mx-auto p-4">
-        <Link to="/home">
-          <GoArrowLeft className="inline-block m-1 text-xl sm:text-3xl" />
-        </Link>
-
+      <div className="max-w-4xl mx-auto p-3 border min-h-screen">
+        <div className="flex justify-between">
+          <Link to="/home">
+            <GoArrowLeft className="inline-block text-3xl sm:m-1 sm:text-3xl" />
+          </Link>
+          {myProfile.data._id === MyOwnerId && (
+            <Link to="/settings">
+              <SlSettings className="inline-block text-gray-600 text-3xl sm:m-1 sm:text-3xl" />
+            </Link>
+          )}
+        </div>
         {/* Profile Header */}
-        <div className="flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6 border-b pb-6">
+        <div className="flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6 border-b pb-6 sm:pt-4">
           <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden bg-gray-200">
             <img
               src={myProfile.data.avatar || NoUser}
@@ -181,7 +188,7 @@ const UserProfile = () => {
         </div>
 
         {/* Posts Grid */}
-        <div className="grid grid-cols-3 gap-1 sm:gap-4 mt-6">
+        <div className="mt-4 grid grid-cols-3 gap-1 sm:gap-4">
           {myProfile.data.posts.map((post, index) => (
             <div
               key={index}

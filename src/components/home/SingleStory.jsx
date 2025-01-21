@@ -2,14 +2,22 @@ import React, { useState, useEffect, useRef } from "react";
 import Cookies from "js-cookie";
 import { FaArrowLeft } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { IoSendOutline } from "react-icons/io5";
+import moment from "moment"; // for date formatting
+import { useNavigate } from "react-router-dom";
 
 const SingleStory = ({ story, index, onStoryAdded }) => {
   const [showStory, setShowStory] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
   const storyRef = useRef();
+  const navigate = useNavigate();
+  const NoUser =
+    "https://i.pinimg.com/736x/16/18/20/1618201e616f4a40928c403f222d7562.jpg";
 
   const storyStyle = {
-    backgroundImage: `url(${story.stories[story.stories.length-1].postFile[0]})`,
+    backgroundImage: `url(${
+      story.stories[story.stories.length - 1].postFile[0]
+    })`,
   };
 
   const toggleOptions = () => {
@@ -48,14 +56,14 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
 
   const biggerStory = () => {
     setShowStory(true); // Show the story view
-    
+
     // setTimeout to hide the story view after 6 seconds
     setTimeout(() => {
       setShowStory(false); // Hide the story view
       setCurrentIndex(0); // Reset the index
     }, 9000);
   };
-  
+
   const storyBack = () => {
     // if (document.exitFullscreen) {
     //   document.exitFullscreen();
@@ -98,12 +106,18 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
       setCurrentIndex(currentIndex - 1);
     }
   };
-  
+
+  const formattedDate = moment(story.stories[currentIndex].createdAt).fromNow();
+
+  const openUserProfile = () => {
+    navigate(`/profile/${story.storyOwner}`);
+  }
+
   // CHECK OWNER ID FOR STORY
   const MyOwnerId = Cookies.get("MyOwnerId");
   // console.log("MyOwnerId:", MyOwnerId);
-  
-  if(story.storyOwner === MyOwnerId) return "";
+
+  if (story.storyOwner === MyOwnerId) return "";
 
   return (
     <>
@@ -118,7 +132,7 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
           <div className="p-2 bg-gradient-to-b from-transparent from-0% via-gray-900/10 via-50% to-[#000000ee] to-100% w-full max-w-28 overflow-hidden h-full flex flex-col items-center justify-end gap-1 shadow-sm border border-gray-200">
             <figure className="mx-auto w-10 h-10 object-cover border border-[#959595] rounded-full overflow-hidden">
               <img
-              loading="lazy"
+                loading="lazy"
                 className="rounded-full w-10 h-10 object-cover"
                 src={
                   story.avatar ||
@@ -137,15 +151,38 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
         <section
           id="story-image"
           ref={storyRef}
-          className={`${""} w-full h-screen overflow-hidden bg-black absolute top-0 left-0 cursor-pointer z-50`}
+          className={`w-full h-screen overflow-y-hidden bg-black absolute top-0 left-0 cursor-pointer z-50`}
         >
-          <span
-            onClick={storyBack}
-            className="absolute top-0 left-0 text-gray-400 text-2xl sm:text-3xl lg:text-4xl cursor-pointer z-10"
-          >
-            <FaArrowLeft className="m-4 drop-shadow-sm" />
-          </span>
-          <figure className="p-1 mx-auto h-full w-screen flex items-start justify-center">
+          {/* USER PROFILE */}
+          <div className="absolute top-0 py-2 left-0 w-full h-full  bg-gradient-to-b from-[#000000c1] from-0% to-transparent to-10%">
+            <div className="flex items-center justify-start">
+              <span
+                onClick={storyBack}
+                className="mx-4 text-gray-300 text-2xl sm:text-3xl lg:text-4xl cursor-pointer z-10"
+              >
+                <FaArrowLeft className="drop-shadow-sm" />
+              </span>
+              <div
+                className="flex items-center cursor-pointer"
+                onClick={openUserProfile}
+              >
+                <img
+                  className="w-12 h-12 object-cover rounded-full border border-gray-400 shadow-lg"
+                  src={story.avatar || NoUser}
+                />
+                <div className="text-start ml-2">
+                  <h3 className="text-lg text-white font-bold">
+                    {story.username || "Anonymous"}
+                    <span className="text-xs text-gray-300/95 block">
+                      {formattedDate || ""}
+                    </span>
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Story Images */}
+          <figure className="p-1 pt-5 mx-auto h-[calc(93vh)] w-screen flex items-start justify-center">
             <img
               src={story.stories[currentIndex].postFile[0]}
               className="h-[92%] sm:h-[98%] aspect-[6/10] max-w-screen-sm object-cover object-center mb-4"
@@ -153,17 +190,15 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
               loading="lazy"
             />
             {/* FOR NAVIGATING THROUGH STORIES  */}
-            <div className="absolute w-full h-full flex bg-transparent">
-              <div
-                onClick={prevImage}
-                className="w-full h-full"
-              ></div>
-              <div
-                onClick={nextImage}
-                className="w-full h-full"
-              ></div>
+            <div className="absolute my-28 w-full h-[calc(100vh-15rem)] flex bg-">
+              <div onClick={prevImage} className="w-full h-full"></div>
+              <div onClick={nextImage} className="w-full h-full"></div>
             </div>
           </figure>
+          <div className="m-2 p-2 px-4 w-[calc(100vw-1rem)] border-2 border-gray-400 bg-transparent rounded-full flex items-center justify-between absolute bottom-14 sm:bottom-5">
+            <p className="px-2 w-full text-gray-500 text-xl">Reply...</p>
+            <IoSendOutline className="text-3xl text-gray-400 font-thin" />
+          </div>
         </section>
       )}
     </>

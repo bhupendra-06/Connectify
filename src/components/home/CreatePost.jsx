@@ -17,7 +17,7 @@ const CreatePost = ({ onPostAdded }) => {
       const selectedFiles = Array.from(e.target.files);
 
       const validFiles = selectedFiles.filter((file) => {
-        if (file.size > 5 * 1024 * 1024) {
+        if (file.size > 10 * 1024 * 1024) {
           alert(`${file.name} exceeds the 5MB size limit!`);
           return false;
         }
