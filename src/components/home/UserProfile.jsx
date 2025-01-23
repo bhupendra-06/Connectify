@@ -4,6 +4,7 @@ import { GoArrowLeft } from "react-icons/go";
 import { SlSettings } from "react-icons/sl";
 import { ClipLoader } from "react-spinners";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const NoUser =
   "https://i.pinimg.com/736x/16/18/20/1618201e616f4a40928c403f222d7562.jpg";
@@ -16,6 +17,16 @@ const UserProfile = () => {
   const { id } = useParams();
   const token = Cookies.get("accessToken");
   const MyOwnerId = Cookies.get("MyOwnerId");
+  const navigate = useNavigate();
+  const goToSettings = () => {
+    if (document.startViewTransition) {
+      document.startViewTransition(() => {
+        navigate("/settings");
+      });
+    } else {
+      navigate("/settings");
+    }
+  };
 
   useEffect(() => {
     if (!token) {
@@ -83,8 +94,6 @@ const UserProfile = () => {
 
       // Toggle follow state locally
       setIsFollowing((prevState) => !prevState);
-
-      console.log("Follow/Unfollow action successful"); // Debugging
     } catch (err) {
       console.error("Error during Follow/Unfollow:", err);
     } finally {
@@ -107,7 +116,7 @@ const UserProfile = () => {
             <GoArrowLeft className="inline-block text-3xl sm:m-1 sm:text-3xl" />
           </Link>
           {myProfile.data._id === MyOwnerId && (
-            <Link to="/settings">
+            <Link onClick={goToSettings}>
               <SlSettings className="inline-block text-gray-600 text-3xl sm:m-1 sm:text-3xl" />
             </Link>
           )}

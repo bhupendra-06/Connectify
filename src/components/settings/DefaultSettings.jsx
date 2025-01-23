@@ -15,13 +15,6 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function DefaultSettings() {
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    // Set the loaded state to true after the component has mounted
-    setLoaded(true);
-  }, []);
-
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -61,13 +54,15 @@ function DefaultSettings() {
 
   return (
     <div
-      className={`mx-auto sm:mt-2 lg:pl-48 max-w-[900px] rounded overflow-hidden bg-white select-none ${
-        loaded ? 'translate-x-0' : 'translate-x-full'
-      } transition-all duration-300 ease-out`}
+      className={`mx-auto sm:mt-2 lg:pl-48 max-w-[900px] rounded overflow-hidden bg-white select-none`}
     >
       <div className="align-left mt-3">
         <div className="flex items-center px-2 sm:px-7">
-          <Link onClick={()=>{navigate(-1)}}>
+          <Link
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
             <GoArrowLeft className="inline-block m-1" size={30} />
           </Link>
           <h1 className="pl-4 text-xl sm:text-3xl font-bold">Settings</h1>
@@ -79,7 +74,12 @@ function DefaultSettings() {
             General
           </div>
           <div className="ml-4 flex flex-col gap-3 pb-4">
-            <Link to="/account-info" className="flex relative">
+            <li
+              onClick={() => {
+                navigate("/account-info");
+              }}
+              className="flex relative"
+            >
               <div className="inline-block p-[10px]  rounded-full bg-gradient-to-r from-[#0575e6] to-[#021b79] text-white font-bold">
                 <LuHome className="font-bold" size={25} />
               </div>
@@ -90,7 +90,7 @@ function DefaultSettings() {
                 size={22}
                 className="text-[#596067] absolute right-0 top-3"
               />
-            </Link>
+            </li>
             <div className="h-px w-full bg-slate-300"></div>
             <div className="flex relative">
               <div className="inline-block  p-[10px] rounded-full  bg-gradient-to-r from-[#f2994a] to-[#f2c94c] text-white font-bold">

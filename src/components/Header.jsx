@@ -12,7 +12,8 @@ import { SlSettings } from "react-icons/sl";
 import { FaCircleUser } from "react-icons/fa6";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 // import { useNavigate } from "react-router-dom";
 
@@ -32,32 +33,44 @@ const Header = () => {
     });
   }, []);
 
-  const handleClick = ()=>{
+  const navigate = useNavigate();
+  const goToSettings = () => {
     if (document.startViewTransition) {
       document.startViewTransition(() => {
-        navigate(`/profile/${post.owner}`);
+        navigate("/settings");
       });
     } else {
-      navigate(`/profile/${post.owner}`); // Fallback for unsupported browsers
+      navigate("/settings");
     }
-  }
+  };
 
   return (
     <>
       <header className="fixed top-0 w-full pl-5 py-2 md:py-4 flex items-center bg-white justify-between shadow-sm shadow-gray-300 z-10">
+        {/* Logo Section */}
         <NavLink
           to="/"
           className="logo text-2xl md:text-3xl font-bold text-blue-600 select-none"
         >
           Connectify.
         </NavLink>
-        <div className="2 w-full flex justify-between">
+
+        {/* Navigation and Search Section */}
+        <div className="w-full flex justify-between">
           <div className="sm:pl-20 flex items-center">
-            <div className="search-box hidden lg:flex">
+            {/* Search Box */}
+            <div className="search-box hidden lg:flex items-center">
               <IoSearch className="icon text-xl text-gray-400" />
-              <input type="search" placeholder="Start typing to search...." />
+              <input
+              id="search"
+                type="search"
+                placeholder="Start typing to search..."
+                className="ml-2 border-b focus:outline-none"
+              />
             </div>
-            <ul className="hidden xl:flex">
+
+            {/* Navigation Icons */}
+            <ul className="hidden xl:flex space-x-4 ml-6">
               <li className="icon-gola text-blue-600 bg-[#d2e3ff] rounded-full">
                 <NavLink to="/">
                   <LuHome className="icon text-blue-600" />
@@ -85,26 +98,33 @@ const Header = () => {
               </li>
             </ul>
           </div>
-          <ul className="sm:px-2 flex items-center sm:*:mx-2 *:lg:text-3xl">
-            <NavLink>
-              <LuBell className="icon text-blue-600 hidden sm:inline-block" />
-            </NavLink>
-            <NavLink>
-              <BiComment className="icon text-blue-600 hidden sm:inline-block" />
-            </NavLink>
-            <NavLink to={"/settings"}>
+
+          {/* User Actions Section */}
+          <ul className="sm:px-2 flex items-center space-x-4">
+            <li>
+              <NavLink>
+                <LuBell className="icon text-blue-600 hidden sm:inline-block" />
+              </NavLink>
+            </li>
+            <li>
+              <NavLink>
+                <BiComment className="icon text-blue-600 hidden sm:inline-block" />
+              </NavLink>
+            </li>
+            <li onClick={goToSettings} className="cursor-pointer">
               <SlSettings className="icon gsapRotate text-blue-600" />
-            </NavLink>
-            <NavLink to={`/profile/${MyOwnerId}`}>
+            </li>
+            <li onClick={() => navigate(`/profile/${MyOwnerId}`)}>
               {avatar ? (
                 <img
                   src={avatar}
+                  alt="User Avatar"
                   className="mx-3 w-10 h-10 object-cover rounded-full border border-blue-200 shadow-sm"
                 />
               ) : (
                 <FaCircleUser className="mx-2 text-gray-400 text-4xl" />
               )}
-            </NavLink>
+            </li>
           </ul>
         </div>
       </header>

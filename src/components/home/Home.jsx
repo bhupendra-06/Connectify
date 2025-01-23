@@ -72,7 +72,7 @@ const Home = () => {
                 <PostShimmer/>
               )}
               {posts.map((post, index) => {
-                return <UserPost post={post} index={index} onPostAdded={handlePostAdded}/>;
+                return <UserPost post={post} index={index} key={index} onPostAdded={handlePostAdded}/>;
               })}
             </div>
           </section>

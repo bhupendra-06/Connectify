@@ -115,6 +115,7 @@ const CreatePost = ({ onPostAdded }) => {
           )}
         </figure>
         <textarea
+          id="post-caption"
           placeholder="Type here..."
           className="resize-none pl-9 pt-1 w-full h-full rounded-lg p-2 outline-none"
           aria-label="Post caption"

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { GoArrowLeft } from "react-icons/go";
 import img1 from "./AccountInfo1.jpg"
 import Input1 from '../form/Input1';
@@ -11,17 +11,18 @@ function AccountInformation() {
     const handleSubmit= ()=>{
 
     }
+    const navigate = useNavigate();
 
     return (
         <div className='mx-2 md:mx-auto max-w-[800px] bg-white  rounded-md my-4'>
             <div className='bg-[#05f] align-left rounded-md'>
                 <div className='flex p-7 text-white '>
-                    <Link to="/settings"><GoArrowLeft className='inline-block pb-1' size={30}/></Link>
+                    <Link onClick={()=>{navigate(-1)}}><GoArrowLeft className='inline-block pb-1' size={30}/></Link>
                     <h4 className='pl-4 text-xl '>Account Details</h4>
                 </div>
-            </div>
+            </div> 
             <div className='flex flex-col items-center mt-2 sm:mt-10'>
-                <img className='w-24 h-24 rounded-md center m-2' src={img1} alt="img" srcset="" />
+                <img className='w-24 h-24 rounded-md center m-2' src={img1} alt="img" srcSet="" />
                 <h2 className='text-2xl m-1 font-bold'>Surfiya Zakir</h2>
                 <h4 className='text-[#ADB5BD]'>Brooklyn</h4>
             </div>
@@ -59,8 +60,8 @@ function AccountInformation() {
                     <div className='grid gap-8 m-4 lg:grid-cols-1'>
                         <div className=''>
                         <div className='text-start text-[#515184]'>
-                                <label htmlFor="" className='font-bold'>Description</label>
-                                <textarea className='w-full p-3 border-2 border-slate-200 rounded-md focus:outline-none focus:border-[#05f] text-[15px] font-thin min-h-28 bg-[#f5f5f5] max-h-28' placeholder='write your message....' />
+                                <label htmlFor="message" className='font-bold'>Description</label>
+                                <textarea id='message' className='w-full p-3 border-2 border-slate-200 rounded-md focus:outline-none focus:border-[#05f] text-[15px] font-thin min-h-28 bg-[#f5f5f5] max-h-28' placeholder='write your message....' />
                             </div>  
                         </div>
                     </div>

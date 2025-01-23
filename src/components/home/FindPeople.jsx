@@ -56,7 +56,7 @@ const FindPeople = () => {
           </div>
         </div>
         {people.map((person, index) => {
-          return <PersonCard person={person} index={index} />;
+          return <PersonCard person={person} index={index} key={index}/>;
         })}
       </div>
       <div className="my-friends mt-5 pb-2 w-fit border rounded-lg shadow-lg">
@@ -69,7 +69,7 @@ const FindPeople = () => {
           </div>
         </div>
         {people.map((person, index) => {
-          return <PersonCard person={person} index={index} />;
+          return <PersonCard person={person} index={index} key={index}/>;
         })}
       </div>
     </>

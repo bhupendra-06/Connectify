@@ -110,8 +110,6 @@ const MyStory = ({ story, onStoryAdded }) => {
     if (story?.stories?.length > 0) {
       // console.log(story.stories[story.stories.length - 1]);
       setMyStoryBg(story.stories[story.stories.length - 1].postFile[0]);
-      console.log("My story", story);
-      console.log(story.stories[currentIndex].createdAt);
     }
   }, [story]);
 
