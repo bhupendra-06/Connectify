@@ -1,4 +1,5 @@
 import React from "react";
+import NoUser from '../../assets/no-user.jpg';
 
 const people = [
   {
@@ -39,9 +40,6 @@ const people = [
   }
 ];
 
-const noUser =
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA3W3oppN7sdVCsUWwwnPIn9pX6E6G2UW70w&s";
-
 // MAIN COMPONENT STARTS HERE
 const FindPeople = () => {
   return (
@@ -50,7 +48,7 @@ const FindPeople = () => {
         <div className="rounded-t-lg">
           <div className="p-5 flex justify-between text-base font-semibold  border-b">
             <h2 className="text-gray-800">Find People</h2>
-            <a href="#" className="text-blue-600">
+            <a href="#" className="text-primaryColor">
               See all
             </a>
           </div>
@@ -63,7 +61,7 @@ const FindPeople = () => {
         <div className="rounded-t-lg">
           <div className="p-5 flex justify-between text-base font-semibold  border-b">
             <h2 className="text-gray-800">My Friends</h2>
-            <a href="#" className="text-blue-600">
+            <a href="#" className="text-primaryColor">
               See all
             </a>
           </div>
@@ -85,7 +83,7 @@ const PersonCard = ({ person, index }) => {
         <div className="flex items-center justify-start gap-2">
           <img
             className="w-12 h-12 object-cover rounded-full"
-            src={person.profileImage || noUser}
+            src={person.profileImage || NoUser}
           />
           <div className="text-start ml-2">
             <h3 className="text-sm text-gray-800 font-bold">
@@ -102,7 +100,7 @@ const PersonCard = ({ person, index }) => {
          text-gray-500 text-xs font-semibold duration-200">
           Ignore
         </button>
-        <button className="border-2 border-blue-500 bg-blue-500 text-white text-xs font-bold duration-200">
+        <button className="border-2 border-primaryColor bg-primaryColor text-white text-xs font-bold duration-200">
           Follow
         </button>
       </div>

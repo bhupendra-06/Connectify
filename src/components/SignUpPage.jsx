@@ -134,7 +134,7 @@ const SignUpPage = () => {
               />
               <label htmlFor="password">Create Password</label>
             </div>
-            <div className="mt-10 px-5 py-3 w-full text-center font-bold text-white bg-blue-600 rounded-2xl hover:cursor-pointer">
+            <div className="mt-10 px-5 py-3 w-full text-center font-bold text-white bg-primaryColor rounded-2xl hover:cursor-pointer">
               <button type="submit">Sign Up</button>
             </div>
             <div className="remember">

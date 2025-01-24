@@ -83,7 +83,7 @@ function DefaultSettings() {
               <div className="inline-block p-[10px]  rounded-full bg-gradient-to-r from-[#0575e6] to-[#021b79] text-white font-bold">
                 <LuHome className="font-bold" size={25} />
               </div>
-              <div className="p-2  font-bold hover:text-[#0055ff]">
+              <div className="p-2  font-bold hover:text-primaryColor">
                 Account Information
               </div>
               <PiCaretRightThin
@@ -96,7 +96,7 @@ function DefaultSettings() {
               <div className="inline-block  p-[10px] rounded-full  bg-gradient-to-r from-[#f2994a] to-[#f2c94c] text-white font-bold">
                 <GrLocation className="font-bold" size={25} />
               </div>
-              <div className="p-2  font-bold hover:text-[#0055ff]">
+              <div className="p-2  font-bold hover:text-primaryColor">
                 Saved Address
               </div>
               <PiCaretRightThin
@@ -109,7 +109,7 @@ function DefaultSettings() {
               <div className="inline-block  p-[10px]  rounded-full bg-gradient-to-r from-[#e44d26] to-[#F16550] text-white font-bold">
                 <PiGlobeSimpleBold className="font-bold" size={25} />
               </div>
-              <div className="p-2  font-bold hover:text-[#0055ff]">
+              <div className="p-2  font-bold hover:text-primaryColor">
                 Social Account
               </div>
               <PiCaretRightThin
@@ -128,7 +128,7 @@ function DefaultSettings() {
               <div className="inline-block p-[10px]  rounded-full bg-gradient-to-r from-[#ee0979] to-[#ff6a00] text-white font-bold">
                 <RiAccountCircleLine className="font-bold" size={25} />
               </div>
-              <div className="p-2  font-bold hover:text-[#0055ff]">
+              <div className="p-2  font-bold hover:text-primaryColor">
                 Account Details
               </div>
               <PiCaretRightThin
@@ -138,10 +138,10 @@ function DefaultSettings() {
             </div>
             <div className="h-px w-full bg-slate-300"></div>
             <div className="flex relative">
-              <div className="inline-block  p-[10px] rounded-full bg-gradient-to-r from-[#05f] to-[#09f] text-white font-bold">
+              <div className="inline-block  p-[10px] rounded-full bg-gradient-to-r from-primaryColor to-[#09f] text-white font-bold">
                 <RiLockPasswordLine className="font-bold" size={25} />
               </div>
-              <div className="p-2  font-bold hover:text-[#0055ff]">
+              <div className="p-2  font-bold hover:text-primaryColor">
                 Passwords
               </div>
               <PiCaretRightThin
@@ -160,7 +160,7 @@ function DefaultSettings() {
               <div className="inline-block p-[10px]  rounded-full bg-gradient-to-r from-[#f2994a] to-[#f2c94c] text-white font-bold">
                 <FaRegBell className="font-bold" size={25} />
               </div>
-              <div className="p-2  font-bold hover:text-[#0055ff]">
+              <div className="p-2  font-bold hover:text-primaryColor">
                 Notification
               </div>
               <PiCaretRightThin
@@ -173,7 +173,7 @@ function DefaultSettings() {
               <div className="inline-block  p-[10px] rounded-full bg-gradient-to-r from-[#0575e6] to-[#021b79] text-white font-bold">
                 <FiHelpCircle className="font-bold" size={25} />
               </div>
-              <div className="p-2  font-bold hover:text-[#0055ff]">Help</div>
+              <div className="p-2  font-bold hover:text-primaryColor">Help</div>
               <PiCaretRightThin
                 size={22}
                 className="text-[#596067] absolute right-0 top-3"
@@ -187,7 +187,7 @@ function DefaultSettings() {
               <div className="inline-block  p-[10px]  rounded-full bg-gradient-to-r from-[#e44d26] to-[#F16550] text-white font-bold">
                 <TbLogout className="font-bold" size={25} />
               </div>
-              <div className="p-2  font-bold hover:text-[#0055ff]">Logout</div>
+              <div className="p-2  font-bold hover:text-primaryColor">Logout</div>
               <PiCaretRightThin
                 size={22}
                 className="text-[#596067] absolute right-0 top-3"

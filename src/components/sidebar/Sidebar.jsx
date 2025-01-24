@@ -30,7 +30,7 @@ function Sidebar({isVisible}) {
                 <div className="inline-block p-[10px]  rounded-full bg-gradient-to-r from-[#0575e6] to-[#021b79] text-white font-bold">
                   <PiTelevisionSimpleBold className="font-bold" size={25} />
                 </div>
-                <div className="p-2 text-[#888] font-bold hover:text-[#0055ff]">
+                <div className="p-2 text-[#888] font-bold hover:text-primaryColor">
                   Newsfeed
                 </div>
               </div>
@@ -38,7 +38,7 @@ function Sidebar({isVisible}) {
                 <div className="inline-block  p-[10px] rounded-full bg-gradient-to-r from-[#e44d26] to-[#F16550] text-white font-bold">
                   <LuAward className="font-bold" size={25} />
                 </div>
-                <div className="p-2 text-[#888] font-bold hover:text-[#0055ff]">
+                <div className="p-2 text-[#888] font-bold hover:text-primaryColor">
                   Badges
                 </div>
               </div>
@@ -46,7 +46,7 @@ function Sidebar({isVisible}) {
                 <div className="inline-block  p-[10px]  rounded-full bg-gradient-to-r from-[#f2994a] to-[#f2c94c] text-white font-bold">
                   <PiGlobeSimpleBold className="font-bold" size={25} />
                 </div>
-                <div className="p-2 text-[#888] font-bold hover:text-[#0055ff]">
+                <div className="p-2 text-[#888] font-bold hover:text-primaryColor">
                   Explore Stories
                 </div>
               </div>
@@ -62,15 +62,15 @@ function Sidebar({isVisible}) {
                     <path d="m422-232 207-248H469l29-227-185 267h139l-30 208ZM320-80l40-280H160l360-520h80l-40 320h240L400-80h-80Zm151-390Z" />
                   </svg>
                 </div>
-                <div className="p-2 text-[#888] font-bold hover:text-[#0055ff]">
+                <div className="p-2 text-[#888] font-bold hover:text-primaryColor">
                   Popular Groups
                 </div>
               </div>
               <div className="flex mb-3">
-                <div className="inline-block  p-[10px]  rounded-full bg-gradient-to-r from-[#05f] to-[#09f] text-white font-bold">
+                <div className="inline-block  p-[10px]  rounded-full bg-gradient-to-r from-primaryColor to-[#09f] text-white font-bold">
                   <GoPerson className="font-bold" size={25} />
                 </div>
-                <div className="p-2 text-[#888] font-bold hover:text-[#0055ff]">
+                <div className="p-2 text-[#888] font-bold hover:text-primaryColor">
                   Author Profile
                 </div>
               </div>
@@ -83,34 +83,34 @@ function Sidebar({isVisible}) {
             </div>
             <div className="ml-4 flex flex-col gap-3">
               <div className="flex ">
-                <div className="inline-block p-[10px]  rounded-full  text-[#0055ff] font-bold">
+                <div className="inline-block p-[10px]  rounded-full  text-primaryColor font-bold">
                   <MdOutlineMailOutline className="font-bold" size={30} />
                 </div>
-                <div className="p-3 text-[#888] font-bold hover:text-[#0055ff]">
+                <div className="p-3 text-[#888] font-bold hover:text-primaryColor">
                   Email Box
                 </div>
               </div>
               <div className="flex ">
-                <div className="inline-block p-[10px]  rounded-full  text-[#0055ff] font-bold">
+                <div className="inline-block p-[10px]  rounded-full  text-primaryColor font-bold">
                   <LuHome className="font-bold" size={30} />
                 </div>
-                <div className="p-3 text-[#888] font-bold hover:text-[#0055ff]">
+                <div className="p-3 text-[#888] font-bold hover:text-primaryColor">
                   Near Hotel
                 </div>
               </div>
               <div className="flex ">
-                <div className="inline-block p-[10px]  rounded-full  text-[#0055ff] font-bold">
+                <div className="inline-block p-[10px]  rounded-full  text-primaryColor font-bold">
                   <GrLocation className="font-bold" size={33} />
                 </div>
-                <div className="p-3 text-[#888] font-bold hover:text-[#0055ff]">
+                <div className="p-3 text-[#888] font-bold hover:text-primaryColor">
                   Latest Event
                 </div>
               </div>
               <div className="flex mb-3">
-                <div className="inline-block p-[10px]  rounded-full  text-[#0055ff] font-bold">
+                <div className="inline-block p-[10px]  rounded-full  text-primaryColor font-bold">
                   <FiYoutube className="font-bold" size={30} />
                 </div>
-                <div className="p-3 text-[#888] font-bold hover:text-[#0055ff]">
+                <div className="p-3 text-[#888] font-bold hover:text-primaryColor">
                   Live Stream
                 </div>
               </div>
@@ -126,7 +126,7 @@ function Sidebar({isVisible}) {
                 <div className="inline-block p-[10px]  rounded-full  text-[#888] font-bold">
                   <IoSettingsOutline className="font-bold" size={25} />
                 </div>
-                <div className="p-3 text-[#888] font-bold hover:text-[#0055ff]">
+                <div className="p-3 text-[#888] font-bold hover:text-primaryColor">
                   Setting
                 </div>
               </div>
@@ -134,7 +134,7 @@ function Sidebar({isVisible}) {
                 <div className="inline-block p-[10px]  rounded-full  text-[#888] font-bold">
                   <MdOutlineWatchLater className="font-bold" size={25} />
                 </div>
-                <div className="p-3 text-[#888] font-bold hover:text-[#0055ff]">
+                <div className="p-3 text-[#888] font-bold hover:text-primaryColor">
                   Analysis
                 </div>
               </div>
@@ -142,7 +142,7 @@ function Sidebar({isVisible}) {
                 <div className="inline-block p-[10px]  rounded-full  text-[#888] font-bold">
                   <MdOutlineChatBubbleOutline className="font-bold" size={25} />
                 </div>
-                <div className="p-3 text-[#888] font-bold hover:text-[#0055ff]">
+                <div className="p-3 text-[#888] font-bold hover:text-primaryColor">
                   Chat
                 </div>
               </div>

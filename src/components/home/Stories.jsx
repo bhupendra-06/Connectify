@@ -6,11 +6,10 @@ import StoryShimmer from "./StoryShimmer";
 import { FaArrowLeft } from "react-icons/fa";
 import { IoSendOutline } from "react-icons/io5";
 import moment from "moment"; // for date formatting
-import { use } from "react";
+import NoUser from "../../assets/no-user.jpg";
 
 const yourStory = {
   name: "Add Story",
-
 };
 
 // STORIES COMPONENT STARTS HERE
@@ -102,9 +101,9 @@ const MyStory = ({ story, onStoryAdded }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [myStoryBg, setMyStoryBg] = useState("");
   const storyRef = useRef();
-  const [currentIndex, setCurrentIndex] = useState(0); // Tracking current image index
-  const NoUser =
-    "https://i.pinimg.com/736x/16/18/20/1618201e616f4a40928c403f222d7562.jpg";
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Tracking current image index
 
   useEffect(() => {
     if (story?.stories?.length > 0) {
@@ -181,9 +180,10 @@ const MyStory = ({ story, onStoryAdded }) => {
       setCurrentIndex(currentIndex - 1);
     }
   };
-  const formattedDate = story.stories && story.stories[currentIndex] ?
-  moment(story.stories[currentIndex].createdAt).fromNow() :
-  "few seconds ago";
+  const formattedDate =
+    story.stories && story.stories[currentIndex]
+      ? moment(story.stories[currentIndex].createdAt).fromNow()
+      : "few seconds ago";
   // const formattedDate = "few seconds ago";
 
   return (

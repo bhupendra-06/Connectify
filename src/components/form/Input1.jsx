@@ -5,7 +5,7 @@ function Input1({inputLabel, inputType}) {
     <div className=''>
         <div className='text-start text-[#515184] font-semibold '>
                 <label htmlFor="" className=''>{inputLabel}</label>
-                <input type={inputType} className='w-full p-3 border-2 border-slate-200 rounded-md focus:outline-none focus:border-[#05f] text-[15px] font-thin'/>
+                <input type={inputType} className='w-full p-3 border-2 border-slate-200 rounded-md focus:outline-none focus:border-primaryColor text-[15px] font-thin'/>
         </div>
     </div>
     )

@@ -50,7 +50,7 @@ const Header = () => {
         {/* Logo Section */}
         <NavLink
           to="/"
-          className="logo text-2xl md:text-3xl font-bold text-blue-600 select-none"
+          className="logo text-2xl md:text-3xl font-bold text-primaryColor select-none"
         >
           Connectify.
         </NavLink>
@@ -71,48 +71,48 @@ const Header = () => {
 
             {/* Navigation Icons */}
             <ul className="hidden xl:flex space-x-4 ml-6">
-              <li className="icon-gola text-blue-600 bg-[#d2e3ff] rounded-full">
+              <li className="icon-gola text-primaryColor bg-[#d2e3ff] rounded-full">
                 <NavLink to="/">
-                  <LuHome className="icon text-blue-600" />
+                  <LuHome className="icon m-2 text-primaryColor" />
                 </NavLink>
               </li>
               <li className="icon-gola">
                 <NavLink to="/login">
-                  <MdOutlineElectricBolt className="icon" />
+                  <MdOutlineElectricBolt className="icon m-2" />
                 </NavLink>
               </li>
               <li className="icon-gola">
                 <NavLink to="/signup">
-                  <LuVideo className="icon" />
+                  <LuVideo className="icon m-2" />
                 </NavLink>
               </li>
               <li className="icon-gola">
                 <NavLink>
-                  <HiUserGroup className="icon" />
+                  <HiUserGroup className="icon m-2" />
                 </NavLink>
               </li>
               <li className="icon-gola">
                 <NavLink>
-                  <FiLogOut className="icon" />
+                  <FiLogOut className="icon m-2" />
                 </NavLink>
               </li>
             </ul>
           </div>
 
-          {/* User Actions Section */}
-          <ul className="sm:px-2 flex items-center space-x-4">
+          {/* User Actions Section on right side*/}
+          <ul className="sm:px-2 flex items-center sm:space-x-4">
             <li>
               <NavLink>
-                <LuBell className="icon text-blue-600 hidden sm:inline-block" />
+                <LuBell className="icon text-primaryColor hidden sm:inline-block" />
               </NavLink>
             </li>
             <li>
               <NavLink>
-                <BiComment className="icon text-blue-600 hidden sm:inline-block" />
+                <BiComment className="icon text-primaryColor hidden sm:inline-block" />
               </NavLink>
             </li>
             <li onClick={goToSettings} className="cursor-pointer">
-              <SlSettings className="icon gsapRotate text-blue-600" />
+              <SlSettings className="icon gsapRotate text-primaryColor" />
             </li>
             <li onClick={() => navigate(`/profile/${MyOwnerId}`)}>
               {avatar ? (

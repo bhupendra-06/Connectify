@@ -5,9 +5,8 @@ import { SlSettings } from "react-icons/sl";
 import { ClipLoader } from "react-spinners";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import NoUser from '../../assets/no-user.jpg';
 
-const NoUser =
-  "https://i.pinimg.com/736x/16/18/20/1618201e616f4a40928c403f222d7562.jpg";
 
 const UserProfile = () => {
   const [myProfile, setMyProfile] = useState(null);
@@ -146,8 +145,8 @@ const UserProfile = () => {
                     isFollowing
                       ? "text-black bg-white border-2" // Following style
                       : myProfile.data.isFollowedBy
-                      ? "text-white bg-blue-500 hover:bg-blue-600" // Follow back style
-                      : "text-white bg-blue-500 hover:bg-blue-600" // Follow style
+                      ? "text-white bg-primaryColor hover:bg-primaryColor" // Follow back style
+                      : "text-white bg-primaryColor hover:bg-primaryColor" // Follow style
                   }`}
                 >
                   {loading ? (

@@ -11,13 +11,11 @@ import moment from "moment"; // for date formatting
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import NoUser from '../../assets/no-user.jpg';
 
 
 import ImageCarousel from "./ImageCarousel";
 // import Cookies from "js-cookie";
-
-const NoUser =
-  "https://i.pinimg.com/736x/16/18/20/1618201e616f4a40928c403f222d7562.jpg";
 
 const UserPost = ({ post, onPostAdded }) => {
 
@@ -174,7 +172,7 @@ const UserPost = ({ post, onPostAdded }) => {
                   : post.description.slice(0, 160) + ".."}{" "}
                 <span
                   onClick={seeMoreFunction}
-                  className="text-blue-600 font-semibold cursor-pointer"
+                  className="text-primaryColor font-semibold cursor-pointer"
                 >
                   {see}
                 </span>
@@ -216,9 +214,9 @@ const UserPost = ({ post, onPostAdded }) => {
               onClick={handleLikeClick}
             >
               {liked ? (
-                <FaThumbsUp className="p-1 mx-1 text-xl text-white bg-blue-500 rounded-full" />
+                <FaThumbsUp className="p-1 mx-1 text-xl text-white bg-primaryColor rounded-full" />
               ) : (
-                <FaRegThumbsUp className="p-1 mx-1 text-xl text-white bg-blue-500 rounded-full" />
+                <FaRegThumbsUp className="p-1 mx-1 text-xl text-white bg-primaryColor rounded-full" />
               )}
 
 

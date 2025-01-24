@@ -15,7 +15,7 @@ function AccountInformation() {
 
     return (
         <div className='mx-2 md:mx-auto max-w-[800px] bg-white  rounded-md my-4'>
-            <div className='bg-[#05f] align-left rounded-md'>
+            <div className='bg-primaryColor align-left rounded-md'>
                 <div className='flex p-7 text-white '>
                     <Link onClick={()=>{navigate(-1)}}><GoArrowLeft className='inline-block pb-1' size={30}/></Link>
                     <h4 className='pl-4 text-xl '>Account Details</h4>
@@ -49,7 +49,7 @@ function AccountInformation() {
                     <div className='grid gap-8 m-4 lg:grid-cols-1 mt-8 '>
                         <div className=''>
                             <div className='text-start text-[#515184] font-semibold relative h-[140px] w-full'>
-                                <input id="file" type="file" className='w-full border-2 border-dashed border-slate-300 rounded-md focus:outline-none focus:border-[#05f] text-[15px] font-thin h-full p-5'/>
+                                <input id="file" type="file" className='w-full border-2 border-dashed border-slate-300 rounded-md focus:outline-none focus:border-primaryColor text-[15px] font-thin h-full p-5'/>
                                 <label htmlFor="file" className='absolute left-1 top-1 bg-white  z-10 h-[95%] w-[98%] text-center pt-7 cursor-pointer' >
                                     <IoCloudDownloadOutline className='m-auto ' size={50}/>
                                     <p>Drag and Drop or click to replace </p>
@@ -61,12 +61,12 @@ function AccountInformation() {
                         <div className=''>
                         <div className='text-start text-[#515184]'>
                                 <label htmlFor="message" className='font-bold'>Description</label>
-                                <textarea id='message' className='w-full p-3 border-2 border-slate-200 rounded-md focus:outline-none focus:border-[#05f] text-[15px] font-thin min-h-28 bg-[#f5f5f5] max-h-28' placeholder='write your message....' />
+                                <textarea id='message' className='w-full p-3 border-2 border-slate-200 rounded-md focus:outline-none focus:border-primaryColor text-[15px] font-thin min-h-28 bg-[#f5f5f5] max-h-28' placeholder='write your message....' />
                             </div>  
                         </div>
                     </div>
                     <div className='grid gap-8 m-4 w-44'>
-                        <button type='submit' className='bg-[#05f] text-white py-4 font-bold rounded-md'>
+                        <button type='submit' className='bg-primaryColor text-white py-4 font-bold rounded-md'>
                             Save
                         </button>
                     </div>

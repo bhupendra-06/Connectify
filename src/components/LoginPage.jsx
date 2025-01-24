@@ -101,7 +101,7 @@ const LoginPage = () => {
             />
             <label htmlFor="password">Password</label>
           </div>
-          <div className="mt-10 px-5 py-3 w-full text-center font-bold text-white bg-blue-600 rounded-2xl">
+          <div className="mt-10 px-5 py-3 w-full text-center font-bold text-white bg-primaryColor rounded-2xl">
             {loading ? (
               <ClipLoader size={16} color="white" className="mx-2" />
             ) : (
@@ -115,7 +115,7 @@ const LoginPage = () => {
               <input type="checkbox" className="cursor-pointer" />
               <label htmlFor="checkbox"> Remember me</label>
             </div>
-            <span className="hover:text-blue-600">Need help?</span>
+            <span className="hover:text-primaryColor">Need help?</span>
           </div>
         </form>
         <p>

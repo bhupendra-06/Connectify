@@ -5,14 +5,13 @@ import { MdDelete } from "react-icons/md";
 import { IoSendOutline } from "react-icons/io5";
 import moment from "moment"; // for date formatting
 import { useNavigate } from "react-router-dom";
+import NoUser from '../../assets/no-user.jpg';
 
 const SingleStory = ({ story, index, onStoryAdded }) => {
   const [showStory, setShowStory] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
   const storyRef = useRef();
   const navigate = useNavigate();
-  const NoUser =
-    "https://i.pinimg.com/736x/16/18/20/1618201e616f4a40928c403f222d7562.jpg";
 
   const storyStyle = {
     backgroundImage: `url(${

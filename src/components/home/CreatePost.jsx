@@ -99,7 +99,7 @@ const CreatePost = ({ onPostAdded }) => {
     >
       <div className="flex items-center">
         <div className="w-10 h-10 text-xl font-bold bg-[#eee] grid place-items-center rounded-full">
-          <HiOutlinePencilAlt className="text-2xl text-blue-600" />
+          <HiOutlinePencilAlt className="text-2xl text-primaryColor" />
         </div>
         <h4 className="mx-2 text-sm text-gray-400 font-bold">Create Post</h4>
       </div>
@@ -157,7 +157,7 @@ const CreatePost = ({ onPostAdded }) => {
         />
         <button
           type="submit"
-          className="px-3 py-0.5 rounded-sm border-2 border-blue-500 bg-blue-500 text-white text-base font-bold hover:scale-105 duration-200"
+          className="px-3 py-0.5 rounded-sm border-2 border-primaryColor bg-primaryColor text-white text-base font-bold hover:scale-105 duration-200"
         >
           {loading ? (
             <ClipLoader size={15} color="white" className="mx-2" />

@@ -128,7 +128,7 @@ const CreateStoryForm = ({ onStoryAdded }) => {
                       accept="image/*"
                       ref={imageRef}
                       onChange={handleImageChange}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none hidden"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primaryColor focus:outline-none hidden"
                     />
                   </div>
                   <div className="mb-4">
@@ -144,7 +144,7 @@ const CreateStoryForm = ({ onStoryAdded }) => {
                       onChange={(e) => setCaption(e.target.value)}
                       placeholder="Write a caption..."
                       rows="3"
-                      className="resize-none w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                      className="resize-none w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primaryColor focus:outline-none"
                     ></textarea>
                   </div>
                   <button
@@ -152,8 +152,8 @@ const CreateStoryForm = ({ onStoryAdded }) => {
                     disabled={loading}
                     className={`w-full text-white font-medium py-2 px-4 rounded-lg ${
                       loading
-                        ? "bg-blue-400 cursor-not-allowed"
-                        : "bg-blue-600 hover:bg-blue-700"
+                        ? "bg-primaryColor cursor-not-allowed"
+                        : "bg-primaryColor hover:bg-primaryColor"
                     } focus:outline-none`}
                   >
                     {loading ? "Posting..." : "Post Story"}
@@ -168,7 +168,7 @@ const CreateStoryForm = ({ onStoryAdded }) => {
       <button
         type="button"
         onClick={handleButtonClick}
-        className="mx-auto text-center inline-flex w-auto justify-center rounded-full bg-blue-600 px-3 py-1 text-2xl font-medium text-white focus:outline-none z-20"
+        className="mx-auto text-center inline-flex w-auto justify-center rounded-full bg-primaryColor px-3 py-1 text-2xl font-medium text-white focus:outline-none z-20"
       >
         +
       </button>

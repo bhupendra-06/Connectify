@@ -10,7 +10,11 @@ export default {
     //   // => @media (min-width: 640px) { ... }
     // },
 
-    extend: {},
+    extend: {
+      colors: {
+        primaryColor: '#578E7E', // Example custom color
+      },
+    },
   },
   plugins: [],
 }
