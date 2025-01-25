@@ -12,7 +12,7 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import NoUser from '../../assets/no-user.jpg';
-
+import { BsHeart, BsHeartFill } from "react-icons/bs";
 
 import ImageCarousel from "./ImageCarousel";
 // import Cookies from "js-cookie";
@@ -155,12 +155,12 @@ const UserPost = ({ post, onPostAdded }) => {
               </h3>
             </div>
           </div>
-          <button
+          {/* <button
             className="w-10 h-10 text-xl text-center font-bold bg-[#eee] rounded-full flex justify-center items-center"
             onClick={deletePost}
           >
             <MdDelete className="text-red-500" />
-          </button>
+          </button> */}
         </div>
 
         {post.description && (
@@ -214,9 +214,10 @@ const UserPost = ({ post, onPostAdded }) => {
               onClick={handleLikeClick}
             >
               {liked ? (
-                <FaThumbsUp className="p-1 mx-1 text-xl text-white bg-primaryColor rounded-full" />
+                // <FaThumbsUp className="p-1 mx-1 text-3xl" />
+                <BsHeartFill className="p-1 mx-1 text-3xl text-red-700"  />
               ) : (
-                <FaRegThumbsUp className="p-1 mx-1 text-xl text-white bg-primaryColor rounded-full" />
+                <BsHeart className="p-1 mx-1 text-3xl" />
               )}
 
 
@@ -226,7 +227,7 @@ const UserPost = ({ post, onPostAdded }) => {
 
             </div>
             <div className="flex items-center text-md">
-              <FaRegComment className="mx-1" />
+              <FaRegComment className="mx-1 text-xl" />
               <span>{`${post.comments || ""} Comments`}</span>
             </div>
           </div>
