@@ -5,13 +5,16 @@ import { MdDelete } from "react-icons/md";
 import { IoSendOutline } from "react-icons/io5";
 import moment from "moment"; // for date formatting
 import { useNavigate } from "react-router-dom";
-import NoUser from '../../assets/no-user.jpg';
+import NoUser from "../../assets/no-user.jpg";
 
 const SingleStory = ({ story, index, onStoryAdded }) => {
   const [showStory, setShowStory] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
   const storyRef = useRef();
   const navigate = useNavigate();
+  const intervalRef = useRef(null);
+  const timeoutRef = useRef(null);
+  const [duration, setDuration] = useState(0); // Track total duration dynamically
 
   const storyStyle = {
     backgroundImage: `url(${
@@ -23,100 +26,128 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
     setShowOptions(!showOptions);
   };
 
-  const deleteStory = async () => {
-    try {
-      const token = Cookies.get("accessToken");
-      if (!token) {
-        throw new Error("No access token found in cookies");
-      }
+  // const deleteStory = async () => {
+  //   try {
+  //     const token = Cookies.get("accessToken");
+  //     if (!token) {
+  //       throw new Error("No access token found in cookies");
+  //     }
 
-      const response = await fetch(
-        `https://connectify-backend-2uq0.onrender.com/api/v1/story/delete-story/${story.storyId}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+  //     const response = await fetch(
+  //       `https://connectify-backend-2uq0.onrender.com/api/v1/story/delete-story/${story.storyId}`,
+  //       {
+  //         method: "DELETE",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
 
-      if (!response.ok) {
-        throw new Error("Failed to delete story: " + response.statusText);
-      }
+  //     if (!response.ok) {
+  //       throw new Error("Failed to delete story: " + response.statusText);
+  //     }
 
-      alert("Story deleted successfully!");
-      onStoryAdded();
-    } catch (err) {
-      console.error("Error deleting story:", err);
-      alert("Failed to delete the story.");
-    }
-  };
+  //     alert("Story deleted successfully!");
+  //     onStoryAdded();
+  //   } catch (err) {
+  //     console.error("Error deleting story:", err);
+  //     alert("Failed to delete the story.");
+  //   }
+  // };
 
   const biggerStory = () => {
     setShowStory(true); // Show the story view
 
-    // setTimeout to hide the story view after 6 seconds
-    setTimeout(() => {
-      setShowStory(false); // Hide the story view
-      setCurrentIndex(0); // Reset the index
-    }, 9000);
+    // Clear any existing interval and timeout before starting new ones
+    clearInterval(intervalRef.current);
+    clearTimeout(timeoutRef.current);
+
+    // Interval to update currentIndex
+    intervalRef.current = setInterval(() => {
+      setCurrentIndex((prevIndex) => {
+        if (prevIndex < story.stories.length - 1) {
+          return prevIndex + 1; // Increment index
+        } else {
+          clearInterval(intervalRef.current); // Stop interval at the last story
+          return prevIndex; // Keep the current index
+        }
+      });
+      setDuration((prev) => prev + 3000);
+    }, 3000); // Update every 3 seconds
+  };
+
+  const clearTimers = () => {
+    clearTimeout(timeoutRef.current);
+    clearInterval(intervalRef.current);
   };
 
   const storyBack = () => {
-    // if (document.exitFullscreen) {
-    //   document.exitFullscreen();
-    // } else if (document.webkitExitFullscreen) {
-    //   document.webkitExitFullscreen();
-    // } else if (document.msExitFullscreen) {
-    //   document.msExitFullscreen();
-    // }
+    clearTimers();
     setShowStory(false);
     setCurrentIndex(0);
+    setDuration(0);
+    console.log("story back runs");
   };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        !event.target.closest(".options-menu") &&
-        !event.target.closest(".options-button")
-      ) {
-        setShowOptions(false);
-      }
-    };
+    console.log(duration);
+    if (duration >= 3000 * story.stories.length) {
+      storyBack();
+    }
+  }, [duration]); // Depend on `duration` updates
 
-    document.addEventListener("mousedown", handleClickOutside);
+  // Cleanup on component unmount to avoid memory leaks
+  useEffect(() => {
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      clearTimeout(timeoutRef.current);
+      clearInterval(intervalRef.current);
     };
   }, []);
+
+  // FOR DELETE BUTTON ON STORY
+  // useEffect(() => {
+  //   const handleClickOutside = (event) => {
+  //     if (
+  //       !event.target.closest(".options-menu") &&
+  //       !event.target.closest(".options-button")
+  //     ) {
+  //       setShowOptions(false);
+  //     }
+  //   };
+
+  //   document.addEventListener("mousedown", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, []);
 
   //FOR STORY OPEN
   const [currentIndex, setCurrentIndex] = useState(0); // Tracking current image index
 
   const nextImage = () => {
-    if (currentIndex < story.stories.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    }
+    setCurrentIndex((prev) => Math.min(prev + 1, story.stories.length - 1));
+    setDuration((prev) => prev + 3000);
   };
 
   const prevImage = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-    }
+    setCurrentIndex((prev) => Math.max(prev - 1, 0));
+    setDuration((prev) => Math.max(prev - 3000, 0));
   };
 
-  const formattedDate = moment(story.stories[currentIndex].createdAt).fromNow();
+  const formattedDate = moment(
+    story.stories[currentIndex]?.createdAt
+  ).fromNow();
 
   const openUserProfile = () => {
     navigate(`/profile/${story.storyOwner}`);
-  }
+  };
 
   // CHECK OWNER ID FOR STORY
   const MyOwnerId = Cookies.get("MyOwnerId");
   // console.log("MyOwnerId:", MyOwnerId);
 
-  if (story.storyOwner === MyOwnerId) return "";
+  if (story.storyOwner === MyOwnerId) return null;
 
   return (
     <>
@@ -133,10 +164,7 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
               <img
                 loading="lazy"
                 className="rounded-full w-10 h-10 object-cover"
-                src={
-                  story.avatar ||
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA3W3oppN7sdVCsUWwwnPIn9pX6E6G2UW70w&s"
-                }
+                src={story.avatar || NoUser}
               />
             </figure>
             <h4 className="max-w-20 overflow-hidden text-xs font-bold text-white text-center">
@@ -182,8 +210,18 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
           </div>
           {/* Story Images */}
           <figure className="p-1 pt-5 mx-auto h-[calc(93vh)] w-screen flex items-start justify-center">
+            {/* Loader on top  */}
+            <div className="absolute top-0 left-0 w-full h-1.5 sm:h-1 flex z-10">
+              <div
+                className={`absolute h-full bg-blue-500 animate-progress z-10`}
+                style={{ animationDuration: `${3 * story.stories.length}s` }} // Dynamic duration
+              ></div>
+              {story.stories.map(() => (
+                <div className="w-full h-1.5 sm:h-1 bg-gray-500/40 border-x border-x-gray-400 z-20"></div>
+              ))}
+            </div>
             <img
-              src={story.stories[currentIndex].postFile[0]}
+              src={story.stories[currentIndex]?.postFile[0]}
               className="h-[92%] sm:h-[98%] aspect-[6/10] max-w-screen-sm object-cover object-center mb-4"
               alt={`Story ${currentIndex + 1}`}
               loading="lazy"

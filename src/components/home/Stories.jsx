@@ -152,14 +152,14 @@ const MyStory = ({ story, onStoryAdded }) => {
   const biggerStory = () => {
     setShowStory(true); // Show the story view
 
-    // setTimeout to hide the story view after 6 seconds
+    // setTimeout to hide the story view after few seconds
     setTimeout(() => {
       setShowStory(false); // Hide the story view
       setCurrentIndex(0); // Reset the index
       if (!showStory) {
         clearTimeout();
       }
-    }, 9000);
+    }, 5000);
   };
 
   const storyBack = () => {
@@ -210,6 +210,11 @@ const MyStory = ({ story, onStoryAdded }) => {
           ref={storyRef}
           className={`w-full h-screen overflow-y-hidden bg-black absolute top-0 left-0 cursor-pointer z-50`}
         >
+          {/* Loader on top  */}
+          <div className="absolute top-0 left-0 w-full flex z-10">
+            <span className="w-full h-2 bg-red-300 z-20"></span>
+            <span className="w-full h-2 bg-red-300 z-20"></span>
+          </div>
           {/* USER PROFILE */}
           <div className="absolute top-0 py-2 left-0 w-full h-full  bg-gradient-to-b from-[#000000c1] from-0% to-transparent to-10%">
             <div className="flex items-center justify-start">

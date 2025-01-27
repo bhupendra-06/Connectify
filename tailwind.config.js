@@ -14,6 +14,18 @@ export default {
       colors: {
         primaryColor: '#578E7E', // Example custom color
       },
+      animation: {
+        progress: 'progress linear',
+      },
+      keyframes: {
+        progress: {
+          '0%': { width: '0%' },
+          '100%': { width: '100%' },
+        },
+      },
+      duration: {
+        9000: "9000ms", // Custom duration class
+      },
     },
   },
   plugins: [],
