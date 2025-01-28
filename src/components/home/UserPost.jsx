@@ -191,7 +191,7 @@ const UserPost = ({ post, onPostAdded }) => {
                   post.postFile.length === 1
                     ? "max-h-96 object-contain border"
                     : "grid-cols-3 h-full object-cover"
-                } rounded-md overflow-hidden`}
+                } rounded-md overflow-hidden cursor-pointer`}
               >
                 <img
                   onClick={() => displayPostImages(picIndex)}
