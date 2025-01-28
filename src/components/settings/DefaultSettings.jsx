@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { GoArrowLeft } from "react-icons/go";
-import { LuHome } from "react-icons/lu";
+import { BiHomeAlt } from "react-icons/bi";
 import { PiGlobeSimpleBold } from "react-icons/pi";
 import { GrLocation } from "react-icons/gr";
 import { RiLockPasswordLine } from "react-icons/ri";
@@ -81,7 +81,7 @@ function DefaultSettings() {
               className="flex relative"
             >
               <div className="inline-block p-[10px]  rounded-full bg-gradient-to-r from-[#0575e6] to-[#021b79] text-white font-bold">
-                <LuHome className="font-bold" size={25} />
+                <BiHomeAlt className="font-bold" size={25} />
               </div>
               <div className="p-2  font-bold hover:text-primaryColor">
                 Account Information

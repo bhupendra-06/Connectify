@@ -6,7 +6,6 @@ import { FiShare2 } from "react-icons/fi";
 // import { IoIosArrowBack } from "react-icons/io";
 // import { IoIosArrowForward } from "react-icons/io";
 // import { RxCrossCircled } from "react-icons/rx";
-import { MdDelete } from "react-icons/md";
 import moment from "moment"; // for date formatting
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
@@ -155,12 +154,6 @@ const UserPost = ({ post, onPostAdded }) => {
               </h3>
             </div>
           </div>
-          {/* <button
-            className="w-10 h-10 text-xl text-center font-bold bg-[#eee] rounded-full flex justify-center items-center"
-            onClick={deletePost}
-          >
-            <MdDelete className="text-red-500" />
-          </button> */}
         </div>
 
         {post.description && (
@@ -192,20 +185,33 @@ const UserPost = ({ post, onPostAdded }) => {
                 : "grid-cols-3"
               } gap-2 place-items-center`}
           >
-            {post.postFile.map((url, picIndex) => (
-              <img
-                onClick={() => displayPostImages(picIndex)}
-                key={url}
-                className={`${post.postFile.length == 1
-                  ? "max-h-96 object-contain border"
-                  : "grid-cols-3 h-full object-cover"
-                  } rounded-md `}
-                src={url}
-                loading="lazy"
-              />
+            {post.postFile.slice(0, 5).map((url, picIndex) => (
+              <div
+                className={`relative h-full ${
+                  post.postFile.length === 1
+                    ? "max-h-96 object-contain border"
+                    : "grid-cols-3 h-full object-cover"
+                } rounded-md overflow-hidden cursor-pointer`}
+              >
+                <img
+                  onClick={() => displayPostImages(picIndex)}
+                  src={url}
+                  loading="lazy"
+                  className={`${picIndex === 5 && post.postFile.length > 5 ? "opacity-50" : ""} w-full h-full object-cover`}
+                  alt={`Post image ${picIndex + 1}`}
+                />
+                {picIndex === 4 && post.postFile.length > 5 && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70 text-white text-3xl font-bold"
+                        onClick={() => displayPostImages(picIndex)}
+                  >
+                      +{post.postFile.length - 5}
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         )}
+
 
         <div className="mt-4 mx-1 flex justify-between">
           <div className="min-w-1/2 flex gap-4 justify-between">
@@ -269,18 +275,12 @@ const UserPost = ({ post, onPostAdded }) => {
       )} */}
 
       {postImages && (
-  <ImageCarousel
-    post={post}
-    currentIndex={currentIndex}
-    removePostImages={removePostImages}
-  />
-)}
-
-   
-
-
-
-
+      <ImageCarousel
+        post={post}
+        currentIndex={currentIndex}
+        removePostImages={removePostImages}
+      />
+      )}
     </div>
   );
 };
