@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Header.css";
 import { IoSearch } from "react-icons/io5";
-import { LuHome } from "react-icons/lu";
+import { BiHomeAlt } from "react-icons/bi";
 import { MdOutlineElectricBolt } from "react-icons/md";
 import { LuVideo } from "react-icons/lu";
 import { FiLogOut } from "react-icons/fi";
@@ -73,7 +73,7 @@ const Header = () => {
             <ul className="hidden xl:flex space-x-4 ml-6">
               <li className="icon-gola text-primaryColor bg-[#d2e3ff] rounded-full">
                 <NavLink to="/">
-                  <LuHome className="icon m-2 text-primaryColor" />
+                  <BiHomeAlt className="icon m-2 text-primaryColor" />
                 </NavLink>
               </li>
               <li className="icon-gola">

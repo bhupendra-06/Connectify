@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { PiGlobeSimpleBold } from "react-icons/pi";
 import { PiTelevisionSimpleBold } from "react-icons/pi";
-import { LuAward, LuHome } from "react-icons/lu";
+import { LuAward, } from "react-icons/lu";
+import { BiHomeAlt } from "react-icons/bi";
 import { GiElectric } from "react-icons/gi";
 import { GoPerson } from "react-icons/go";
 import { GrLocation } from "react-icons/gr";
@@ -92,7 +93,7 @@ function Sidebar({isVisible}) {
               </div>
               <div className="flex ">
                 <div className="inline-block p-[10px]  rounded-full  text-primaryColor font-bold">
-                  <LuHome className="font-bold" size={30} />
+                  <BiHomeAlt className="font-bold" size={30} />
                 </div>
                 <div className="p-3 text-[#888] font-bold hover:text-primaryColor">
                   Near Hotel
