@@ -10,11 +10,12 @@ import NoUser from "../../assets/no-user.jpg";
 const SingleStory = ({ story, index, onStoryAdded }) => {
   const [showStory, setShowStory] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
-  const storyRef = useRef();
   const navigate = useNavigate();
+  const storyRef = useRef();
   const intervalRef = useRef(null);
   const timeoutRef = useRef(null);
   const [duration, setDuration] = useState(0); // Track total duration dynamically
+  const [currentIndex, setCurrentIndex] = useState(0); // Tracking current image index
 
   const storyStyle = {
     backgroundImage: `url(${
@@ -73,8 +74,8 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
           return prevIndex; // Keep the current index
         }
       });
-      setDuration((prev) => prev + 3000);
-    }, 3000); // Update every 3 seconds
+      setDuration((prev) => prev + 4000);
+    }, 4000); // Update every 3 seconds
   };
 
   const clearTimers = () => {
@@ -87,12 +88,10 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
     setShowStory(false);
     setCurrentIndex(0);
     setDuration(0);
-    console.log("story back runs");
   };
 
   useEffect(() => {
-    console.log(duration);
-    if (duration >= 3000 * story.stories.length) {
+    if (duration >= 4000 * story.stories.length) {
       storyBack();
     }
   }, [duration]); // Depend on `duration` updates
@@ -104,6 +103,19 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
       clearInterval(intervalRef.current);
     };
   }, []);
+
+  //FOR STORY OPEN
+
+  const nextImage = () => {
+    setCurrentIndex((prev) => Math.min(prev + 1, story.stories.length - 1));
+    setDuration((prev) => prev + 4000);
+  };
+
+  const prevImage = () => {
+    setCurrentIndex((prev) => Math.max(prev - 1, 0));
+    setDuration((prev) => Math.max(prev - 4000, 0));
+  };
+
 
   // FOR DELETE BUTTON ON STORY
   // useEffect(() => {
@@ -122,18 +134,6 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
   //   };
   // }, []);
 
-  //FOR STORY OPEN
-  const [currentIndex, setCurrentIndex] = useState(0); // Tracking current image index
-
-  const nextImage = () => {
-    setCurrentIndex((prev) => Math.min(prev + 1, story.stories.length - 1));
-    setDuration((prev) => prev + 3000);
-  };
-
-  const prevImage = () => {
-    setCurrentIndex((prev) => Math.max(prev - 1, 0));
-    setDuration((prev) => Math.max(prev - 3000, 0));
-  };
 
   const formattedDate = moment(
     story.stories[currentIndex]?.createdAt
@@ -181,7 +181,7 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
           className={`w-full h-screen overflow-y-hidden bg-black absolute top-0 left-0 cursor-pointer z-50`}
         >
           {/* USER PROFILE */}
-          <div className="absolute top-0 py-2 left-0 w-full h-full  bg-gradient-to-b from-[#000000c1] from-0% to-transparent to-10%">
+          <div className="absolute top-0 py-3 left-0 w-full h-full  bg-gradient-to-b from-[#000000c1] from-0% to-transparent to-10%">
             <div className="flex items-center justify-start">
               <span
                 onClick={storyBack}
@@ -194,7 +194,7 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
                 onClick={openUserProfile}
               >
                 <img
-                  className="w-12 h-12 object-cover rounded-full border border-gray-400 shadow-lg"
+                  className="w-12 h-12 object-cover rounded-full border-2 border-gray-400 shadow-lg"
                   src={story.avatar || NoUser}
                 />
                 <div className="text-start ml-2">
@@ -209,17 +209,31 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
             </div>
           </div>
           {/* Story Images */}
-          <figure className="p-1 pt-5 mx-auto h-[calc(93vh)] w-screen flex items-start justify-center">
-            {/* Loader on top  */}
+          <figure className="p-1 pt-16 mx-auto h-[calc(93vh)] w-screen flex items-start justify-center">
+            {/* Dynamic Progress Bar on story top */}
             <div className="absolute top-0 left-0 w-full h-1.5 sm:h-1 flex z-10">
-              <div
-                className={`absolute h-full bg-blue-500 animate-progress z-10`}
-                style={{ animationDuration: `${3 * story.stories.length}s` }} // Dynamic duration
-              ></div>
-              {story.stories.map(() => (
-                <div className="w-full h-1.5 sm:h-1 bg-gray-500/40 border-x border-x-gray-400 z-20"></div>
+              {story.stories.map((_, idx) => (
+                <div
+                  key={idx}
+                  className={`relative h-full rounded-xl border-x-2 border-black ${
+                    idx < currentIndex ? "bg-blue-500" : "bg-gray-700"
+                  }`}
+                  style={{
+                    width: `${100 / story.stories.length}%`, // Divide equally
+                  }}
+                >
+                  {idx === currentIndex && (
+                    <div
+                      className=" rounded-xl absolute left-0 top-0 h-full bg-blue-500"
+                      style={{
+                        animation: `progress-animation ${4100}ms linear forwards`, // Dynamic animation
+                      }}
+                    ></div>
+                  )}
+                </div>
               ))}
             </div>
+
             <img
               src={story.stories[currentIndex]?.postFile[0]}
               className="h-[92%] sm:h-[98%] aspect-[6/10] max-w-screen-sm object-cover object-center mb-4"
@@ -227,13 +241,13 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
               loading="lazy"
             />
             {/* FOR NAVIGATING THROUGH STORIES  */}
-            <div className="absolute my-28 w-full h-[calc(100vh-15rem)] flex bg-">
-              <div onClick={prevImage} className="w-full h-full"></div>
-              <div onClick={nextImage} className="w-full h-full"></div>
+            <div className="absolute my-28 w-full h-[calc(100vh-15rem)] flex justify-between">
+              <div onClick={prevImage} className="w-1/2 h-full"></div>
+              <div onClick={nextImage} className="w-1/2 h-full"></div>
             </div>
           </figure>
-          <div className="m-2 p-2 px-4 w-[calc(100vw-1rem)] border-2 border-gray-400 bg-transparent rounded-full flex items-center justify-between absolute bottom-14 sm:bottom-5">
-            <p className="px-2 w-full text-gray-500 text-xl">Reply...</p>
+          <div className="m-2 p-2 px-4 w-[calc(100vw-1rem)] border border-gray-300 bg-transparent rounded-full flex items-center justify-between absolute bottom-14 sm:bottom-5">
+            <p className="px-2 w-full text-gray-400 text-xl">Reply...</p>
             <IoSendOutline className="text-3xl text-gray-400 font-thin" />
           </div>
         </section>

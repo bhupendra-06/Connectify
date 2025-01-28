@@ -49,3 +49,13 @@ body {
     transform: translateX(0);
   }
 }
+
+
+@keyframes progress-animation {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}

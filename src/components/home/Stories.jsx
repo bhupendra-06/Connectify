@@ -101,9 +101,10 @@ const MyStory = ({ story, onStoryAdded }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [myStoryBg, setMyStoryBg] = useState("");
   const storyRef = useRef();
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  // Tracking current image index
+  const [currentIndex, setCurrentIndex] = useState(0); // Tracking current image index
+  const intervalRef = useRef(null);
+  const timeoutRef = useRef(null);
+  const [duration, setDuration] = useState(0); // Track total duration dynamically
 
   useEffect(() => {
     if (story?.stories?.length > 0) {
@@ -119,67 +120,95 @@ const MyStory = ({ story, onStoryAdded }) => {
   const toggleOptions = () => {
     setShowOptions(!showOptions);
   };
-  const deleteStory = async () => {
-    try {
-      const token = Cookies.get("accessToken");
-      if (!token) {
-        throw new Error("No access token found in cookies");
-      }
 
-      const response = await fetch(
-        `https://connectify-backend-2uq0.onrender.com/api/v1/story/delete-story/${story.storyId}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+  // const deleteStory = async () => {
+  //   try {
+  //     const token = Cookies.get("accessToken");
+  //     if (!token) {
+  //       throw new Error("No access token found in cookies");
+  //     }
 
-      if (!response.ok) {
-        throw new Error("Failed to delete story: " + response.statusText);
-      }
+  //     const response = await fetch(
+  //       `https://connectify-backend-2uq0.onrender.com/api/v1/story/delete-story/${story.storyId}`,
+  //       {
+  //         method: "DELETE",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
 
-      alert("Story deleted successfully!");
-      onStoryAdded();
-    } catch (err) {
-      console.error("Error deleting story:", err);
-      alert("Failed to delete the story.");
-    }
-  };
+  //     if (!response.ok) {
+  //       throw new Error("Failed to delete story: " + response.statusText);
+  //     }
+
+  //     alert("Story deleted successfully!");
+  //     onStoryAdded();
+  //   } catch (err) {
+  //     console.error("Error deleting story:", err);
+  //     alert("Failed to delete the story.");
+  //   }
+  // };
 
   const biggerStory = () => {
     setShowStory(true); // Show the story view
 
-    // setTimeout to hide the story view after few seconds
-    setTimeout(() => {
-      setShowStory(false); // Hide the story view
-      setCurrentIndex(0); // Reset the index
-      if (!showStory) {
-        clearTimeout();
-      }
-    }, 5000);
+    // Clear any existing interval and timeout before starting new ones
+    clearInterval(intervalRef.current);
+    clearTimeout(timeoutRef.current);
+
+    // Interval to update currentIndex
+    intervalRef.current = setInterval(() => {
+      setCurrentIndex((prevIndex) => {
+        if (prevIndex < story.stories.length - 1) {
+          return prevIndex + 1; // Increment index
+        } else {
+          clearInterval(intervalRef.current); // Stop interval at the last story
+          return prevIndex; // Keep the current index
+        }
+      });
+      setDuration((prev) => prev + 4000);
+    }, 4000); // Update every 3 seconds
+  };
+
+  const clearTimers = () => {
+    clearTimeout(timeoutRef.current);
+    clearInterval(intervalRef.current);
   };
 
   const storyBack = () => {
+    clearTimers();
     setShowStory(false);
     setCurrentIndex(0);
+    setDuration(0);
   };
 
-  //FOR STORY OPEN
-
-  const nextImage = () => {
-    if (currentIndex < story.stories.length - 1) {
-      setCurrentIndex(currentIndex + 1);
+  useEffect(() => {
+    if (story?.stories && duration >= 4000 * story.stories.length) {
+      storyBack();
     }
+  }, [duration, story]);
+
+  // Cleanup on component unmount to avoid memory leaks
+  useEffect(() => {
+    return () => {
+      clearTimeout(timeoutRef.current);
+      clearInterval(intervalRef.current);
+    };
+  }, []);
+
+  //FOR STORY OPEN
+  const nextImage = () => {
+    setCurrentIndex((prev) => Math.min(prev + 1, story.stories.length - 1));
+    setDuration((prev) => prev + 4000);
   };
 
   const prevImage = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-    }
+    setCurrentIndex((prev) => Math.max(prev - 1, 0));
+    setDuration((prev) => Math.max(prev - 4000, 0));
   };
+
   const formattedDate =
     story.stories && story.stories[currentIndex]
       ? moment(story.stories[currentIndex].createdAt).fromNow()
@@ -210,11 +239,6 @@ const MyStory = ({ story, onStoryAdded }) => {
           ref={storyRef}
           className={`w-full h-screen overflow-y-hidden bg-black absolute top-0 left-0 cursor-pointer z-50`}
         >
-          {/* Loader on top  */}
-          <div className="absolute top-0 left-0 w-full flex z-10">
-            <span className="w-full h-2 bg-red-300 z-20"></span>
-            <span className="w-full h-2 bg-red-300 z-20"></span>
-          </div>
           {/* USER PROFILE */}
           <div className="absolute top-0 py-2 left-0 w-full h-full  bg-gradient-to-b from-[#000000c1] from-0% to-transparent to-10%">
             <div className="flex items-center justify-start">
@@ -245,6 +269,29 @@ const MyStory = ({ story, onStoryAdded }) => {
           </div>
           {/* Story Images */}
           <figure className="p-1 pt-5 mx-auto h-[calc(100vh)] w-screen flex items-start justify-center">
+            {/* Dynamic Progress Bar on story top */}
+            <div className="absolute top-0 left-0 w-full h-1.5 sm:h-1 flex z-10">
+              {story.stories.map((_, idx) => (
+                <div
+                  key={idx}
+                  className={`relative h-full rounded-xl border-x-2 border-black ${
+                    idx < currentIndex ? "bg-blue-500" : "bg-gray-700"
+                  }`}
+                  style={{
+                    width: `${100 / story.stories.length}%`, // Divide equally
+                  }}
+                >
+                  {idx === currentIndex && (
+                    <div
+                      className=" rounded-xl absolute left-0 top-0 h-full bg-blue-500"
+                      style={{
+                        animation: `progress-animation ${4100}ms linear forwards`, // Dynamic animation
+                      }}
+                    ></div>
+                  )}
+                </div>
+              ))}
+            </div>
             <img
               src={story.stories[currentIndex].postFile[0]}
               className="h-[92%] sm:h-[98%] aspect-[6/10] max-w-screen-sm object-cover object-center mb-4"
