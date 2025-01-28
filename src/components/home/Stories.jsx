@@ -213,7 +213,6 @@ const MyStory = ({ story, onStoryAdded }) => {
     story.stories && story.stories[currentIndex]
       ? moment(story.stories[currentIndex].createdAt).fromNow()
       : "few seconds ago";
-  // const formattedDate = "few seconds ago";
 
   return (
     <>

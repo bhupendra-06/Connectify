@@ -85,6 +85,14 @@ const CreateStoryForm = ({ onStoryAdded }) => {
 
   return (
     <>
+      {/* MAIN COMPONENT */}
+      <button
+        type="button"
+        onClick={handleButtonClick}
+        className="mx-auto text-center inline-flex w-auto justify-center rounded-full bg-primaryColor px-3 py-1 text-2xl font-medium text-white focus:outline-none z-20"
+      >
+        +
+      </button>
       {/* FORM MODAL TO POST STROY  */}
       <Dialog open={open} onClose={setOpen} className="relative z-20">
         <DialogBackdrop transition className="fixed inset-0 bg-gray-600/90" />
@@ -164,14 +172,6 @@ const CreateStoryForm = ({ onStoryAdded }) => {
           </div>
         </div>
       </Dialog>
-      {/* MAIN COMPONENT */}
-      <button
-        type="button"
-        onClick={handleButtonClick}
-        className="mx-auto text-center inline-flex w-auto justify-center rounded-full bg-primaryColor px-3 py-1 text-2xl font-medium text-white focus:outline-none z-20"
-      >
-        +
-      </button>
     </>
   );
 };

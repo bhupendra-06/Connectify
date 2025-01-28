@@ -9,6 +9,7 @@ import SignUpPage from "./components/SignUpPage.jsx";
 import AccountInformation from "./components/settings/AccountInformation.jsx";
 import DefaultSettings from "./components/settings/DefaultSettings.jsx";
 import UserProfile from "./components/home/UserProfile.jsx";
+import SearchUser from "./components/search/SearchUser.jsx";
 import TestPage from "./components/TestPage.jsx";
 
 const App = () => {
@@ -48,6 +49,10 @@ const App = () => {
         element={
           isAuthenticated() ? <DefaultSettings /> : <Navigate to="/login" />
         }
+      />
+      <Route
+        path="/search"
+        element={isAuthenticated() ? <SearchUser /> : <Navigate to="/login" />}
       />
       {/* Default Route */}
       <Route

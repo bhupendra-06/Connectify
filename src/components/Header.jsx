@@ -15,9 +15,19 @@ import { useGSAP } from "@gsap/react";
 import { Link, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import SearchUser from "./search/SearchUser";
+import {
+  Dialog,
+  DialogBackdrop,
+  DialogPanel,
+  DialogTitle,
+} from "@headlessui/react";
 // import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false); // For form modal
+
   // getting avatar and owner id to fetch user profile
   const avatar = Cookies.get("avatar");
   const MyOwnerId = Cookies.get("MyOwnerId");
@@ -33,7 +43,6 @@ const Header = () => {
     });
   }, []);
 
-  const navigate = useNavigate();
   const goToSettings = () => {
     if (document.startViewTransition) {
       document.startViewTransition(() => {
@@ -42,6 +51,10 @@ const Header = () => {
     } else {
       navigate("/settings");
     }
+  };
+  const handleSearchClick = (e) => {
+    e.stopPropagation();
+    setOpen(true);
   };
 
   return (
@@ -62,7 +75,7 @@ const Header = () => {
             <div className="search-box hidden lg:flex items-center">
               <IoSearch className="icon text-xl text-gray-400" />
               <input
-              id="search"
+                id="search"
                 type="search"
                 placeholder="Start typing to search..."
                 className="ml-2 border-b focus:outline-none"
@@ -77,7 +90,7 @@ const Header = () => {
                 </NavLink>
               </li>
               <li className="icon-gola">
-                <NavLink to="/login">
+                <NavLink to="/">
                   <MdOutlineElectricBolt className="icon m-2" />
                 </NavLink>
               </li>
@@ -107,9 +120,9 @@ const Header = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink>
-                <BiComment className="icon text-primaryColor hidden sm:inline-block" />
-              </NavLink>
+              <div onClick={handleSearchClick}>
+                <IoSearch className="icon text-primaryColor" />
+              </div>
             </li>
             <li onClick={goToSettings} className="cursor-pointer">
               <SlSettings className="icon gsapRotate text-primaryColor" />
@@ -128,6 +141,17 @@ const Header = () => {
           </ul>
         </div>
       </header>
+      <Dialog open={open} onClose={setOpen} className="relative z-20">
+        <DialogBackdrop transition className="fixed inset-0 bg-gray-600/90" />
+        <div className="fixed inset-0 z-10 overflow-y-auto">
+          <div className="mx-auto flex items-center justify-center text-center sm:items-center">
+            {/* Here is the Dialog Panel  */}
+            <DialogPanel>
+              <SearchUser />
+            </DialogPanel>
+          </div>
+        </div>
+      </Dialog>
     </>
   );
 };
