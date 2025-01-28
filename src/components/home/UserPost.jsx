@@ -185,7 +185,7 @@ const UserPost = ({ post, onPostAdded }) => {
                 : "grid-cols-3"
               } gap-2 place-items-center`}
           >
-            {post.postFile.slice(0, 3).map((url, picIndex) => (
+            {post.postFile.slice(0, 5).map((url, picIndex) => (
               <div
                 className={`relative h-full ${
                   post.postFile.length === 1
@@ -197,14 +197,14 @@ const UserPost = ({ post, onPostAdded }) => {
                   onClick={() => displayPostImages(picIndex)}
                   src={url}
                   loading="lazy"
-                  className={`${picIndex === 2 && post.postFile.length > 3 ? "opacity-60" : ""} w-full h-full object-cover`}
+                  className={`${picIndex === 5 && post.postFile.length > 5 ? "opacity-50" : ""} w-full h-full object-cover`}
                   alt={`Post image ${picIndex + 1}`}
                 />
-                {picIndex === 2 && post.postFile.length > 3 && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-2xl font-bold"
+                {picIndex === 4 && post.postFile.length > 5 && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70 text-white text-3xl font-bold"
                         onClick={() => displayPostImages(picIndex)}
                   >
-                      +{post.postFile.length - 3}
+                      +{post.postFile.length - 5}
                   </div>
                 )}
               </div>
