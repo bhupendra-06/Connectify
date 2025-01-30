@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import SingleStory from "./SingleStory";
 import StoryShimmer from "./StoryShimmer";
 import { FaArrowLeft } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 import { IoSendOutline } from "react-icons/io5";
 import moment from "moment"; // for date formatting
 import NoUser from "../../assets/no-user.jpg";
@@ -121,35 +122,36 @@ const MyStory = ({ story, onStoryAdded }) => {
     setShowOptions(!showOptions);
   };
 
-  // const deleteStory = async () => {
-  //   try {
-  //     const token = Cookies.get("accessToken");
-  //     if (!token) {
-  //       throw new Error("No access token found in cookies");
-  //     }
+  const deleteStory = async () => {
+    try {
+      const token = Cookies.get("accessToken");
+      if (!token) {
+        throw new Error("No access token found in cookies");
+      }
 
-  //     const response = await fetch(
-  //       `https://connectify-backend-2uq0.onrender.com/api/v1/story/delete-story/${story.storyId}`,
-  //       {
-  //         method: "DELETE",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
+      const response = await fetch(
+        `https://connectify-backend-2uq0.onrender.com/api/v1/story/delete-story/${story.stories[currentIndex]._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-  //     if (!response.ok) {
-  //       throw new Error("Failed to delete story: " + response.statusText);
-  //     }
+      if (!response.ok) {
+        throw new Error("Failed to delete story: " + response.statusText);
+      }
 
-  //     alert("Story deleted successfully!");
-  //     onStoryAdded();
-  //   } catch (err) {
-  //     console.error("Error deleting story:", err);
-  //     alert("Failed to delete the story.");
-  //   }
-  // };
+      alert("Story deleted successfully!");
+      storyBack();
+      onStoryAdded();
+    } catch (err) {
+      console.error("Error deleting story:", err);
+      alert("Failed to delete the story.");
+    }
+  };
 
   const biggerStory = () => {
     setShowStory(true); // Show the story view
@@ -168,6 +170,7 @@ const MyStory = ({ story, onStoryAdded }) => {
           return prevIndex; // Keep the current index
         }
       });
+      console.log(story.stories[currentIndex]._id);
       setDuration((prev) => prev + 4000);
     }, 4000); // Update every 3 seconds
   };
@@ -182,6 +185,7 @@ const MyStory = ({ story, onStoryAdded }) => {
     setShowStory(false);
     setCurrentIndex(0);
     setDuration(0);
+    setShowOptions(false);
   };
 
   useEffect(() => {
@@ -239,7 +243,7 @@ const MyStory = ({ story, onStoryAdded }) => {
           className={`w-full h-screen overflow-y-hidden bg-black absolute top-0 left-0 cursor-pointer z-50`}
         >
           {/* USER PROFILE */}
-          <div className="absolute top-0 py-2 left-0 w-full h-full  bg-gradient-to-b from-[#000000c1] from-0% to-transparent to-10%">
+          <div className="absolute top-0 py-3 left-0 w-full h-full flex items-start justify-between bg-gradient-to-b from-[#000000c1] from-0% to-transparent to-10%">
             <div className="flex items-center justify-start">
               <span
                 onClick={storyBack}
@@ -264,6 +268,42 @@ const MyStory = ({ story, onStoryAdded }) => {
                   </h3>
                 </div>
               </div>
+            </div>
+            <div className="mx-2 menu flex flex-col items-end">
+              <div
+                className="menu-icon"
+                onClick={() => setShowOptions(!showOptions)}
+              >
+                {/* Three vertical dots icon */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="icon icon-tabler icon-tabler-dots-vertical"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" />
+                  <circle cx="12" cy="12" r="1" />
+                  <circle cx="12" cy="19" r="1" />
+                  <circle cx="12" cy="5" r="1" />
+                </svg>
+              </div>
+              {showOptions && (
+                <div className="dropdown-menu m-4 bg-red-500 py-1 px-2 rounded-md text-white text-sm">
+                  <ul>
+                    <li onClick={deleteStory} className="hidden sm:inline-block">Delete Story</li>
+                    <li onClick={deleteStory} className="sm:hidden">
+                      <MdDelete/>
+                    </li>
+                    {/* Other options can be added here */}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
           {/* Story Images */}

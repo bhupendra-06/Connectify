@@ -27,36 +27,6 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
     setShowOptions(!showOptions);
   };
 
-  // const deleteStory = async () => {
-  //   try {
-  //     const token = Cookies.get("accessToken");
-  //     if (!token) {
-  //       throw new Error("No access token found in cookies");
-  //     }
-
-  //     const response = await fetch(
-  //       `https://connectify-backend-2uq0.onrender.com/api/v1/story/delete-story/${story.storyId}`,
-  //       {
-  //         method: "DELETE",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-
-  //     if (!response.ok) {
-  //       throw new Error("Failed to delete story: " + response.statusText);
-  //     }
-
-  //     alert("Story deleted successfully!");
-  //     onStoryAdded();
-  //   } catch (err) {
-  //     console.error("Error deleting story:", err);
-  //     alert("Failed to delete the story.");
-  //   }
-  // };
-
   const biggerStory = () => {
     setShowStory(true); // Show the story view
 
@@ -116,23 +86,6 @@ const SingleStory = ({ story, index, onStoryAdded }) => {
     setDuration((prev) => Math.max(prev - 4000, 0));
   };
 
-
-  // FOR DELETE BUTTON ON STORY
-  // useEffect(() => {
-  //   const handleClickOutside = (event) => {
-  //     if (
-  //       !event.target.closest(".options-menu") &&
-  //       !event.target.closest(".options-button")
-  //     ) {
-  //       setShowOptions(false);
-  //     }
-  //   };
-
-  //   document.addEventListener("mousedown", handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, []);
 
 
   const formattedDate = moment(

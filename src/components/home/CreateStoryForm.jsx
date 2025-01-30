@@ -106,7 +106,7 @@ const CreateStoryForm = ({ onStoryAdded }) => {
                 </h2>
                 <button
                   type="button"
-                  class="p-1 text-2xl ms-auto text-gray-900 bg-transparent hover:bg-gray-800 hover:text-gray-200 rounded-lg absolute top-2 right-2"
+                  class="p-1 text-2xl ms-auto bg-transparent text-gray-700 hover:text-gray-950 rounded-lg absolute top-2 right-2"
                   onClick={() => setOpen(false)}
                 >
                   <RxCrossCircled />
