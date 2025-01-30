@@ -52,14 +52,14 @@ const SearchUser = () => {
   };
 
   return (
-    <div className="mx-auto sm:my-10 py-10 max-w-lg w-screen h-screen sm:max-h-[800px] flex flex-col items-center sm:rounded-lg bg-gray-50 relative">
+    <div className="mx-auto sm:my-10 py-6 max-w-lg w-screen h-screen sm:max-h-[680px] flex flex-col items-center sm:rounded-lg bg-gray-50 relative">
       <NavLink
         to="/"
-        className="p-1 text-2xl ms-auto text-gray-900 bg-transparent hover:bg-gray-800 hover:text-gray-200 rounded-lg absolute top-2 right-2"
+        className="p-1 text-2xl ms-auto text-primaryColor bg-transparent rounded-lg absolute top-2 right-2"
       >
         <RxCrossCircled />
       </NavLink>
-      <h1 className="text-3xl font-bold mb-8 text-primaryColor">
+      <h1 className="text-3xl font-bold mb-5 text-primaryColor">
         Search Users
       </h1>
 
@@ -84,7 +84,7 @@ const SearchUser = () => {
       {loading ? (
         <p className="text-gray-700">Loading...</p>
       ) : (
-        <div className="px-4 grid grid-cols-1 gap-4 w-full max-w-6xl overflow-scroll">
+        <div className="px-4 grid grid-cols-1 gap-4 w-full max-w-6xl overflow-y-scroll hide-scrollbar">
           {data.length > 0 &&
             !error &&
             data.map((user) => (

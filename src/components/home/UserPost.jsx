@@ -57,8 +57,6 @@ const UserPost = ({ post, onPostAdded }) => {
     setCurrentIndex(newIndex);
   };
 
-  // Import axios for API requests
-
   const handleLikeClick = async () => {
     if (!token) {
       alert("Please log in to like posts!");
