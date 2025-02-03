@@ -1,16 +1,14 @@
-// src/components/LoginPage.jsx
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "./LoginPage.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import "./LoginPage.css";
 import Cookies from "js-cookie";
 import { ClipLoader } from "react-spinners";
 
-const LoginPage = () => {
+const TestPage = () => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
   const [errMsg, setErrMsg] = useState("");
 
   const handleChange = (e) => {
@@ -28,6 +26,8 @@ const LoginPage = () => {
 
     try {
       setLoading(true);
+
+      setErrMsg(null);
       const response = await fetch(
         "https://connectify-backend-2uq0.onrender.com/api/v1/users/login",
         {
@@ -57,73 +57,73 @@ const LoginPage = () => {
       }
     } catch (error) {
       console.error("Error:", error);
-      setErrMsg("Invalid Username or Password. Please try again.");
+      setErrMsg("Invalid Username or Password.");
     } finally {
       setLoading(false);
     }
   };
-
   return (
-    <main className="login-header w-full">
-      <nav className="p-6 font-bold text-4xl text-start text-gray-200">
-        <h1>Connectify</h1>
-      </nav>
-      <div className="login-container">
-        <nav className="mx-auto w-40">
-          <img
-            src="https://connectify.me/wp-content/uploads/HOTSPOT-2021-01.png"
-            alt="logo"
-            className="logo"
+    <main className="p-6 min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#F1F5F9] to-[#D1D5DB]">
+      <form
+        className="w-full max-w-md flex flex-col bg-white p-8 rounded-lg shadow-lg"
+        onSubmit={handleSubmit}
+      >
+        <h2 className="mb-6 text-4xl font-bold text-[#1E293B]">Sign In</h2>
+        {errMsg && <div className="mb-4 text-red-400">{errMsg}</div>}
+        <div className="mb-6 relative w-full">
+          <input
+            type="email"
+            name="email"
+            id="email"
+            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primaryColor peer"
+            placeholder=" "
+            value={formData.email}
+            onChange={handleChange}
+            required
           />
-        </nav>
-        <h2 className="my-6 text-3xl font-semibold text-gray-300 sm:text-black">
-          Sign In
-        </h2>
-        {errMsg && <div className="text-red-600">{errMsg}</div>}
-        <form onSubmit={handleSubmit}>
-          <div className="input-field mt-4 w-full h-14 bg-white rounded-sm relative overflow-hidden">
-            <input
-              type="email"
-              id="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-            <label htmlFor="email">Email </label>
-          </div>
-          <div className="input-field mt-4 w-full h-14 bg-white rounded-sm relative">
-            <input
-              type="password"
-              id="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-            <label htmlFor="password">Password</label>
-          </div>
-          <div className="mt-10 px-5 py-3 w-full text-center font-bold text-white bg-primaryColor rounded-2xl">
-            {loading ? (
-              <ClipLoader size={16} color="white" className="mx-2" />
-            ) : (
-              <button type="submit" className="hover:cursor-pointer">
-                Sign In
-              </button>
-            )}
-          </div>
-          <div className="remember">
-            <div className="checkbox flex gap-1 items-center">
-              <input type="checkbox" className="cursor-pointer" />
-              <label htmlFor="checkbox"> Remember me</label>
-            </div>
-            <span className="hover:text-primaryColor">Need help?</span>
-          </div>
-        </form>
-        <p>
-          New to Connectify? <NavLink to="/signup">Sign up now.</NavLink>
+          <label
+            htmlFor="email"
+            className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-100 top-2 origin-0 left-0 peer-focus:left-0 peer-focus:text-primaryColor peer-focus:scale-75 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0"
+          >
+            Email
+          </label>
+        </div>
+        <div className="mb-10 relative w-full">
+          <input
+            type="password"
+            name="password"
+            id="password"
+            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primaryColor peer"
+            placeholder=" "
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+          <label
+            htmlFor="password"
+            className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-100 top-2 origin-0 left-0 peer-focus:left-0 peer-focus:text-primaryColor peer-focus:scale-75 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0"
+          >
+            Password
+          </label>
+        </div>
+        <button
+          type="submit"
+          className="mb-6 w-full bg-[#578E7E] text-white py-3 rounded-lg font-semibold hover:bg-opacity-90 transition duration-200"
+        >
+          {loading ? <ClipLoader size={16} color="white" /> : "Sign In"}
+        </button>
+        <p className="mt-0 text-[#1E293B]">
+          New to Connectify?{" "}
+          <NavLink
+            to="/signup"
+            className="text-[#578E7E] font-bold hover:underline"
+          >
+            Sign up now.
+          </NavLink>
         </p>
-      </div>
+      </form>
     </main>
   );
 };
 
-export default LoginPage;
+export default TestPage;

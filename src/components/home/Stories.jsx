@@ -78,9 +78,9 @@ const Stories = () => {
           onStoryAdded={handleStoryAdded}
         />
 
-        {loading ? (
+        {loading && (
           <StoryShimmer />
-        ) : (
+        ) }{ (
           stories.map((story, index) => (
             <SingleStory
               story={story}

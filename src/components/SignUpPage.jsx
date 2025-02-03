@@ -26,13 +26,6 @@ const SignUpPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // const requestBody = {
-    //   name: formData.name,
-    //   email: formData.email,
-    //   username: formData.username,
-    //   password: formData.password
-    // };
-
     const requestBody = {
       fullName: formData.fullName,
       email: formData.email,
@@ -40,8 +33,6 @@ const SignUpPage = () => {
       password: formData.password,
     };
     console.log("requestBody", requestBody);
-
-    // console.log(requestBody);
 
     fetch(
       "https://connectify-backend-2uq0.onrender.com/api/v1/users/register",
@@ -65,7 +56,7 @@ const SignUpPage = () => {
           setMessage("Registration successfully Done!");
           setMsgColor("text-green-600");
           alert("Registration successfully Done!");
-          navigate('/login');
+          navigate("/login");
         } else {
           setMessage("Registration failed: Unexpected response format");
           setMsgColor("text-red-600");
@@ -76,7 +67,6 @@ const SignUpPage = () => {
         setMessage("Registration failed: " + error.message);
         setMsgColor("text-red-600");
       });
-
   };
 
   return (
@@ -89,10 +79,10 @@ const SignUpPage = () => {
           <h2 className="my-6 text-3xl font-semibold text-gray-300 sm:text-black">
             Sign Up
           </h2>
+          {/* Display message */}
           {message && (
             <div className={`${msgColor} text-xl font-bold`}>{message}</div>
           )}{" "}
-          {/* Display message */}
           <form onSubmit={handleSubmit}>
             <div className="input-field mt-4 w-full h-14 bg-white rounded-sm relative overflow-hidden">
               <input
