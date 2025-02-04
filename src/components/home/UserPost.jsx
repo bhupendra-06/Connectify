@@ -137,7 +137,8 @@ const UserPost = ({ post, onPostAdded }) => {
   return (
     <div>
       <div className="m-2 mt-0 p-4 rounded-lg bg-white shadow-xl shadow-gray-200 border">
-        <div className="profile mb-3 flex items-center justify-between">
+      {/* User Profile */}
+        <div className="mb-3 flex items-center justify-between select-none">
           <div className="flex items-center cursor-pointer" onClick={handleUserProfile}>
             <img
               className="w-14 h-14 object-cover rounded-full"

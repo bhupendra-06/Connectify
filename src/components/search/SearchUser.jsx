@@ -91,7 +91,7 @@ const SearchUser = () => {
               <div
                 key={user._id} // user id
                 onClick={() => navigate(`/profile/${user._id}`)}
-                className="p-4 bg-white flex items-center gap-2 shadow-md rounded-lg border border-gray-200 hover:shadow-lg"
+                className="p-4 bg-white flex items-center gap-2 shadow-md rounded-lg border border-gray-200 hover:shadow-lg cursor-pointer select-none"
               >
                 <div className="w-14 h-14 rounded-full overflow-hidden bg-primaryColor">
                   <img
@@ -103,11 +103,9 @@ const SearchUser = () => {
                 <div>
                   <h2 className="text-xl font-semibold text-start text-primaryColor">
                     {user.username || "No Name"}
-                    {/* Adjust field names based on API */}
                   </h2>
                   <p className="mt-1 text-sm text-start text-gray-600">
                     {user.fullName || "No Email"}
-                    {/* Adjust field names based on API */}
                   </p>
                 </div>
               </div>
