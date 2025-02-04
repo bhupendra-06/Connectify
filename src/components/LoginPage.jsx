@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import "./LoginPage.css";
 import { NavLink, useNavigate } from "react-router-dom";
-import "./LoginPage.css";
 import Cookies from "js-cookie";
 import { ClipLoader } from "react-spinners";
 
@@ -63,12 +61,10 @@ const TestPage = () => {
     }
   };
   return (
-    <main className="p-6 min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#F1F5F9] to-[#D1D5DB]">
-      <nav className="hidden sm:inline-block mb-20 font-bold text-4xl text-start text-[#3674B5]">
-        <h1>Start Making Friends on Connectify</h1>
-      </nav>
+    <main className="p-6 min-h-screen flex flex-col items-center justify-center bg-gradient-to-tl from-20% from-[#F1F5F9] to-[#064c50]">
+      <h1 className="absolute top-0 left-0 p-6 text-3xl sm:text-4xl text-gray-100 font-bold shadow-lg rounded-lg w-full">Connectify</h1>
       <div className="w-full max-w-md flex flex-col bg-white p-8 rounded-lg shadow-lg">
-        <h2 className="mb-6 text-4xl font-bold text-[#1E293B]">Sign In</h2>
+        <h2 className="mb-6 text-3xl font-semibold text-gray-800">Sign In</h2>
         {errMsg && <div className="mb-4 text-red-400">{errMsg}</div>}
         <form className="w-full max-w-md flex flex-col" onSubmit={handleSubmit}>
           <div className="mb-6 relative w-full">
@@ -119,7 +115,7 @@ const TestPage = () => {
         New to Connectify?{" "}
         <NavLink
           to="/signup"
-          className="text-[#578E7E] font-bold hover:underline"
+          className="text-[#578E7E] font-semibold hover:underline"
         >
           Sign up now.
         </NavLink>
