@@ -27,7 +27,6 @@ const UserProfile = () => {
   const token = Cookies.get("accessToken");
   const MyOwnerId = Cookies.get("MyOwnerId");
   const navigate = useNavigate();
-  // const [loading, setLoading] = useState(false);
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [updatedProfile, setUpdatedProfile] = useState({
@@ -161,19 +160,6 @@ const UserProfile = () => {
     setOpen(true);
   };
 
-  const nextSlide = () => {
-    setCurrentIndex(
-      (prev) => (prev + 1) % myProfile.data.posts[selectedPost].postFile.length
-    );
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex(
-      (prev) =>
-        (prev - 1 + myProfile.data.posts[selectedPost].postFile.length) %
-        myProfile.data.posts[selectedPost].postFile.length
-    );
-  };
   const postBack = () => {
     setOpen(false);
     setSee("See More.");
@@ -181,9 +167,18 @@ const UserProfile = () => {
     setCurrentIndex(0);
   };
 
+  const [postCreateAt, setPostCreateAt] = useState();
   const openEditModal = () => {
     setShowEditModal(true);
   };
+
+  useEffect(() => {
+    if (myProfile?.data?.posts[selectedPost]?.createdAt) {
+      setPostCreateAt(
+        moment(myProfile.data.posts[selectedPost].createdAt).fromNow()
+      );
+    }
+  }, [myProfile?.data?.posts[selectedPost]]);
 
   const closeEditModal = () => {
     setShowEditModal(false);
@@ -357,17 +352,17 @@ const UserProfile = () => {
             </div>
           ))}
         </div>
-        {/* ON POST CLICK SINGLE POST */}
+        {/* CLICKING ON A SINGLE POST */}
         {open && myProfile && (
           <div
             className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
             onClick={postBack} // Clicking outside closes modal
           >
             <div
-              className="bg-white p-4 pt-8 rounded-lg shadow-lg max-w-11/12 max-w-[350px] max-h-screen overflow-hidden mt-2 relative"
+              className="bg-white p-4 pt-6 rounded-lg shadow-lg max-w-11/12 max-w-[350px] max-h-screen overflow-hidden mt-2 relative"
               onClick={(e) => e.stopPropagation()} // Prevents closing when clicking inside
             >
-            {/* Cross icon to go back */}
+              {/* Cross icon to go back */}
               <button
                 onClick={postBack}
                 className="absolute top-0 right-0 rounded-full text-lg text-gray-600 hover:text-gray-900 hover:bg-gray-300 px-2"
@@ -376,28 +371,54 @@ const UserProfile = () => {
               </button>
               <section className="">
                 {/* User info. */}
-                <div
-                  onClick={postBack}
-                  className="p-3 flex items-center gap-2 border rounded-lg"
-                >
-                  <div className="w-14 h-14 rounded-full overflow-hidden bg-primaryColor">
-                    <img
-                      src={myProfile.data.avatar || NoUser}
-                      alt="user-profile"
-                      className="w-full h-full object-cover"
-                    />
+                <div className="py-2 px-1 flex items-center justify-between gap-2 border rounded-md">
+                  <div className="flex gap-2" onClick={postBack}>
+                    <div className="w-12 h-12 rounded-full overflow-hidden bg-primaryColor">
+                      <img
+                        src={myProfile.data.avatar || NoUser}
+                        alt="user-profile"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div>
+                      <h2 className="text-xl font-semibold text-start text-black">
+                        {myProfile.data.username || "User"}
+                      </h2>
+                      <p className="mt-0 text-xs text-start text-gray-600">
+                        {postCreateAt || "Some time ago"}
+                      </p>
+                    </div>
                   </div>
                   <div>
-                    <h2 className="text-xl font-semibold text-start text-primaryColor">
-                      {myProfile.data.username || "User"}
-                    </h2>
-                    <p className="mt-1 text-sm text-start text-gray-600">
-                      {myProfile.data.fullName || "User"}
-                    </p>
+                    {myProfile.data._id !== MyOwnerId && (
+                      <button
+                        onClick={followToggle}
+                        disabled={loading}
+                        className={`px-3 py-1.5 mx-2 text-sm font-semibold rounded-lg ${
+                          isFollowing
+                            ? "text-black bg-white border-2" // Following style
+                            : myProfile.data.isFollowedBy
+                            ? "text-white bg-primaryColor hover:bg-primaryColor" // Follow back style
+                            : "text-white bg-primaryColor hover:bg-primaryColor" // Follow style
+                        }`}
+                      >
+                        {loading ? (
+                          <ClipLoader
+                            size={14}
+                            color=""
+                            className="mx-5 text-gray-300"
+                          />
+                        ) : isFollowing ? (
+                          "Following"
+                        ) : (
+                          "Follow +"
+                        )}
+                      </button>
+                    )}
                   </div>
                 </div>
                 {/* Caption */}
-                <p className="mt-2 text-gray-600 text-justify">
+                <p className="my-1 text-gray-600 text-justify">
                   {/* {myProfile.data.posts[selectedPost].description} */}
                   {myProfile.data.posts[selectedPost].description.length >
                   200 ? (
@@ -421,7 +442,10 @@ const UserProfile = () => {
                 </p>
                 <div className="flex flex-col items-center justify-center mb-3">
                   {/* Slider for post images */}
-                  <Slider {...settings} className="w-80 h-80 rounded-[4px] shadow-[inset_4px_4px_8px_#e8e8e8,inset_-4px_-4px_8px_#e8e8e8] bg-gray-50">
+                  <Slider
+                    {...settings}
+                    className="w-80 h-80 rounded-[4px] shadow-[inset_4px_4px_8px_#e8e8e8,inset_-4px_-4px_8px_#e8e8e8] bg-gray-50"
+                  >
                     {myProfile.data.posts[selectedPost] &&
                       myProfile.data.posts[selectedPost].postFile.map(
                         (url, index) => (
@@ -523,7 +547,6 @@ const UserProfile = () => {
                 className="px-4 py-2 bg-primaryColor text-white rounded"
                 disabled={loading}
               >
-                {" "}
                 {loading ? (
                   <ClipLoader size={20} color="#ffffff" className="mx-5" />
                 ) : (
@@ -531,7 +554,7 @@ const UserProfile = () => {
                 )}
               </button>
               <button
-                onClick={() => setShowEditModal(false)}
+                onClick={closeEditModal}
                 className="ml-2 px-4 py-2 bg-gray-500 text-white rounded"
               >
                 Cancel
