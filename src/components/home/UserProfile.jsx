@@ -3,18 +3,16 @@ import { Link, useParams } from "react-router-dom";
 import { GoArrowLeft } from "react-icons/go";
 import { SlSettings } from "react-icons/sl";
 import { ClipLoader } from "react-spinners";
+import { MoonLoader } from "react-spinners";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import moment from "moment"; // for date formatting
 import NoUser from "../../assets/no-user.jpg";
 import { RxCrossCircled } from "react-icons/rx";
-import {
-  Dialog,
-  DialogBackdrop,
-  DialogPanel,
-  DialogTitle,
-} from "@headlessui/react";
-import SinglePost from "./SinglePost";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io"; // Navigation arrows
 
 const UserProfile = () => {
   const [myProfile, setMyProfile] = useState(null);
@@ -40,6 +38,26 @@ const UserProfile = () => {
     coverImage: "",
     password: "",
   });
+  const settings = {
+    initialSlide: 0,
+    infinite: myProfile?.data?.posts[selectedPost]?.postFile.length > 1, // Disable infinite if only one image
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    dots: true,
+    arrows: myProfile?.data?.posts[selectedPost]?.postFile.length > 1, // Hide arrows if only one image
+    nextArrow: <CustomArrowNext />,
+    prevArrow: <CustomArrowPrev />,
+    responsive: [
+      {
+        breakpoint: 768, // Mobile and tablet view
+        settings: {
+          dots: true,
+          arrows: false,
+        },
+      },
+    ],
+  };
 
   const goToSettings = () => {
     if (document.startViewTransition) {
@@ -173,8 +191,9 @@ const UserProfile = () => {
 
   if (!myProfile)
     return (
-      <div className="w-screen h-screen text-3xl text-gray-600 flex items-center justify-center">
-        <p>Loading Profile...</p>
+      <div className="w-screen h-screen flex items-center justify-center">
+        {/* <div><ClipLoader className="text-[#578E7E] text-9xl" color="#578E7E"/></div> */}
+        <span className="spinner w-12 h-12 border-[6px] border-gray-200 border-b-primaryColor "></span>
       </div>
     );
 
@@ -225,7 +244,7 @@ const UserProfile = () => {
     }
   };
 
-  console.log("myprofile", myProfile);
+  // console.log("myprofile", myProfile);
 
   return (
     myProfile && (
@@ -345,16 +364,18 @@ const UserProfile = () => {
             onClick={postBack} // Clicking outside closes modal
           >
             <div
-              className="bg-white p-4 pt-8 rounded-lg shadow-lg w-11/12 max-w-[500px] max-h-screen overflow-auto mt-2 relative"
+              className="bg-white p-4 pt-8 rounded-lg shadow-lg max-w-11/12 max-w-[350px] max-h-screen overflow-hidden mt-2 relative"
               onClick={(e) => e.stopPropagation()} // Prevents closing when clicking inside
             >
+            {/* Cross icon to go back */}
               <button
                 onClick={postBack}
-                className="absolute top-1 right-2 text-lg text-gray-600 hover:text-gray-900"
+                className="absolute top-0 right-0 rounded-full text-lg text-gray-600 hover:text-gray-900 hover:bg-gray-300 px-2"
               >
                 ✖
               </button>
               <section className="">
+                {/* User info. */}
                 <div
                   onClick={postBack}
                   className="p-3 flex items-center gap-2 border rounded-lg"
@@ -375,6 +396,7 @@ const UserProfile = () => {
                     </p>
                   </div>
                 </div>
+                {/* Caption */}
                 <p className="mt-2 text-gray-600 text-justify">
                   {/* {myProfile.data.posts[selectedPost].description} */}
                   {myProfile.data.posts[selectedPost].description.length >
@@ -397,58 +419,32 @@ const UserProfile = () => {
                     myProfile.data.posts[selectedPost].description
                   )}
                 </p>
-                <div className="flex flex-col items-center justify-center w-fit pb-2 bg-gray-100">
-                  <div className="relative w-full aspect-square overflow-hidden rounded-sm shadow-lg">
-                    {/* Images */}
-                    <img
-                      src={
-                        myProfile.data.posts[selectedPost].postFile[
-                          currentIndex
-                        ]
-                      }
-                      alt={`Slide ${currentIndex + 1}`}
-                      className="w-full h-full object-contain transition-transform duration-500"
-                    />
-
-                    {/* Left Button */}
-                    <button
-                      onClick={prevSlide}
-                      className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-800/70 text-white p-2 rounded-full hover:bg-gray-600"
-                    >
-                      ❮
-                    </button>
-
-                    {/* Right Button */}
-                    <button
-                      onClick={nextSlide}
-                      className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-800/70 text-white p-2 rounded-full hover:bg-gray-600"
-                    >
-                      ❯
-                    </button>
-                  </div>
-
-                  {/* Dots Navigation */}
-                  <div className="flex mt-4">
-                    {myProfile.data.posts[selectedPost].postFile.map(
-                      (_, index) => (
-                        <div
-                          key={index}
-                          className={`w-2 h-2 mx-1 rounded-full ${
-                            index === currentIndex
-                              ? "bg-primaryColor"
-                              : "bg-gray-300"
-                          }`}
-                          onClick={() => setCurrentIndex(index)}
-                        />
-                      )
-                    )}
-                  </div>
+                <div className="flex flex-col items-center justify-center mb-3">
+                  {/* Slider for post images */}
+                  <Slider {...settings} className="w-80 h-80 rounded-[4px] shadow-[inset_4px_4px_8px_#e8e8e8,inset_-4px_-4px_8px_#e8e8e8] bg-gray-50">
+                    {myProfile.data.posts[selectedPost] &&
+                      myProfile.data.posts[selectedPost].postFile.map(
+                        (url, index) => (
+                          <div
+                            key={`slide-${index}`} // Unique key to ensure proper rendering
+                            className="flex justify-center items-center outline-none"
+                          >
+                            <img
+                              src={url}
+                              alt={`Slide ${index}`}
+                              className="w-80 mx-auto aspect-square object-contain"
+                              loading="lazy"
+                            />
+                          </div>
+                        )
+                      )}
+                  </Slider>
                 </div>
               </section>
             </div>
           </div>
         )}
-
+        {/* EDIT PROFILE FORM */}
         {showEditModal && (
           <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
             <div className="bg-white p-6 rounded-lg w-96">
@@ -547,5 +543,25 @@ const UserProfile = () => {
     )
   );
 };
+
+// Custom Next Arrow
+const CustomArrowNext = ({ onClick }) => (
+  <div
+    className="absolute right-0 top-1/2 transform -translate-y-1/2 cursor-pointer z-10 hidden md:block"
+    onClick={onClick}
+  >
+    <IoIosArrowForward className="text-gray-300/50 text-4xl" />
+  </div>
+);
+
+// Custom Prev Arrow
+const CustomArrowPrev = ({ onClick }) => (
+  <div
+    className="absolute left-0 top-1/2 transform -translate-y-1/2 cursor-pointer z-10 hidden md:block"
+    onClick={onClick}
+  >
+    <IoIosArrowBack className="text-gray-500/50 text-4xl" />
+  </div>
+);
 
 export default UserProfile;
