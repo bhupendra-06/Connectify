@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
+import { FaUserPlus } from "react-icons/fa"; // React Icons instead of Lucide
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -32,19 +33,16 @@ const SignUpPage = () => {
       username: formData.username,
       password: formData.password,
     };
-    console.log("requestBody", requestBody);
+
     setLoading(true);
     setMessage(null);
-    fetch(
-      "https://connectify-backend-2uq0.onrender.com/api/v1/users/register",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestBody),
-      }
-    )
+    fetch("https://connectify-backend-2uq0.onrender.com/api/v1/users/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    })
       .then((response) => {
         if (!response) {
           throw new Error("Network response was not ok " + response.statusText);
@@ -52,136 +50,111 @@ const SignUpPage = () => {
         return response.json();
       })
       .then((data) => {
-        console.log("Response data:", data);
         if (data) {
-          setMessage("Registration successfully Done!");
-          setMsgColor("text-green-600");
-          alert("Registration successfully Done!");
+          setMessage("Registration successful!");
+          setMsgColor("bg-green-100 text-green-700");
           navigate("/login");
         } else {
-          setMessage("Registration failed: Unexpected response format");
-          setMsgColor("text-red-600");
+          setMessage("Registration failed. Try again.");
+          setMsgColor("bg-red-100 text-red-700");
         }
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error:", error);
-        setMessage("Registration failed: " + error.message);
-        setMsgColor("text-red-600");
+        setMessage("Error: " + error.message);
+        setMsgColor("bg-red-100 text-red-700");
         setLoading(false);
         setFormData({
           email: "",
           fullName: "",
           username: "",
           password: "",
-        })
+        });
       });
   };
 
   return (
-    <main className="p-6 min-h-screen flex flex-col items-center justify-center bg-gradient-to-tl from-20% from-[#F1F5F9] to-[#064c50]">
-          <h1 className="absolute top-0 left-0 p-6 text-3xl sm:text-4xl text-gray-100 font-bold shadow-lg rounded-lg w-full">Connectify</h1>
-      <section className="p-8 w-full max-w-md bg-white shadow-lg rounded-lg">
-        <h2
-          className="text-3xl font-semibold text-center text-gray-800 mb-8"
-        >
+    <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-indigo-200 via-purple-200 to-pink-200 p-6">
+      {/* Branding */}
+      <h1 className="absolute top-6 left-6 text-3xl sm:text-4xl font-extrabold text-gray-800 tracking-wide drop-shadow-md">
+        Bondly
+      </h1>
+
+      {/* Card */}
+      <section className="p-8 w-full max-w-md bg-white/40 backdrop-blur-md shadow-xl rounded-2xl">
+        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6 flex items-center justify-center gap-2">
+          <FaUserPlus className="w-6 h-6 text-primaryColor" />
           Create Account
         </h2>
+
+        {/* Message */}
         {message && (
-          <div className={`${msgColor} mb-2 text-lg font-medium`}>
-            User already exists.
+          <div
+            className={`${msgColor} px-3 py-2 mb-4 rounded-md text-center font-medium`}
+          >
+            {message}
           </div>
         )}
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="relative z-0 w-full group">
-            <input
-              id="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              name="email"
-              placeholder=" "
-              required
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primaryColor peer"
-            />
-            <label
-              htmlFor="email"
-              className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-100 top-2 origin-0 left-0 peer-focus:left-0 peer-focus:text-primaryColor peer-focus:scale-75 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0"
-            >
-              Email
-            </label>
-          </div>
-          <div className="relative z-0 w-full group">
-            <input
-              id="fullName"
-              name="fullName"
-              type="text"
-              value={formData.fullName}
-              onChange={handleChange}
-              placeholder=" "
-              required
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primaryColor peer"
-            />
-            <label
-              htmlFor="fullname"
-              className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-100 top-2 origin-0 left-0 peer-focus:left-0 peer-focus:text-primaryColor peer-focus:scale-75 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0"
-            >
-              Full Name
-            </label>
-          </div>
-          <div className="relative z-0 w-full group">
-            <input
-              type="text"
-              name="username"
-              id="username"
-              value={formData.username}
-              onChange={handleChange}
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primaryColor peer"
-              placeholder=" "
-              required
-            />
-            <label
-              htmlFor="username"
-              className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-100 top-2 origin-0 left-0 peer-focus:left-0 peer-focus:text-primaryColor peer-focus:scale-75 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0"
-            >
-              Username
-            </label>
-          </div>
-          <div className="relative z-0 w-full group">
-            <input
-              type="password"
-              name="password"
-              id="password"
-              value={formData.password}
-              onChange={handleChange}
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primaryColor peer"
-              placeholder=" "
-              required
-            />
-            <label
-              htmlFor="password"
-              className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-100 top-2 origin-0 left-0 peer-focus:left-0 peer-focus:text-primaryColor peer-focus:scale-75 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0"
-            >
-              Create Password
-            </label>
-          </div>
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <input
+            id="email"
+            type="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Email"
+            required
+            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-400 focus:outline-none text-gray-800"
+          />
+          <input
+            id="fullName"
+            type="text"
+            value={formData.fullName}
+            onChange={handleChange}
+            placeholder="Full Name"
+            required
+            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-400 focus:outline-none text-gray-800"
+          />
+          <input
+            id="username"
+            type="text"
+            value={formData.username}
+            onChange={handleChange}
+            placeholder="Username"
+            required
+            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-400 focus:outline-none text-gray-800"
+          />
+          <input
+            id="password"
+            type="password"
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="Password"
+            required
+            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-400 focus:outline-none text-gray-800"
+          />
+
+          {/* Submit */}
           <button
             type="submit"
-            className="w-full bg-primaryColor text-white py-2 font-semibold rounded hover:bg-opacity-90 transition duration-200"
+            className="w-full py-2 rounded-lg font-semibold text-white bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-primaryColor hover:to-purple-600 transition duration-200 flex justify-center items-center gap-2"
           >
-            {loading ? <ClipLoader size={16} color="white" /> : "Sign Up"}
+            {loading ? <ClipLoader size={18} color="white" /> : "Sign Up"}
           </button>
         </form>
       </section>
-        <p className="mt-6 text-center text-gray-600">
-          Already have an account?{" "}
-          <NavLink
-            to="/login"
-            className="text-primaryColor font-semibold hover:underline"
-          >
-            Sign In.
-          </NavLink>
-        </p>
+
+      {/* Switch to login */}
+      <p className="mt-6 text-center text-gray-700">
+        Already have an account?{" "}
+        <NavLink
+          to="/login"
+          className="text-primaryColor font-semibold hover:underline"
+        >
+          Sign In
+        </NavLink>
+      </p>
     </main>
   );
 };
