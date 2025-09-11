@@ -12,7 +12,7 @@ export default {
 
     extend: {
       colors: {
-        primaryColor: '#578E7E', // Example custom color
+        primaryColor: 'rgb(135 16 221)', // Example custom color
       },
       animation: {
         progress: 'progress linear',
