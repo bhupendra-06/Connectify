@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { ClipLoader } from "react-spinners";
+import { FaSignInAlt } from "react-icons/fa"; // React Icons
 
-const TestPage = () => {
+const LoginPage = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
@@ -24,8 +25,8 @@ const TestPage = () => {
 
     try {
       setLoading(true);
-
       setErrMsg(null);
+
       const response = await fetch(
         "https://connectify-backend-2uq0.onrender.com/api/v1/users/login",
         {
@@ -37,16 +38,15 @@ const TestPage = () => {
 
       const data = await response.json();
       console.log("data", data);
-      // console.log("MyUserID :",data.data.user._id);
 
       if (
         data.statusCode === 200 &&
         data.data.accessToken &&
         data.data.refreshToken
       ) {
-        Cookies.set("accessToken", data.data.accessToken, { expires: 1 }); // Expires in 1 day
-        Cookies.set("refreshToken", data.data.refreshToken, { expires: 7 }); // Expires in 7 days
-        Cookies.set("MyOwnerId", data.data.user._id, { expires: 7 }); // Owner Id for use
+        Cookies.set("accessToken", data.data.accessToken, { expires: 1 });
+        Cookies.set("refreshToken", data.data.refreshToken, { expires: 7 });
+        Cookies.set("MyOwnerId", data.data.user._id, { expires: 7 });
         Cookies.set("avatar", data.data.user.avatar, { expires: 7 });
 
         navigate("/home");
@@ -60,68 +60,70 @@ const TestPage = () => {
       setLoading(false);
     }
   };
+
   return (
-    <main className="p-6 min-h-screen flex flex-col items-center justify-center bg-gradient-to-tl from-20% from-[#F1F5F9] to-[#064c50]">
-      <h1 className="absolute top-0 left-0 p-6 text-3xl sm:text-4xl text-gray-100 font-bold shadow-lg rounded-lg w-full">Connectify</h1>
-      <div className="w-full max-w-md flex flex-col bg-white p-8 rounded-lg shadow-lg">
-        <h2 className="mb-6 text-3xl font-semibold text-gray-800">Sign In</h2>
-        {errMsg && <div className="mb-4 text-red-400">{errMsg}</div>}
-        <form className="w-full max-w-md flex flex-col" onSubmit={handleSubmit}>
-          <div className="mb-6 relative w-full">
-            <input
-              type="email"
-              name="email"
-              id="email"
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primaryColor peer"
-              placeholder=" "
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-            <label
-              htmlFor="email"
-              className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-100 top-2 origin-0 left-0 peer-focus:left-0 peer-focus:text-primaryColor peer-focus:scale-75 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0"
-            >
-              Email
-            </label>
+    <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-indigo-200 via-purple-200 to-pink-200 p-6">
+      {/* Branding */}
+      <h1 className="absolute top-6 left-6 text-3xl sm:text-4xl font-extrabold text-gray-800 tracking-wide drop-shadow-md">
+        Bondly
+      </h1>
+
+      {/* Card */}
+      <section className="p-8 w-full max-w-md bg-white/40 backdrop-blur-md shadow-xl rounded-2xl">
+        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6 flex items-center justify-center gap-2">
+          <FaSignInAlt className="w-6 h-6 text-primaryColor" />
+          Sign In
+        </h2>
+
+        {/* Error Message */}
+        {errMsg && (
+          <div className="bg-red-100 text-red-700 px-3 py-2 mb-4 rounded-md text-center font-medium">
+            {errMsg}
           </div>
-          <div className="mb-10 relative w-full">
-            <input
-              type="password"
-              name="password"
-              id="password"
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primaryColor peer"
-              placeholder=" "
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-            <label
-              htmlFor="password"
-              className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-100 top-2 origin-0 left-0 peer-focus:left-0 peer-focus:text-primaryColor peer-focus:scale-75 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0"
-            >
-              Password
-            </label>
-          </div>
+        )}
+
+        {/* Form */}
+        <form className="space-y-5" onSubmit={handleSubmit}>
+          <input
+            type="email"
+            id="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Email"
+            required
+            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-400 focus:outline-none text-gray-800"
+          />
+          <input
+            type="password"
+            id="password"
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="Password"
+            required
+            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-400 focus:outline-none text-gray-800"
+          />
+
           <button
             type="submit"
-            className="mb-0 w-full bg-[#578E7E] text-white py-3 rounded-lg font-semibold hover:bg-opacity-90 transition duration-200"
+            className="w-full py-2 rounded-lg font-semibold text-white bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-primaryColor hover:to-purple-600 transition duration-200 flex justify-center items-center gap-2"
           >
-            {loading ? <ClipLoader size={16} color="white" /> : "Sign In"}
+            {loading ? <ClipLoader size={18} color="white" /> : "Sign In"}
           </button>
         </form>
-      </div>
-      <p className="my-6 text-[#1E293B]">
-        New to Connectify?{" "}
+      </section>
+
+      {/* Switch to Signup */}
+      <p className="mt-6 text-center text-gray-700">
+        New to Bondly?{" "}
         <NavLink
           to="/signup"
-          className="text-[#578E7E] font-semibold hover:underline"
+          className="text-primaryColor font-semibold hover:underline"
         >
-          Sign up now.
+          Sign Up
         </NavLink>
       </p>
     </main>
   );
 };
 
-export default TestPage;
+export default LoginPage;
