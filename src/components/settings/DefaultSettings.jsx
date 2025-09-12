@@ -1,29 +1,19 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { GoArrowLeft } from "react-icons/go";
-import { BiHomeAlt } from "react-icons/bi";
-import { PiGlobeSimpleBold } from "react-icons/pi";
-import { GrLocation } from "react-icons/gr";
-import { RiLockPasswordLine } from "react-icons/ri";
-import { FaRegBell } from "react-icons/fa";
-import { FiHelpCircle } from "react-icons/fi";
+import { BiUserCircle, BiBell, BiLockAlt, BiLink } from "react-icons/bi";
+import { FiSettings } from "react-icons/fi";
 import { TbLogout } from "react-icons/tb";
 import { PiCaretRightThin } from "react-icons/pi";
-import { RiAccountCircleLine } from "react-icons/ri";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 function DefaultSettings() {
   const navigate = useNavigate();
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   const handleLogout = async () => {
     const accessToken = Cookies.get("accessToken");
-
-    if (!accessToken) {
-      console.error("Access token not found. User might not be logged in.");
-      return;
-    }
+    if (!accessToken) return;
 
     try {
       const response = await fetch(
@@ -37,165 +27,79 @@ function DefaultSettings() {
         }
       );
 
-      const data = await response.json();
-      console.log("Logout Response:", data);
-
       if (response.status === 200) {
         Cookies.remove("accessToken");
         Cookies.remove("refreshToken");
         navigate("/login");
-      } else {
-        console.error("Logout failed:", data.message);
       }
     } catch (error) {
-      console.error("Error during logout:", error);
+      console.error("Logout error:", error);
     }
   };
 
+  const settingsList = [
+    { label: "Profile Information", icon: <BiUserCircle size={22} />, action: () => navigate("/account-info") },
+    { label: "Notifications", icon: <BiBell size={22} />, action: () => navigate("/notifications") },
+    { label: "Linked Accounts", icon: <BiLink size={22} />, action: () => navigate("/linked-accounts") },
+    { label: "Security & Password", icon: <BiLockAlt size={22} />, action: () => navigate("/change-password") },
+    { label: "Preferences", icon: <FiSettings size={22} />, action: () => navigate("/preferences") },
+    { label: "Logout", icon: <TbLogout size={22} />, action: () => setShowLogoutModal(true) },
+  ];
+
   return (
-    <div
-      className={`mx-auto sm:mt-2 lg:pl-48 max-w-[900px] rounded overflow-hidden bg-white select-none`}
-    >
-      <div className="align-left mt-3">
-        <div className="flex items-center px-2 sm:px-7">
-          <Link
-            onClick={() => {
-              navigate(-1);
-            }}
+    <div className="max-w-md mx-3 sm:mx-auto bg-[#f9fafe] rounded-xl shadow-lg mt-5 sm:mt-10 select-none">
+      {/* Header */}
+      <div className="flex items-center p-5 border-b">
+        <Link onClick={() => navigate(-1)}>
+          <GoArrowLeft size={28} className="hover:text-gray-500 transition" />
+        </Link>
+        <h1 className="pl-4 text-xl sm:text-2xl font-bold text-gray-800">Settings</h1>
+      </div>
+
+      {/* Settings List */}
+      <div className="flex flex-col p-3">
+        {settingsList.map((item, index) => (
+          <div
+            key={index}
+            onClick={item.action}
+            className="flex items-center justify-between p-4 mb-3 rounded-xl shadow hover:shadow-md transition cursor-pointer bg-white"
           >
-            <GoArrowLeft className="inline-block m-1" size={30} />
-          </Link>
-          <h1 className="pl-4 text-xl sm:text-3xl font-bold">Settings</h1>
-        </div>
+            <div className="flex items-center gap-3">
+              <div className="p-3 rounded-full bg-primaryColor/25 text-primaryColor flex items-center justify-center shadow-md">
+                {item.icon}
+              </div>
+              <span className="font-semibold text-gray-800">{item.label}</span>
+            </div>
+            <PiCaretRightThin size={22} className="text-gray-400" />
+          </div>
+        ))}
       </div>
-      <div className="w-full m-auto mb-3 px-2 sm:px-7">
-        <div>
-          <div className="text-[#ADB5BD] text-[13px] p-3 font-bold text-start ml-2">
-            General
-          </div>
-          <div className="ml-4 flex flex-col gap-3 pb-4">
-            <li
-              onClick={() => {
-                navigate("/account-info");
-              }}
-              className="flex relative"
-            >
-              <div className="inline-block p-[10px]  rounded-full bg-gradient-to-r from-[#0575e6] to-[#021b79] text-white font-bold">
-                <BiHomeAlt className="font-bold" size={25} />
-              </div>
-              <div className="p-2  font-bold hover:text-primaryColor">
-                Account Information
-              </div>
-              <PiCaretRightThin
-                size={22}
-                className="text-[#596067] absolute right-0 top-3"
-              />
-            </li>
-            <div className="h-px w-full bg-slate-300"></div>
-            <div className="flex relative">
-              <div className="inline-block  p-[10px] rounded-full  bg-gradient-to-r from-[#f2994a] to-[#f2c94c] text-white font-bold">
-                <GrLocation className="font-bold" size={25} />
-              </div>
-              <div className="p-2  font-bold hover:text-primaryColor">
-                Saved Address
-              </div>
-              <PiCaretRightThin
-                size={22}
-                className="text-[#596067] absolute right-0 top-3"
-              />
-            </div>
-            <div className="h-px w-full bg-slate-300"></div>
-            <div className="flex relative">
-              <div className="inline-block  p-[10px]  rounded-full bg-gradient-to-r from-[#e44d26] to-[#F16550] text-white font-bold">
-                <PiGlobeSimpleBold className="font-bold" size={25} />
-              </div>
-              <div className="p-2  font-bold hover:text-primaryColor">
-                Social Account
-              </div>
-              <PiCaretRightThin
-                size={22}
-                className="text-[#596067] absolute right-0 top-3"
-              />
+
+      {/* Logout Confirmation Modal */}
+      {showLogoutModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white rounded-lg p-6 w-80">
+            <h2 className="text-lg font-bold text-center mb-4">Confirm Logout</h2>
+            <p className="text-center text-gray-600 mb-6">
+              Are you sure you want to logout?
+            </p>
+            <div className="flex justify-center gap-4">
+              <button
+                onClick={handleLogout}
+                className="bg-primaryColor text-white px-4 py-2 rounded font-semibold hover:bg-primaryColor/80"
+              >
+                Yes, Logout
+              </button>
+              <button
+                onClick={() => setShowLogoutModal(false)}
+                className="bg-gray-300 text-gray-800 px-4 py-2 rounded font-semibold hover:bg-gray-400"
+              >
+                Cancel
+              </button>
             </div>
           </div>
         </div>
-        <div>
-          <div className="text-[#ADB5BD] text-[13px] p-3 font-bold text-start ml-2">
-            Account
-          </div>
-          <div className="ml-4 flex flex-col gap-3 pb-4">
-            <div className="flex relative">
-              <div className="inline-block p-[10px]  rounded-full bg-gradient-to-r from-[#ee0979] to-[#ff6a00] text-white font-bold">
-                <RiAccountCircleLine className="font-bold" size={25} />
-              </div>
-              <div className="p-2  font-bold hover:text-primaryColor">
-                Account Details
-              </div>
-              <PiCaretRightThin
-                size={22}
-                className="text-[#596067] absolute right-0 top-3"
-              />
-            </div>
-            <div className="h-px w-full bg-slate-300"></div>
-            <div className="flex relative">
-              <div className="inline-block  p-[10px] rounded-full bg-gradient-to-r from-primaryColor to-[#09f] text-white font-bold">
-                <RiLockPasswordLine className="font-bold" size={25} />
-              </div>
-              <div className="p-2  font-bold hover:text-primaryColor">
-                Passwords
-              </div>
-              <PiCaretRightThin
-                size={22}
-                className="text-[#596067] absolute right-0 top-3"
-              />
-            </div>
-          </div>
-        </div>
-        <div>
-          <div className="text-[#ADB5BD] text-[13px] p-3 font-bold text-start ml-2">
-            Others
-          </div>
-          <div className="ml-4 flex flex-col gap-3">
-            <div className="flex relative cursor-pointer">
-              <div className="inline-block p-[10px]  rounded-full bg-gradient-to-r from-[#f2994a] to-[#f2c94c] text-white font-bold">
-                <FaRegBell className="font-bold" size={25} />
-              </div>
-              <div className="p-2  font-bold hover:text-primaryColor">
-                Notification
-              </div>
-              <PiCaretRightThin
-                size={22}
-                className="text-[#596067] absolute right-0 top-3"
-              />
-            </div>
-            <div className="h-px w-full bg-slate-300"></div>
-            <div className="flex relative cursor-pointer">
-              <div className="inline-block  p-[10px] rounded-full bg-gradient-to-r from-[#0575e6] to-[#021b79] text-white font-bold">
-                <FiHelpCircle className="font-bold" size={25} />
-              </div>
-              <div className="p-2  font-bold hover:text-primaryColor">Help</div>
-              <PiCaretRightThin
-                size={22}
-                className="text-[#596067] absolute right-0 top-3"
-              />
-            </div>
-            <div className="h-px w-full bg-slate-300"></div>
-            <div
-              onClick={handleLogout}
-              className="flex mb-7 relative cursor-pointer"
-            >
-              <div className="inline-block  p-[10px]  rounded-full bg-gradient-to-r from-[#e44d26] to-[#F16550] text-white font-bold">
-                <TbLogout className="font-bold" size={25} />
-              </div>
-              <div className="p-2  font-bold hover:text-primaryColor">Logout</div>
-              <PiCaretRightThin
-                size={22}
-                className="text-[#596067] absolute right-0 top-3"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+      )}
     </div>
   );
 }
