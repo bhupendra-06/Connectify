@@ -334,15 +334,16 @@ const UserProfile = () => {
           </div>
         </div>
 
+
         {/* Posts Grid */}
-        <div className="mt-4 grid grid-cols-3 gap-1 sm:gap-4">
+        <div className="mt-4 grid grid-cols-3 gap-1 sm:gap-2">
           {myProfile.data?.posts?.map((post, index) => (
             <div
               onClick={() => {
                 handlePostClick(index);
               }}
               key={index}
-              className="relative bg-gray-200 w-full aspect-square overflow-hidden"
+              className="relative bg-gray-200 w-full rounded-lg aspect-square overflow-hidden"
             >
               <img
                 src={post.postFile[0]}
