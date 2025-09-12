@@ -22,8 +22,6 @@ const UserPost = ({ post, onPostAdded }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const token = Cookies.get("accessToken");
 
-  // console.log("post.isLiked",post.isLiked );
-
   const seeMoreFunction = () => {
     setSeeMore(!seeMore);
     setSee(see === "See More." ? "See Less." : "See More.");
@@ -60,7 +58,7 @@ const UserPost = ({ post, onPostAdded }) => {
     try {
       const response = await axios.put(
         `https://connectify-backend-2uq0.onrender.com/api/v1/posts/like-post/${post._id}`,
-        {}, // No request body needed
+        {},
         {
           headers: {
             "Content-Type": "application/json",
@@ -70,8 +68,6 @@ const UserPost = ({ post, onPostAdded }) => {
       );
 
       if (response.data.success) {
-        // console.log("response" ,response);
-
         setLikes(response.data.data.likes.length);
         setLiked(!liked);
       } else {
@@ -94,7 +90,6 @@ const UserPost = ({ post, onPostAdded }) => {
         throw new Error("No access token found in cookies");
       }
 
-      // console.log("post id",post._id);
       const response = await fetch(
         `https://connectify-backend-2uq0.onrender.com/api/v1/posts/delete-post/${post._id}`,
         {
@@ -112,7 +107,6 @@ const UserPost = ({ post, onPostAdded }) => {
 
       alert("Post deleted successfully!");
       onPostAdded();
-      // onPostDeleted(post._id); // Trigger callback to update parent state
     } catch (err) {
       console.error("Error deleting post:", err);
       alert("Failed to delete the post.");
@@ -125,37 +119,37 @@ const UserPost = ({ post, onPostAdded }) => {
         navigate(`/profile/${post.owner}`);
       });
     } else {
-      navigate(`/profile/${post.owner}`); // Fallback for unsupported browsers
+      navigate(`/profile/${post.owner}`);
     }
   };
 
   return (
     <div>
       {post ? (
-        <div className="m-2 mt-0 p-4 rounded-lg bg-white shadow-xl shadow-gray-200 border">
+        <div className="m-2 mt-0 p-4 rounded-2xl bg-white shadow-md hover:shadow-xl transition border border-gray-100">
           {/* User Profile */}
           <div className="mb-3 flex items-center justify-between select-none">
             <div
-              className="flex items-center cursor-pointer"
+              className="flex items-center gap-3 cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition"
               onClick={handleUserProfile}
             >
               <img
-                className="w-14 h-14 object-cover rounded-full"
+                className="w-12 h-12 object-cover rounded-full ring-2 ring-primaryColor/40"
                 src={post.avatar || NoUser}
+                alt="user avatar"
               />
-              <div className="text-start ml-3">
-                <h3 className="text-xl font-bold">
+              <div className="text-start">
+                <h3 className="text-lg font-semibold">
                   {post.username || "Anonymous"}
-                  <span className="text-sm text-gray-400 block">
-                    {formattedDate || ""}
-                  </span>
                 </h3>
+                <span className="text-sm text-gray-400">{formattedDate || ""}</span>
               </div>
             </div>
           </div>
 
+          {/* Description */}
           {post.description && (
-            <p className="mb-3 text-base text-gray-600 text-justify select-none">
+            <p className="mb-3 text-gray-700 text-justify leading-relaxed">
               {post.description.length > 200 ? (
                 <>
                   {seeMore
@@ -163,7 +157,7 @@ const UserPost = ({ post, onPostAdded }) => {
                     : post.description.slice(0, 160) + ".."}{" "}
                   <span
                     onClick={seeMoreFunction}
-                    className="text-primaryColor font-semibold cursor-pointer"
+                    className="text-blue-600 font-medium cursor-pointer hover:underline"
                   >
                     {see}
                   </span>
@@ -174,39 +168,32 @@ const UserPost = ({ post, onPostAdded }) => {
             </p>
           )}
 
+          {/* Images Grid */}
           {post.postFile && (
             <div
-              className={`grid ${
+              className={`grid gap-2 ${
                 post.postFile.length === 1
                   ? "grid-cols-1"
                   : post.postFile.length === 2
                   ? "grid-cols-2"
                   : "grid-cols-3"
-              } gap-2 place-items-center`}
+              }`}
             >
               {post.postFile.slice(0, 5).map((url, picIndex) => (
                 <div
-                key={picIndex}
-                  className={`relative h-full ${
-                    post.postFile.length === 1
-                      ? "max-h-96 object-contain border"
-                      : "grid-cols-3 h-full object-cover"
-                  } rounded-md overflow-hidden cursor-pointer`}
+                  key={picIndex}
+                  className="relative rounded-xl overflow-hidden cursor-pointer group"
                 >
                   <img
                     onClick={() => displayPostImages(picIndex)}
                     src={url}
                     loading="lazy"
-                    className={`${
-                      picIndex === 5 && post.postFile.length > 5
-                        ? "opacity-50"
-                        : ""
-                    } w-full h-full object-cover`}
+                    className="w-full h-full object-cover transition-transform group-hover:scale-105"
                     alt={`Post image ${picIndex + 1}`}
                   />
                   {picIndex === 4 && post.postFile.length > 5 && (
                     <div
-                      className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70 text-white text-3xl font-bold"
+                      className="absolute inset-0 flex items-center justify-center bg-black/60 text-white text-2xl font-bold"
                       onClick={() => displayPostImages(picIndex)}
                     >
                       +{post.postFile.length - 5}
@@ -217,64 +204,38 @@ const UserPost = ({ post, onPostAdded }) => {
             </div>
           )}
 
-          <div className="mt-4 mx-1 flex justify-between">
-            <div className="min-w-1/2 flex gap-4 justify-between">
-              <div
-                className="flex items-center text-md cursor-pointer"
-                onClick={handleLikeClick}
-              >
-                {liked ? (
-                  // <FaThumbsUp className="p-1 mx-1 text-3xl" />
-                  <BsHeartFill className="p-1 mx-1 text-3xl text-red-700" />
-                ) : (
-                  <BsHeart className="p-1 mx-1 text-3xl" />
-                )}
-
-                {/* <span>{`${post.likesCount} Likes`}</span> */}
-                <span>{`${likes} Likes`}</span>
-              </div>
-              <div className="flex items-center text-md">
-                <FaRegComment className="mx-1 text-xl" />
-                <span>{`${post.comments || ""} Comments`}</span>
-              </div>
+          {/* Likes / Comments / Share */}
+          <div className="mt-3 border-t pt-2 flex justify-around text-gray-600">
+            <div
+              className="flex items-center gap-2 cursor-pointer hover:text-red-500 transition"
+              onClick={handleLikeClick}
+            >
+              {liked ? (
+                <BsHeartFill className="text-2xl text-red-600 animate-pulse" />
+              ) : (
+                <BsHeart className="text-2xl" />
+              )}
+              <span className={liked ? "text-red-600 font-semibold" : ""}>
+                {likes} Likes
+              </span>
             </div>
-            <div className="flex items-center text-md">
-              <FiShare2 className="mx-1" />
+
+            <div className="flex items-center gap-2 cursor-pointer hover:text-blue-500">
+              <FaRegComment className="text-xl" />
+              <span>{post.comments || 0} Comments</span>
+            </div>
+
+            <div className="flex items-center gap-2 cursor-pointer hover:text-green-500">
+              <FiShare2 className="text-xl" />
               <span className="hidden sm:block">Share</span>
             </div>
           </div>
         </div>
-      ): (<PostShimmer />)}
+      ) : (
+        <PostShimmer />
+      )}
 
-      {/* FULL SCREEN VIEW OF IMAGES */}
-      {/* {postImages && (
-        <div className="w-screen h-screen fixed top-0 left-0 select-none z-50">
-          <div className="p-2 w-full h-full bg-black flex items-center overflow-hidden">
-            {post.postFile && (
-              <img
-                src={post.postFile[currentIndex]} // Corrected template string syntax
-                className="w-[85vw] h-[90vh] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 object-contain"
-                alt="Post"
-                loading="lazy"
-              />
-            )}
-            <RxCrossCircled
-              onClick={removePostImages}
-              className="text-5xl md:text-5xl text-gray-600 absolute left-2 lg:left-10 top-2 lg:top-5 select-none cursor-pointer"
-            />
-
-            <IoIosArrowBack
-              onClick={goBack}
-              className="text-3xl md:text-5xl text-gray-300 border border-gray-500 absolute left-2 lg:left-10 top-1/2 -translate-y-1/2 select-none cursor-pointer"
-            />
-            <IoIosArrowForward
-              onClick={goForward}
-              className="text-3xl md:text-5xl text-gray-300 border border-gray-500 absolute right-2 lg:right-10 top-1/2 -translate-y-1/2 select-none cursor-pointer"
-            />
-          </div>
-        </div>
-      )} */}
-
+      {/* FULL SCREEN VIEW */}
       {postImages && (
         <ImageCarousel
           post={post}
