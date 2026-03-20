@@ -77,7 +77,7 @@ const SignUpPage = () => {
     <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-indigo-200 via-purple-200 to-pink-200 p-6">
       {/* Branding */}
       <h1 className="absolute top-6 left-6 text-3xl sm:text-4xl font-extrabold text-gray-800 tracking-wide drop-shadow-md">
-        Bondly
+        Connectify
       </h1>
 
       {/* Card */}

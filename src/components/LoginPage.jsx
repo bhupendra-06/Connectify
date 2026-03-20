@@ -65,7 +65,7 @@ const LoginPage = () => {
     <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-indigo-200 via-purple-200 to-pink-200 p-6">
       {/* Branding */}
       <h1 className="absolute top-6 left-6 text-3xl sm:text-4xl font-extrabold text-gray-800 tracking-wide drop-shadow-md">
-        Bondly
+        Connectify
       </h1>
 
       {/* Card */}
@@ -114,7 +114,7 @@ const LoginPage = () => {
 
       {/* Switch to Signup */}
       <p className="mt-6 text-center text-gray-700">
-        New to Bondly?{" "}
+        New to Connectify?{" "}
         <NavLink
           to="/signup"
           className="text-primaryColor font-semibold hover:underline"

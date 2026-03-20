@@ -73,7 +73,7 @@ const Header = () => {
               B
             </text>
           </svg>
-          <span className="text-xl md:text-2xl font-bold text-gray-800">Bondly</span>
+          <span className="text-xl md:text-2xl font-bold text-gray-800">Connectify</span>
         </Link>
 
         {/* Search bar (desktop) */}
